@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="明天就要线下赛了， 记录一下抓web流量的方式。 挖洞这方面， 挖洞是不可能挖洞的， 这辈子都不可能挖洞。 挖洞又不会挖， 就是偷偷大佬们的payload， 才能维持的了生活这样子。">
+<meta name="description" content="明天就要线下赛了， 记录一下抓web流量的方式。 挖洞这方面， 挖洞是不可能挖洞的， 这辈子都不可能挖洞。 挖洞又不会挖， 就是偷偷大佬们的payload， 才能维持的了生活这样子。  抓流量php脚本1234567891011121314151617181920212223242526272829303132333435&amp;lt;?php//Catch flowerror_reporting(0)">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ctf线下赛-抓web流量">
 <meta property="og:url" content="http://yoursite.com/2018/05/25/ctf线下赛-抓web流量/index.html">
 <meta property="og:site_name" content="Mugen">
-<meta property="og:description" content="明天就要线下赛了， 记录一下抓web流量的方式。 挖洞这方面， 挖洞是不可能挖洞的， 这辈子都不可能挖洞。 挖洞又不会挖， 就是偷偷大佬们的payload， 才能维持的了生活这样子。">
+<meta property="og:description" content="明天就要线下赛了， 记录一下抓web流量的方式。 挖洞这方面， 挖洞是不可能挖洞的， 这辈子都不可能挖洞。 挖洞又不会挖， 就是偷偷大佬们的payload， 才能维持的了生活这样子。  抓流量php脚本1234567891011121314151617181920212223242526272829303132333435&amp;lt;?php//Catch flowerror_reporting(0)">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2018/05/25/ctf线下赛-抓web流量/lx.gif">
-<meta property="og:updated_time" content="2018-05-25T11:29:28.924Z">
+<meta property="og:updated_time" content="2018-05-25T12:45:52.696Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ctf线下赛-抓web流量">
-<meta name="twitter:description" content="明天就要线下赛了， 记录一下抓web流量的方式。 挖洞这方面， 挖洞是不可能挖洞的， 这辈子都不可能挖洞。 挖洞又不会挖， 就是偷偷大佬们的payload， 才能维持的了生活这样子。">
+<meta name="twitter:description" content="明天就要线下赛了， 记录一下抓web流量的方式。 挖洞这方面， 挖洞是不可能挖洞的， 这辈子都不可能挖洞。 挖洞又不会挖， 就是偷偷大佬们的payload， 才能维持的了生活这样子。  抓流量php脚本1234567891011121314151617181920212223242526272829303132333435&amp;lt;?php//Catch flowerror_reporting(0)">
 <meta name="twitter:image" content="http://yoursite.com/2018/05/25/ctf线下赛-抓web流量/lx.gif">
 
 
@@ -355,6 +355,9 @@
 <p>就是偷偷大佬们的payload，</p>
 <p>才能维持的了生活这样子。</p>
 <p><img src="/2018/05/25/ctf线下赛-抓web流量/lx.gif" alt="lx"></p>
+<p>抓流量php脚本<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">//Catch flow</span></span><br><span class="line">error_reporting(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">debug</span><span class="params">()</span></span>&#123;</span><br><span class="line"></span><br><span class="line">	$f = fopen(<span class="string">"/tmp/access_log"</span>, <span class="string">"a+"</span>);</span><br><span class="line"></span><br><span class="line">	$d = <span class="string">"["</span>. date(<span class="string">"Y-m-d H:i:s"</span>) . <span class="string">"] "</span> . $_SERVER[<span class="string">'REMOTE_ADDR'</span>] . <span class="string">" -&gt; "</span>.$_SERVER[<span class="string">'REQUEST_URI'</span>].<span class="string">" \n"</span>;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">foreach</span>($_GET <span class="keyword">as</span> $key =&gt; $value)&#123;</span><br><span class="line">		$d .= <span class="string">"   \$_GET["</span>.$key.<span class="string">"] =&gt; "</span>.$value .<span class="string">"\n"</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">foreach</span>($_POST <span class="keyword">as</span> $key =&gt; $value)&#123;</span><br><span class="line">        $d .= <span class="string">"   \$_POST["</span>.$key.<span class="string">"] =&gt; "</span>.$value .<span class="string">"\n"</span>;</span><br><span class="line">	&#125;</span><br><span class="line">    <span class="keyword">foreach</span>($_COOKIE <span class="keyword">as</span> $key =&gt; $value)&#123;</span><br><span class="line">        $d .= <span class="string">"   \$_COOKIE["</span>.$key.<span class="string">"] =&gt; "</span>.$value .<span class="string">"\n"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">	<span class="keyword">foreach</span>($_SERVER <span class="keyword">as</span> $key =&gt; $value)&#123;</span><br><span class="line">		$d .= <span class="string">"   \$_SERVER["</span>.$key.<span class="string">"] =&gt; "</span>.$value.<span class="string">"\n"</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">foreach</span>($_FILES <span class="keyword">as</span> $key =&gt; $value)&#123;</span><br><span class="line">        $d .= <span class="string">"   \$_FILES["</span>.$key.<span class="string">"] =&gt; "</span>.$value.<span class="string">"\n"</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	fwrite($f, $d);</span><br><span class="line">	fclose($f);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(__LOADED__ == <span class="string">"__LOADED__"</span>)&#123;</span><br><span class="line">	debug();</span><br><span class="line">	define(<span class="string">"__LOADED__"</span>, <span class="string">"TRUE"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>批量挂载脚本<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line">base_dir = <span class="string">'/var/www/html'</span> <span class="comment">#web路径</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">scandir</span><span class="params">(startdir)</span> :</span></span><br><span class="line">    </span><br><span class="line">    os.chdir(startdir)</span><br><span class="line">    <span class="keyword">for</span> obj <span class="keyword">in</span> os.listdir(os.curdir) :</span><br><span class="line">        path = os.getcwd() + os.sep + obj</span><br><span class="line">        <span class="keyword">if</span> os.path.isfile(path) <span class="keyword">and</span> <span class="string">'.php'</span> <span class="keyword">in</span> obj:</span><br><span class="line">            modifyip(path,<span class="string">'&lt;?php'</span>,<span class="string">'&lt;?php\nrequire_once(\'/var/www/html/waf.php\');'</span>) <span class="comment">#强行加一句代码</span></span><br><span class="line">        <span class="keyword">if</span> os.path.isdir(obj) :</span><br><span class="line">            scandir(obj)</span><br><span class="line">            os.chdir(os.pardir) </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">modifyip</span><span class="params">(tfile,sstr,rstr)</span>:</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        lines=open(tfile,<span class="string">'r'</span>).readlines()</span><br><span class="line">        flen=len(lines)<span class="number">-1</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(flen):</span><br><span class="line">            <span class="keyword">if</span> sstr <span class="keyword">in</span> lines[i]:</span><br><span class="line">                lines[i]=lines[i].replace(sstr,rstr)</span><br><span class="line">        open(tfile,<span class="string">'w'</span>).writelines(lines)</span><br><span class="line">        </span><br><span class="line">    <span class="keyword">except</span> Exception,e:</span><br><span class="line">        <span class="keyword">print</span> e</span><br><span class="line">        </span><br><span class="line"></span><br><span class="line">scandir(base_dir)</span><br></pre></td></tr></table></figure></p>
+<p>部署完成之后会将日志写在tmp下面<br>文件为access_log</p>
 
       
     </div>
@@ -375,22 +378,6 @@
       
       
 
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2018/05/22/hello-lego/" rel="next" title="hello lego">
-                <i class="fa fa-chevron-left"></i> hello lego
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-          </div>
-        </div>
       
 
       
@@ -455,7 +442,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">1</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
