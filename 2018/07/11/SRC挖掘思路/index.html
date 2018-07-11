@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="i春秋,WEB," />
+  <meta name="keywords" content="渗透测试,SRC挖掘," />
 
 
 
@@ -79,24 +79,18 @@
 
 
 
-<meta name="description" content="搞完部门的事回来看到小白在群里面讨论做i春秋的题 看了一下社工题没有思路 看下web感觉有点思路就一直在做 写下writeup吧 题目  跟着提示的思路来  改请求头 改User-Agent为tip的 改X-Forwarded-For 随便改个IP就好了 改Cookie:Magic_Code=1 然后就得到一个  bugku上有道类似的看源码发现一个JS123&amp;lt;script&amp;gt;var e">
-<meta name="keywords" content="i春秋,WEB">
+<meta name="description" content="何为SRCSRC(Security Response Center,安全应急响应中心)SRC导航 http://0xsafe.org/index.html 在此之前漏洞挖掘我也只是个新手，正在摸索中学习，可能有很多地方讲的不对，多多包涵。 浅谈SRC挖掘思路首先需要了解基本的企业安全，以及吸取前人经验。乌云在这方面算是做的蛮好的，可惜挂了。企业安全体系知识：WooYun WiKi:http://w">
+<meta name="keywords" content="渗透测试,SRC挖掘">
 <meta property="og:type" content="article">
-<meta property="og:title" content="i春秋娱乐解题赛-端午web题">
-<meta property="og:url" content="http://yoursite.com/2018/06/14/i春秋娱乐解题赛-端午web题/index.html">
+<meta property="og:title" content="SRC挖掘思路">
+<meta property="og:url" content="http://yoursite.com/2018/07/11/SRC挖掘思路/index.html">
 <meta property="og:site_name" content="Mugen">
-<meta property="og:description" content="搞完部门的事回来看到小白在群里面讨论做i春秋的题 看了一下社工题没有思路 看下web感觉有点思路就一直在做 写下writeup吧 题目  跟着提示的思路来  改请求头 改User-Agent为tip的 改X-Forwarded-For 随便改个IP就好了 改Cookie:Magic_Code=1 然后就得到一个  bugku上有道类似的看源码发现一个JS123&amp;lt;script&amp;gt;var e">
+<meta property="og:description" content="何为SRCSRC(Security Response Center,安全应急响应中心)SRC导航 http://0xsafe.org/index.html 在此之前漏洞挖掘我也只是个新手，正在摸索中学习，可能有很多地方讲的不对，多多包涵。 浅谈SRC挖掘思路首先需要了解基本的企业安全，以及吸取前人经验。乌云在这方面算是做的蛮好的，可惜挂了。企业安全体系知识：WooYun WiKi:http://w">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/2018/06/14/i春秋娱乐解题赛-端午web题/1.png">
-<meta property="og:image" content="http://yoursite.com/2018/06/14/i春秋娱乐解题赛-端午web题/2.jpg">
-<meta property="og:image" content="http://yoursite.com/2018/06/14/i春秋娱乐解题赛-端午web题/3.jpg">
-<meta property="og:image" content="http://yoursite.com/2018/06/14/i春秋娱乐解题赛-端午web题/4.jpg">
-<meta property="og:image" content="http://yoursite.com/2018/06/14/i春秋娱乐解题赛-端午web题/5.jpg">
-<meta property="og:updated_time" content="2018-07-08T12:28:34.497Z">
+<meta property="og:updated_time" content="2018-07-11T03:45:01.354Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="i春秋娱乐解题赛-端午web题">
-<meta name="twitter:description" content="搞完部门的事回来看到小白在群里面讨论做i春秋的题 看了一下社工题没有思路 看下web感觉有点思路就一直在做 写下writeup吧 题目  跟着提示的思路来  改请求头 改User-Agent为tip的 改X-Forwarded-For 随便改个IP就好了 改Cookie:Magic_Code=1 然后就得到一个  bugku上有道类似的看源码发现一个JS123&amp;lt;script&amp;gt;var e">
-<meta name="twitter:image" content="http://yoursite.com/2018/06/14/i春秋娱乐解题赛-端午web题/1.png">
+<meta name="twitter:title" content="SRC挖掘思路">
+<meta name="twitter:description" content="何为SRCSRC(Security Response Center,安全应急响应中心)SRC导航 http://0xsafe.org/index.html 在此之前漏洞挖掘我也只是个新手，正在摸索中学习，可能有很多地方讲的不对，多多包涵。 浅谈SRC挖掘思路首先需要了解基本的企业安全，以及吸取前人经验。乌云在这方面算是做的蛮好的，可惜挂了。企业安全体系知识：WooYun WiKi:http://w">
 
 
 
@@ -126,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/06/14/i春秋娱乐解题赛-端午web题/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/07/11/SRC挖掘思路/"/>
 
 
 
 
 
-  <title>i春秋娱乐解题赛-端午web题 | Mugen</title>
+  <title>SRC挖掘思路 | Mugen</title>
   
 
 
@@ -279,7 +273,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/14/i春秋娱乐解题赛-端午web题/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/11/SRC挖掘思路/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="lego">
@@ -296,7 +290,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">i春秋娱乐解题赛-端午web题</h1>
+          <h1 class="post-title" itemprop="name headline">SRC挖掘思路</h1>
         
 
         <div class="post-meta">
@@ -308,8 +302,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-14T21:22:18+08:00">
-                2018-06-14
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-11T10:16:49+08:00">
+                2018-07-11
               </time>
             
 
@@ -331,8 +325,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/CTF/" itemprop="url" rel="index">
-                    <span itemprop="name">CTF</span>
+                  <a href="/categories/SRC/" itemprop="url" rel="index">
+                    <span itemprop="name">SRC</span>
                   </a>
                 </span>
 
@@ -373,26 +367,26 @@
       
 
       
-        <p>搞完部门的事回来看到小白在群里面讨论做i春秋的题</p>
-<p>看了一下社工题没有思路</p>
-<p>看下web感觉有点思路就一直在做</p>
-<p>写下writeup吧</p>
-<p>题目</p>
-<p><img src="/2018/06/14/i春秋娱乐解题赛-端午web题/1.png" alt="ctf"></p>
-<p>跟着提示的思路来</p>
-<p><img src="/2018/06/14/i春秋娱乐解题赛-端午web题/2.jpg" alt="ctf"></p>
-<p>改请求头 改User-Agent为tip的</p>
-<p>改X-Forwarded-For 随便改个IP就好了</p>
-<p>改Cookie:Magic_Code=1</p>
-<p>然后就得到一个</p>
-<p><img src="/2018/06/14/i春秋娱乐解题赛-端午web题/3.jpg" alt="ctf"></p>
-<p>bugku上有道类似的看源码发现一个JS<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="undefined">var encode_version = 'sojson.v4';var __0x10aaf=['GB/DssOzYA==','IG3DhU/CgA==','wqshG8OzaQ==','w4gRCMKvw54=','wonCssOfesKQew==','eMOwwoDCli4=','HsKgEsOROT9gw78QZMKe','YhPCnMKTO1QZw7MVTsOHEiHCtcOCdmjDncOzwqfChlHDuRHCgjdJwqJTwo8=','wozDg07CqRNOwrZSSVnDo23Di3DCk8KUwo8ewpxNwq7DhMKVHU/CssKzG8K3GGZ3w4Z6w5R3wr8FwqLDqA==','b8KqERXCm8KvFmNLw70=','w4PCvyHDssOCw4LDmw==','NHPDg0c=','w4gWwoxjwoo=','woViw5TDkMOk','w65aLMORWA==','wq80w4HDgQ0=','PlRxa0o=','wq9cwp8qPi4=','KcKNFMO3w6rClMOm','w7Unw7AvCA==','w77CpCzCt8OLDA==','woXCmMKKO3o=','woQpwrzCtFY=','PcO6w7hv','w7xpEsOnUg==','wrfDuMK0ZEU=','ZA3DhcK3woM=','w7VbdxvCvQ==','wqvDnwPDq8Oh'];(function(_0x4b62bb,_0x4884c2)&#123;var _0x4f42e4=function(_0x19f0d2)&#123;while(--_0x19f0d2)&#123;_0x4b62bb['push'](_0x4b62bb['shift']());&#125;&#125;;_0x4f42e4(++_0x4884c2);&#125;(__0x10aaf,0x79));var _0x9bdd=function(_0x5e5d64,_0x3e968f)&#123;_0x5e5d64=_0x5e5d64-0x0;var _0x40b26f=__0x10aaf[_0x5e5d64];if(_0x9bdd['initialized']===undefined)&#123;(function()&#123;var _0x133a9d=typeof window!=='undefined'?window:typeof process==='object'&amp;&amp;typeof require==='function'&amp;&amp;typeof global==='object'?global:this;var _0x2b26dd='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=';_0x133a9d['atob']||(_0x133a9d['atob']=function(_0x27b884)&#123;var _0x50ea49=String(_0x27b884)['replace'](/=+$/,'');for(var _0x5d56c0=0x0,_0x484ca0,_0x1fdce4,_0x3285be=0x0,_0x5aaa6b='';_0x1fdce4=_0x50ea49['charAt'](_0x3285be++);~_0x1fdce4&amp;&amp;(_0x484ca0=_0x5d56c0%0x4?_0x484ca0*0x40+_0x1fdce4:_0x1fdce4,_0x5d56c0++%0x4)?_0x5aaa6b+=String['fromCharCode'](0xff&amp;_0x484ca0&gt;&gt;(-0x2*_0x5d56c0&amp;0x6)):0x0)&#123;_0x1fdce4=_0x2b26dd['indexOf'](_0x1fdce4);&#125;return _0x5aaa6b;&#125;);&#125;());var _0x17bf79=function(_0x4cc0ac,_0x523873)&#123;var _0x3e29d3=[],_0x16fc57=0x0,_0x175f65,_0x41a094='',_0x1902c2='';_0x4cc0ac=atob(_0x4cc0ac);for(var _0x8ac140=0x0,_0x2a7193=_0x4cc0ac['length'];_0x8ac140&lt;_0x2a7193;_0x8ac140++)&#123;_0x1902c2+='%'+('00'+_0x4cc0ac['charCodeAt'](_0x8ac140)['toString'](0x10))['slice'](-0x2);&#125;_0x4cc0ac=decodeURIComponent(_0x1902c2);for(var _0xd9ec31=0x0;_0xd9ec31&lt;0x100;_0xd9ec31++)&#123;_0x3e29d3[_0xd9ec31]=_0xd9ec31;&#125;for(_0xd9ec31=0x0;_0xd9ec31&lt;0x100;_0xd9ec31++)&#123;_0x16fc57=(_0x16fc57+_0x3e29d3[_0xd9ec31]+_0x523873['charCodeAt'](_0xd9ec31%_0x523873['length']))%0x100;_0x175f65=_0x3e29d3[_0xd9ec31];_0x3e29d3[_0xd9ec31]=_0x3e29d3[_0x16fc57];_0x3e29d3[_0x16fc57]=_0x175f65;&#125;_0xd9ec31=0x0;_0x16fc57=0x0;for(var _0x2a4993=0x0;_0x2a4993&lt;_0x4cc0ac['length'];_0x2a4993++)&#123;_0xd9ec31=(_0xd9ec31+0x1)%0x100;_0x16fc57=(_0x16fc57+_0x3e29d3[_0xd9ec31])%0x100;_0x175f65=_0x3e29d3[_0xd9ec31];_0x3e29d3[_0xd9ec31]=_0x3e29d3[_0x16fc57];_0x3e29d3[_0x16fc57]=_0x175f65;_0x41a094+=String['fromCharCode'](_0x4cc0ac['charCodeAt'](_0x2a4993)^_0x3e29d3[(_0x3e29d3[_0xd9ec31]+_0x3e29d3[_0x16fc57])%0x100]);&#125;return _0x41a094;&#125;;_0x9bdd['rc4']=_0x17bf79;_0x9bdd['data']=&#123;&#125;;_0x9bdd['initialized']=!![];&#125;var _0x5ca5b6=_0x9bdd['data'][_0x5e5d64];if(_0x5ca5b6===undefined)&#123;if(_0x9bdd['once']===undefined)&#123;_0x9bdd['once']=!![];&#125;_0x40b26f=_0x9bdd['rc4'](_0x40b26f,_0x3e968f);_0x9bdd['data'][_0x5e5d64]=_0x40b26f;&#125;else&#123;_0x40b26f=_0x5ca5b6;&#125;return _0x40b26f;&#125;;var clicks=0x0;$(function()&#123;var _0x291bc2=&#123;'zylCx':function _0x12a707(_0x4b97a5,_0x5f1c2d)&#123;return _0x4b97a5(_0x5f1c2d);&#125;,'yXdGg':'350px','MhlGn':_0x9bdd('0x0','3&amp;sO'),'VpzYp':_0x9bdd('0x1','4ryP'),'hJRur':function _0x2b5304(_0x494dda,_0x1303ac)&#123;return _0x494dda&gt;=_0x1303ac;&#125;,'itGPz':function _0x292fe4(_0x3c5335,_0x1a786a)&#123;return _0x3c5335+_0x1a786a;&#125;,'iFZDu':function _0x441ba7(_0x13e19a,_0x3eafd0)&#123;return _0x13e19a+_0x3eafd0;&#125;,'TODvQ':_0x9bdd('0x2','#$LN'),'krPqg':_0x9bdd('0x3','k@UG'),'Yfxrk':_0x9bdd('0x4',']QK['),'yBhlX':_0x9bdd('0x5','NdTE'),'gQsNu':_0x9bdd('0x6','siJj'),'BBPeC':function _0x495df1(_0x3ec6d9,_0x1fbd4e)&#123;return _0x3ec6d9(_0x1fbd4e);&#125;,'Vrwja':'#Click'&#125;;_0x291bc2[_0x9bdd('0x7','AaCe')]($,_0x291bc2[_0x9bdd('0x8','ua$Q')])['mousedown'](function()&#123;_0x291bc2[_0x9bdd('0x9','^RwV')]($,this)[_0x9bdd('0xa','7gW6')](_0x291bc2[_0x9bdd('0xb','xO2K')])[_0x9bdd('0xc','pB#]')](_0x291bc2['yXdGg']);&#125;)[_0x9bdd('0xd','T*bl')](function()&#123;_0x291bc2['zylCx']($,this)[_0x9bdd('0xe','#%S3')](_0x291bc2['MhlGn'])[_0x9bdd('0xf','HEcg')](_0x291bc2[_0x9bdd('0x10','94FV')]);clicks++;_0x291bc2[_0x9bdd('0x11','NKw[')]($,_0x291bc2['VpzYp'])[_0x9bdd('0x12','H[R8')](clicks);if(_0x291bc2[_0x9bdd('0x13','^RwV')](clicks,0x989680))&#123;var _0x45dee2=_0x291bc2[_0x9bdd('0x14','6h3Z')]($,_0x291bc2['itGPz'](_0x291bc2['itGPz'](_0x291bc2[_0x9bdd('0x15','d0#0')](_0x291bc2[_0x9bdd('0x16','mPZH')](_0x291bc2[_0x9bdd('0x17','NdTE')],_0x291bc2[_0x9bdd('0x18','ATHI')]),clicks),_0x291bc2[_0x9bdd('0x19','gP0T')]),_0x291bc2[_0x9bdd('0x1a','Yye)')]));_0x291bc2[_0x9bdd('0x1b','y]D!')]($,_0x291bc2['gQsNu'])['append'](_0x45dee2);_0x45dee2[_0x9bdd('0x1c','nQ49')]();&#125;&#125;);&#125;);;encode_version = 'sojson.v4';    </span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
-<p>看得好晕<br>注意到了clicks就直接post给他赋值就解出来了</p>
-<p><img src="/2018/06/14/i春秋娱乐解题赛-端午web题/4.jpg" alt="ctf"></p>
-<p>然后根据提示倒序一下里面的flag然后连解base64几下就解出来了</p>
-<p><img src="/2018/06/14/i春秋娱乐解题赛-端午web题/5.jpg" alt="ctf"></p>
-<p>这题难度不是很高，但是毕竟是自己在没有writeup的情况下解出来的</p>
-<p>还是很开心的，记录一下。</p>
+        <h3 id="何为SRC"><a href="#何为SRC" class="headerlink" title="何为SRC"></a>何为SRC</h3><p>SRC(Security Response Center,安全应急响应中心)<br>SRC导航 <a href="http://0xsafe.org/index.html" target="_blank" rel="noopener">http://0xsafe.org/index.html</a></p>
+<h3 id="在此之前"><a href="#在此之前" class="headerlink" title="在此之前"></a>在此之前</h3><p>漏洞挖掘我也只是个新手，正在摸索中学习，可能有很多地方讲的不对，多多包涵。</p>
+<h3 id="浅谈SRC挖掘思路"><a href="#浅谈SRC挖掘思路" class="headerlink" title="浅谈SRC挖掘思路"></a>浅谈SRC挖掘思路</h3><p>首先需要了解基本的企业安全，以及吸取前人经验。<br>乌云在这方面算是做的蛮好的，可惜挂了。<br>企业安全体系知识：WooYun WiKi:<a href="http://wiki.secbug.net/" target="_blank" rel="noopener">http://wiki.secbug.net/</a><br>乌云镜像: <a href="http://www.anquan.us/" target="_blank" rel="noopener">http://www.anquan.us/</a><br>各大SRC厂商中，同程的SRC会公开漏洞也可以学习，借鉴。<a href="https://sec.ly.com/bugs" target="_blank" rel="noopener">https://sec.ly.com/bugs</a><br>基本的思路了解之后，开始尝试实践吧。</p>
+<h4 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h4><h5 id="子域名收集"><a href="#子域名收集" class="headerlink" title="子域名收集"></a>子域名收集</h5><p>首先对厂商的信息收集是非常的重要的。如果是刚入门的新手，主站可能挖不出来什么有价值，或者敏感的信息。我们可以尝试从厂商的子业务下手。子域名的收集有时候还是很重要的。我也是从这里挖到了人生的第一个SRC。<br>工具：layer,subDomainsBrute（<a href="https://github.com/lijiejie/" target="_blank" rel="noopener">lijiejie</a>大佬的，顺便安利下这个大佬，蛮多工具都很好用）<br>以及在线工具：<a href="http://z.duoluosb.com/" target="_blank" rel="noopener">http://z.duoluosb.com/</a> （chamd5的大佬的）</p>
+<h5 id="google-hacking"><a href="#google-hacking" class="headerlink" title="google hacking"></a>google hacking</h5><blockquote>
+<p>  语法</p>
+</blockquote>
+<pre><code>搜集域名和mail地址：
+搜集敏感文件：site:xxx.com filetype:doc
+
+搜集管理后台：site:xxx.com 管理／site:xxx.com admin／site:xxx.com login
+
+搜集mail：site:xxx.com intext:@xxx.com／intext:@xxx.com
+
+搜集敏感web路径：site:xxx.com intitle:登录／site:xxx.com inurl:sql.php
+</code></pre><p>两个强大的搜索引擎<a href="https://www.shodan.io/" target="_blank" rel="noopener">shodan</a>和<a href="https://www.zoomeye.org/" target="_blank" rel="noopener">zoomeye</a><br>以及之前Ricter师傅说过一个网站<a href="https://community.riskiq.com/" target="_blank" rel="noopener">RiskIQ</a></p>
+<h5 id="cms识别"><a href="#cms识别" class="headerlink" title="cms识别"></a>cms识别</h5><p><a href="http://www.yunsee.cn/" target="_blank" rel="noopener">云悉WEB资产梳理|在线CMS指纹识别平台</a></p>
+<h4 id="漏洞挖掘"><a href="#漏洞挖掘" class="headerlink" title="漏洞挖掘"></a>漏洞挖掘</h4><p>常规漏洞挖掘的话，和平常学习的思维差不多，就不多说了。</p>
+<h4 id="逻辑漏洞"><a href="#逻辑漏洞" class="headerlink" title="逻辑漏洞"></a>逻辑漏洞</h4><p>先附一张思维导图<br><a href="SRC挖掘思路/1.jpg"></a><br>密码找回漏洞挖掘思维导图<br><a href="SRC挖掘思路/1.png"></a></p>
+<h3 id="浅谈SRC挖掘学习"><a href="#浅谈SRC挖掘学习" class="headerlink" title="浅谈SRC挖掘学习"></a>浅谈SRC挖掘学习</h3><p>我在直接找SRC挖掘资料的过程中，发现网上在这方面的资料是蛮少的，这个东西怎么讲，不能说没有人分享，而是要具体事情具体分析，比如想挖其中的XSS，就要去找XSS挖掘思路,因为这个东西，大佬们也说不怎么好讲，经验的东西可能很重要，挖多了可能就会了。在学习过程中，一点点进步吧。</p>
 
       
     </div>
@@ -410,9 +404,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/i春秋/" rel="tag"># i春秋</a>
+            <a href="/tags/渗透测试/" rel="tag"># 渗透测试</a>
           
-            <a href="/tags/WEB/" rel="tag"># WEB</a>
+            <a href="/tags/SRC挖掘/" rel="tag"># SRC挖掘</a>
           
         </div>
       
@@ -425,8 +419,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/05/27/红帽杯线下赛总结/" rel="next" title="红帽杯线下赛总结">
-                <i class="fa fa-chevron-left"></i> 红帽杯线下赛总结
+              <a href="/2018/07/10/大二结束/" rel="next" title="时光会偷走你所有的美好">
+                <i class="fa fa-chevron-left"></i> 时光会偷走你所有的美好
               </a>
             
           </div>
@@ -434,10 +428,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/06/26/安恒六月月赛/" rel="prev" title="安恒六月月赛web题">
-                安恒六月月赛web题 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -489,8 +479,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -550,6 +549,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#何为SRC"><span class="nav-number">1.</span> <span class="nav-text">何为SRC</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#在此之前"><span class="nav-number">2.</span> <span class="nav-text">在此之前</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#浅谈SRC挖掘思路"><span class="nav-number">3.</span> <span class="nav-text">浅谈SRC挖掘思路</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#信息收集"><span class="nav-number">3.1.</span> <span class="nav-text">信息收集</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#子域名收集"><span class="nav-number">3.1.1.</span> <span class="nav-text">子域名收集</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#google-hacking"><span class="nav-number">3.1.2.</span> <span class="nav-text">google hacking</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#cms识别"><span class="nav-number">3.1.3.</span> <span class="nav-text">cms识别</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#漏洞挖掘"><span class="nav-number">3.2.</span> <span class="nav-text">漏洞挖掘</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#逻辑漏洞"><span class="nav-number">3.3.</span> <span class="nav-text">逻辑漏洞</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#浅谈SRC挖掘学习"><span class="nav-number">4.</span> <span class="nav-text">浅谈SRC挖掘学习</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
