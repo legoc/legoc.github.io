@@ -82,14 +82,14 @@
 <meta name="description" content="Restep1:信息收集strings/file/binwalk/IDA –&amp;gt;goole/github step2:关键代码some ways:  control flow data cross-reference(data xref) code cross-reference(code xref) memory searching+r/w breakpoint tracing anythi">
 <meta name="keywords" content="xman,笔记,re">
 <meta property="og:type" content="article">
-<meta property="og:title" content="xman-day2">
-<meta property="og:url" content="http://yoursite.com/2018/08/02/xman-day2/index.html">
+<meta property="og:title" content="xman-re">
+<meta property="og:url" content="http://yoursite.com/2018/08/02/xman-re/index.html">
 <meta property="og:site_name" content="Mugen">
 <meta property="og:description" content="Restep1:信息收集strings/file/binwalk/IDA –&amp;gt;goole/github step2:关键代码some ways:  control flow data cross-reference(data xref) code cross-reference(code xref) memory searching+r/w breakpoint tracing anythi">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-08-02T23:53:33.266Z">
+<meta property="og:updated_time" content="2018-08-05T11:48:02.454Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="xman-day2">
+<meta name="twitter:title" content="xman-re">
 <meta name="twitter:description" content="Restep1:信息收集strings/file/binwalk/IDA –&amp;gt;goole/github step2:关键代码some ways:  control flow data cross-reference(data xref) code cross-reference(code xref) memory searching+r/w breakpoint tracing anythi">
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/08/02/xman-day2/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/08/02/xman-re/"/>
 
 
 
 
 
-  <title>xman-day2 | Mugen</title>
+  <title>xman-re | Mugen</title>
   
 
 
@@ -273,7 +273,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/02/xman-day2/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/02/xman-re/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="lego">
@@ -290,7 +290,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">xman-day2</h1>
+          <h1 class="post-title" itemprop="name headline">xman-re</h1>
         
 
         <div class="post-meta">
@@ -397,6 +397,69 @@
 <p>re1:<br>apitrace:寻找msgboxde handle<br>step1:在函数列表里搜索messeagebox,找到弹窗的地方<br>step2:鼠标放到这个函数上，f5,ctrl+x，依次向上找两次，感觉到达关键代码的位置了。<br>step3:f5失败，选择函数部分，开头到结尾全部选中,u一下，再p一下。<br>step4:能找到check的函数了，分析代码，是依次对比flag的每一位<br>step5:老师的解法是修改汇编语言，把cmp改成mov赋值，再读一下就得到了flag<br>step6：小白不会patch,只能在这里打个断点，每循环依次，就查一下对比的那一位，记下来。<br>step7:第一次循环是字符f,第二次是l,循环33次，就得到了flag.<br>~完~</p>
 <p>===============================================</p>
 <p>Evr:<br>step1:shift+f12，搜索字符串，找到“input code”<br>step2：f5，反编译失败，使用alt+k修复<br>step3:分析源码，编写py脚本，脚本附在后面<br>dump密文：1、修改变量类型为byte,按b<br>2、右键-&gt;array,修改数组长度<br>3、shift+e,弹出窗口中，选择C语言格式<br>step4:得到flag<br>下面脚本为Atum师傅上课写的（小姐姐的脚本我老整理不好）<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">flag_enc=[<span class="number">30</span>,  <span class="number">21</span>,   <span class="number">2</span>,  <span class="number">16</span>,  <span class="number">13</span>,  <span class="number">72</span>,  <span class="number">72</span>, <span class="number">111</span>, <span class="number">221</span>, <span class="number">221</span>, <span class="number">72</span>, <span class="number">100</span>,  <span class="number">99</span>, <span class="number">215</span>,  <span class="number">46</span>,  <span class="number">44</span>, <span class="number">254</span>, <span class="number">106</span>, <span class="number">109</span>,  <span class="number">42</span>, <span class="number">242</span>, <span class="number">111</span>, <span class="number">154</span>,  <span class="number">77</span>, <span class="number">139</span>,  <span class="number">75</span>,  <span class="number">10</span>, <span class="number">138</span>,  <span class="number">79</span>,  <span class="number">69</span>,  <span class="number">23</span>,  <span class="number">70</span>,  <span class="number">79</span>,  <span class="number">20</span>,  <span class="number">11</span>];</span><br><span class="line"></span><br><span class="line">flag=<span class="string">""</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">7</span>):</span><br><span class="line">    flag+=chr(flag_enc[i]^<span class="number">0x76</span>)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">7</span>):</span><br><span class="line">    <span class="keyword">for</span> c <span class="keyword">in</span> range(<span class="number">0x20</span>,<span class="number">0x7f</span>):</span><br><span class="line">        origc=c</span><br><span class="line">        c=c^<span class="number">0x76</span>^<span class="number">0xad</span></span><br><span class="line">        c=((<span class="number">2</span>*c)&amp;<span class="number">0xff</span>)&amp;<span class="number">0xaa</span>|(<span class="number">0xff</span>&amp;((c&amp;<span class="number">0xaa</span>)&gt;&gt;<span class="number">1</span>))</span><br><span class="line">        <span class="keyword">if</span> c==flag_enc[<span class="number">7</span>+i]:</span><br><span class="line">            flag+=chr(origc)</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">7</span>):</span><br><span class="line">    <span class="keyword">for</span> c <span class="keyword">in</span> range(<span class="number">0x20</span>,<span class="number">0x7f</span>):</span><br><span class="line">        origc=c</span><br><span class="line">        c=c^<span class="number">0x76</span>^<span class="number">0xbe</span></span><br><span class="line">        c=((<span class="number">4</span>*c)&amp;<span class="number">0xff</span>)&amp;<span class="number">0xcc</span>|(<span class="number">0xff</span>&amp;((c&amp;<span class="number">0xcc</span>)&gt;&gt;<span class="number">2</span>))</span><br><span class="line">        <span class="keyword">if</span> c==flag_enc[<span class="number">14</span>+i]:</span><br><span class="line">            flag+=chr(origc)</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">7</span>):</span><br><span class="line">    <span class="keyword">for</span> c <span class="keyword">in</span> range(<span class="number">0x20</span>,<span class="number">0x7f</span>):</span><br><span class="line">        origc=c</span><br><span class="line">        c=c^<span class="number">0x76</span>^<span class="number">0xef</span></span><br><span class="line">        c=((<span class="number">16</span>*c)&amp;<span class="number">0xff</span>)&amp;<span class="number">0xf0</span>|(<span class="number">0xff</span>&amp;((c&amp;<span class="number">0xf0</span>)&gt;&gt;<span class="number">4</span>))</span><br><span class="line">        <span class="keyword">if</span> c==flag_enc[<span class="number">21</span>+i]:</span><br><span class="line">            flag+=chr(origc)</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">7</span>):</span><br><span class="line">    flag+=chr(flag_enc[i+<span class="number">28</span>]^<span class="number">0x76</span>)</span><br><span class="line"><span class="keyword">print</span> flag</span><br></pre></td></tr></table></figure></p>
+<hr>
+<h2 id="re2"><a href="#re2" class="headerlink" title="re2"></a>re2</h2><p>不知道函数什么用处的时候,函数无符号时<br>做一个类似的程序模糊匹配  </p>
+<ul>
+<li>ida FLIRT  </li>
+<li>rizzo.py(网上的不支持ida7.0)  </li>
+<li>Atum师傅改的（支持ida7.0） <a href="https://github.com/A7um/CTFUtils/blob/master/rizzo.py" target="_blank" rel="noopener">https://github.com/A7um/CTFUtils/blob/master/rizzo.py</a></li>
+</ul>
+<p>setjump与longjump的使用  </p>
+<p>非常规逆向<br>find Tools</p>
+<ul>
+<li>Binary Parser</li>
+<li>Disassemble<ul>
+<li>disassembler is necessary</li>
+</ul>
+</li>
+<li>Tracer<ul>
+<li>disassembler+tracer=debugger</li>
+<li>trace replay</li>
+</ul>
+</li>
+<li>Debugger</li>
+<li>Decompiler<ul>
+<li>得之我幸，失之我命</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="Android"><a href="#Android" class="headerlink" title="Android"></a>Android</h2><p>分析环境与常用工具</p>
+<ul>
+<li>santoku<ul>
+<li>基于Linux的Android取证、逆向、开发</li>
+<li>2014年9月停止更新了</li>
+</ul>
+</li>
+<li>Android Studio<ul>
+<li>Android应用开发</li>
+<li>APK分析、性能分析</li>
+</ul>
+</li>
+<li>JEB<ul>
+<li>Android逆向工具</li>
+<li>支持无源码调试</li>
+<li>提供ARM、Mips、Intel x86/64反编译支持</li>
+<li>缺点：贵（Basic Monthly $120）</li>
+</ul>
+</li>
+<li>jadx<ul>
+<li>开源dex文件反编译工具</li>
+</ul>
+</li>
+<li>Smali、BakSmali、APKTool<ul>
+<li>反汇编常用工具</li>
+<li>dex文件和smali代码的相互转换</li>
+<li>APK文件的解包和打包</li>
+</ul>
+</li>
+<li>IDA Pro<ul>
+<li>支持Dalvik指令集反汇编</li>
+<li>多用于动态调试Native代码</li>
+<li>同样很贵</li>
+</ul>
+</li>
+</ul>
 
       
     </div>
@@ -440,6 +503,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/08/05/xman-pwn/" rel="prev" title="xman-pwn">
+                xman-pwn <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -516,7 +583,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -571,7 +638,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Re"><span class="nav-number">1.</span> <span class="nav-text">Re</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#step1"><span class="nav-number">1.1.</span> <span class="nav-text">step1:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#step2"><span class="nav-number">1.2.</span> <span class="nav-text">step2:</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#逆向基础-学习笔记-适合小白的例题解答步骤"><span class="nav-number">2.</span> <span class="nav-text">逆向基础-学习笔记+适合小白的例题解答步骤</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#逆向工具："><span class="nav-number">2.1.</span> <span class="nav-text">逆向工具：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IDA操作："><span class="nav-number">2.2.</span> <span class="nav-text">IDA操作：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#逆向经验："><span class="nav-number">2.3.</span> <span class="nav-text">逆向经验：</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Re"><span class="nav-number">1.</span> <span class="nav-text">Re</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#step1"><span class="nav-number">1.1.</span> <span class="nav-text">step1:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#step2"><span class="nav-number">1.2.</span> <span class="nav-text">step2:</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#逆向基础-学习笔记-适合小白的例题解答步骤"><span class="nav-number">2.</span> <span class="nav-text">逆向基础-学习笔记+适合小白的例题解答步骤</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#逆向工具："><span class="nav-number">2.1.</span> <span class="nav-text">逆向工具：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IDA操作："><span class="nav-number">2.2.</span> <span class="nav-text">IDA操作：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#逆向经验："><span class="nav-number">2.3.</span> <span class="nav-text">逆向经验：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#re2"><span class="nav-number">2.4.</span> <span class="nav-text">re2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Android"><span class="nav-number">2.5.</span> <span class="nav-text">Android</span></a></li></ol></li></ol></div>
             
 
           </div>
