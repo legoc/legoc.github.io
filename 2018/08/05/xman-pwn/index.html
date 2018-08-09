@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="笔记,ctf,xman,pwn,栈溢出,堆利用," />
 
 
 
@@ -80,6 +80,7 @@
 
 
 <meta name="description" content="上课笔记 系统调用 有独特的调用约定 32：eax-syscall号，ebx,ecx,ed 64:   gdbinfo b 查看断点/ pwntools  小功能： cyclic pattern(cyclic()),cyclic_find()) 小功能： fmtstr_payload  格式化字符串可变参数101：    C语言可变用参数用…表示 可以接受任意长度参数 va_list:va_sta">
+<meta name="keywords" content="笔记,ctf,xman,pwn,栈溢出,堆利用">
 <meta property="og:type" content="article">
 <meta property="og:title" content="xman-pwn">
 <meta property="og:url" content="http://yoursite.com/2018/08/05/xman-pwn/index.html">
@@ -88,7 +89,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://oayoilchh.bkt.clouddn.com/17-3-18/35031846-file_1489776459315_10751.png">
 <meta property="og:image" content="http://oayoilchh.bkt.clouddn.com/17-3-18/95379439-file_1489777462726_1270b.png">
-<meta property="og:updated_time" content="2018-08-06T07:33:31.763Z">
+<meta property="og:updated_time" content="2018-08-09T07:48:17.152Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="xman-pwn">
 <meta name="twitter:description" content="上课笔记 系统调用 有独特的调用约定 32：eax-syscall号，ebx,ecx,ed 64:   gdbinfo b 查看断点/ pwntools  小功能： cyclic pattern(cyclic()),cyclic_find()) 小功能： fmtstr_payload  格式化字符串可变参数101：    C语言可变用参数用…表示 可以接受任意长度参数 va_list:va_sta">
@@ -315,6 +316,28 @@
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CTF/" itemprop="url" rel="index">
+                    <span itemprop="name">CTF</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -477,6 +500,46 @@
 <li>没有泄露</li>
 <li>Partial write to bypass ASLR</li>
 </ul>
+<h1 id="IO-FILE"><a href="#IO-FILE" class="headerlink" title="_IO_FILE"></a>_IO_FILE</h1><h2 id="FILE介绍"><a href="#FILE介绍" class="headerlink" title="FILE介绍"></a>FILE介绍</h2><p>FILE在Linux系统的标准IO库中用于描述文件的结构，称为文件流。我们常定义一个指向FILE结构的指针来接收这个返回值。</p>
+<p>FILE结构定义在libio.h中,如下所示</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> _<span class="title">IO_FILE</span> &#123;</span></span><br><span class="line">  <span class="keyword">int</span> _flags;       <span class="comment">/* High-order word is _IO_MAGIC; rest is flags. */</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> _IO_file_flags _flags</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">/* The following pointers correspond to the C++ streambuf protocol. */</span></span><br><span class="line">  <span class="comment">/* <span class="doctag">Note:</span>  Tk uses the _IO_read_ptr and _IO_read_end fields directly. */</span></span><br><span class="line">  <span class="keyword">char</span>* _IO_read_ptr;   <span class="comment">/* Current read pointer */</span></span><br><span class="line">  <span class="keyword">char</span>* _IO_read_end;   <span class="comment">/* End of get area. */</span></span><br><span class="line">  <span class="keyword">char</span>* _IO_read_base;  <span class="comment">/* Start of putback+get area. */</span></span><br><span class="line">  <span class="keyword">char</span>* _IO_write_base; <span class="comment">/* Start of put area. */</span></span><br><span class="line">  <span class="keyword">char</span>* _IO_write_ptr;  <span class="comment">/* Current put pointer. */</span></span><br><span class="line">  <span class="keyword">char</span>* _IO_write_end;  <span class="comment">/* End of put area. */</span></span><br><span class="line">  <span class="keyword">char</span>* _IO_buf_base;   <span class="comment">/* Start of reserve area. */</span></span><br><span class="line">  <span class="keyword">char</span>* _IO_buf_end;    <span class="comment">/* End of reserve area. */</span></span><br><span class="line">  <span class="comment">/* The following fields are used to support backing up and undo. */</span></span><br><span class="line">  <span class="keyword">char</span> *_IO_save_base; <span class="comment">/* Pointer to start of non-current get area. */</span></span><br><span class="line">  <span class="keyword">char</span> *_IO_backup_base;  <span class="comment">/* Pointer to first valid character of backup area */</span></span><br><span class="line">  <span class="keyword">char</span> *_IO_save_end; <span class="comment">/* Pointer to end of non-current get area. */</span></span><br><span class="line"></span><br><span class="line">  <span class="class"><span class="keyword">struct</span> _<span class="title">IO_marker</span> *_<span class="title">markers</span>;</span></span><br><span class="line"></span><br><span class="line">  <span class="class"><span class="keyword">struct</span> _<span class="title">IO_FILE</span> *_<span class="title">chain</span>;</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">int</span> _fileno;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">if</span> 0</span></span><br><span class="line">  <span class="keyword">int</span> _blksize;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">else</span></span></span><br><span class="line">  <span class="keyword">int</span> _flags2;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line">  _IO_off_t _old_offset; <span class="comment">/* This used to be _offset but it's too small.  */</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> __HAVE_COLUMN <span class="comment">/* temporary */</span></span></span><br><span class="line">  <span class="comment">/* 1+column number of pbase(); 0 is unknown. */</span></span><br><span class="line">  <span class="keyword">unsigned</span> <span class="keyword">short</span> _cur_column;</span><br><span class="line">  <span class="keyword">signed</span> <span class="keyword">char</span> _vtable_offset;</span><br><span class="line">  <span class="keyword">char</span> _shortbuf[<span class="number">1</span>];</span><br><span class="line"></span><br><span class="line">  <span class="comment">/*  char* _save_gptr;  char* _save_egptr; */</span></span><br><span class="line"></span><br><span class="line">  _IO_lock_t *_lock;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> _IO_USE_OLD_IO_FILE</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h1 id="Windows"><a href="#Windows" class="headerlink" title="Windows"></a>Windows</h1><h2 id="Tools"><a href="#Tools" class="headerlink" title="Tools"></a>Tools</h2><ul>
+<li>ida pro</li>
+<li>x64 DBG</li>
+<li>winDBG</li>
+<li>Mona</li>
+</ul>
+<h2 id="real-world"><a href="#real-world" class="headerlink" title="real world"></a>real world</h2><ul>
+<li>cve-2017-11882</li>
+</ul>
+<h1 id="漏洞挖掘"><a href="#漏洞挖掘" class="headerlink" title="漏洞挖掘"></a>漏洞挖掘</h1><h2 id="Code-AUDIT"><a href="#Code-AUDIT" class="headerlink" title="Code AUDIT"></a>Code AUDIT</h2><ul>
+<li>open source</li>
+<li>从整体出发，关键模块重点关注</li>
+<li>丰富的coding经验</li>
+</ul>
+<h2 id="RVERSE"><a href="#RVERSE" class="headerlink" title="RVERSE"></a>RVERSE</h2><ul>
+<li>静态分析<ul>
+<li>汇编代码</li>
+<li>伪代码审计</li>
+</ul>
+</li>
+<li>动态分析</li>
+</ul>
+<h2 id="FUZZING"><a href="#FUZZING" class="headerlink" title="FUZZING"></a>FUZZING</h2><ul>
+<li>Automated or semi-automated</li>
+<li>高回报</li>
+</ul>
+<h2 id="TARGET"><a href="#TARGET" class="headerlink" title="TARGET"></a>TARGET</h2><ul>
+<li>越界数组</li>
+<li>缓冲区溢出</li>
+<li>格式化字符串漏洞</li>
+<li>整型溢出</li>
+<li>指针操作不当</li>
+<li>条件竞争</li>
+<li>类型混淆</li>
+</ul>
+<hr>
+<p></p><p align="right">再也不去奢求什么未来 </p><p></p>
 
       
     </div>
@@ -491,6 +554,22 @@
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/笔记/" rel="tag"># 笔记</a>
+          
+            <a href="/tags/ctf/" rel="tag"># ctf</a>
+          
+            <a href="/tags/xman/" rel="tag"># xman</a>
+          
+            <a href="/tags/pwn/" rel="tag"># pwn</a>
+          
+            <a href="/tags/栈溢出/" rel="tag"># 栈溢出</a>
+          
+            <a href="/tags/堆利用/" rel="tag"># 堆利用</a>
+          
+        </div>
       
 
       
@@ -608,7 +687,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-count">20</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -641,7 +720,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#上课笔记"><span class="nav-number">1.</span> <span class="nav-text">上课笔记</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#基础栈溢出复习之基础"><span class="nav-number">2.</span> <span class="nav-text">基础栈溢出复习之基础</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#堆溢出"><span class="nav-number">3.</span> <span class="nav-text">堆溢出</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Use-after-free"><span class="nav-number">3.1.</span> <span class="nav-text">Use after free</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Unlink"><span class="nav-number">3.2.</span> <span class="nav-text">Unlink</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Off-by-one"><span class="nav-number">3.3.</span> <span class="nav-text">Off by one</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#例子-note"><span class="nav-number">3.3.1.</span> <span class="nav-text">例子 note</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Fast-bin-attack"><span class="nav-number">3.4.</span> <span class="nav-text">Fast bin attack</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Unsorted-bin-attack"><span class="nav-number">3.5.</span> <span class="nav-text">Unsorted bin attack</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#House-of-xxx"><span class="nav-number">3.6.</span> <span class="nav-text">House of xxx</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#House-of-Spirit"><span class="nav-number">3.6.1.</span> <span class="nav-text">House of Spirit</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Host-of-Force"><span class="nav-number">3.6.2.</span> <span class="nav-text">Host of Force</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Host-of-Orange"><span class="nav-number">3.6.3.</span> <span class="nav-text">Host of Orange</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#House-of-Roman"><span class="nav-number">3.6.4.</span> <span class="nav-text">House of Roman</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#上课笔记"><span class="nav-number">1.</span> <span class="nav-text">上课笔记</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#基础栈溢出复习之基础"><span class="nav-number">2.</span> <span class="nav-text">基础栈溢出复习之基础</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#堆溢出"><span class="nav-number">3.</span> <span class="nav-text">堆溢出</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Use-after-free"><span class="nav-number">3.1.</span> <span class="nav-text">Use after free</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Unlink"><span class="nav-number">3.2.</span> <span class="nav-text">Unlink</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Off-by-one"><span class="nav-number">3.3.</span> <span class="nav-text">Off by one</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#例子-note"><span class="nav-number">3.3.1.</span> <span class="nav-text">例子 note</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Fast-bin-attack"><span class="nav-number">3.4.</span> <span class="nav-text">Fast bin attack</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Unsorted-bin-attack"><span class="nav-number">3.5.</span> <span class="nav-text">Unsorted bin attack</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#House-of-xxx"><span class="nav-number">3.6.</span> <span class="nav-text">House of xxx</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#House-of-Spirit"><span class="nav-number">3.6.1.</span> <span class="nav-text">House of Spirit</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Host-of-Force"><span class="nav-number">3.6.2.</span> <span class="nav-text">Host of Force</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Host-of-Orange"><span class="nav-number">3.6.3.</span> <span class="nav-text">Host of Orange</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#House-of-Roman"><span class="nav-number">3.6.4.</span> <span class="nav-text">House of Roman</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#IO-FILE"><span class="nav-number">4.</span> <span class="nav-text">_IO_FILE</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#FILE介绍"><span class="nav-number">4.1.</span> <span class="nav-text">FILE介绍</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Windows"><span class="nav-number">5.</span> <span class="nav-text">Windows</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Tools"><span class="nav-number">5.1.</span> <span class="nav-text">Tools</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#real-world"><span class="nav-number">5.2.</span> <span class="nav-text">real world</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#漏洞挖掘"><span class="nav-number">6.</span> <span class="nav-text">漏洞挖掘</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Code-AUDIT"><span class="nav-number">6.1.</span> <span class="nav-text">Code AUDIT</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RVERSE"><span class="nav-number">6.2.</span> <span class="nav-text">RVERSE</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#FUZZING"><span class="nav-number">6.3.</span> <span class="nav-text">FUZZING</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TARGET"><span class="nav-number">6.4.</span> <span class="nav-text">TARGET</span></a></li></ol></li></ol></div>
             
 
           </div>
