@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="writeup,巅峰极客," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="CTFPWN 简单的栈溢出Ida打开找到关键函数查看保护溢出点为32Exp如下 还有一个坑就是getshell之后还要玩游戏。。  不停运行./getflag就出flag RE简单的逆向运行 Ida打开查找字符串找到对应函数F5失败0x4012b2的sp有问题Alt+k先改0x40127b的sp 再改0x4012b2的spF5成功后，很明显是关键函数这里把输入的高4位和低4位逐个跟flag比较，成">
+<meta name="keywords" content="writeup,巅峰极客">
+<meta property="og:type" content="article">
+<meta property="og:title" content="巅峰极客第二场-writeup">
+<meta property="og:url" content="http://yoursite.com/2018/08/26/巅峰极客第二场-writeup/index.html">
+<meta property="og:site_name" content="Mugen">
+<meta property="og:description" content="CTFPWN 简单的栈溢出Ida打开找到关键函数查看保护溢出点为32Exp如下 还有一个坑就是getshell之后还要玩游戏。。  不停运行./getflag就出flag RE简单的逆向运行 Ida打开查找字符串找到对应函数F5失败0x4012b2的sp有问题Alt+k先改0x40127b的sp 再改0x4012b2的spF5成功后，很明显是关键函数这里把输入的高4位和低4位逐个跟flag比较，成">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2018/08/26/巅峰极客第二场-writeup/1.png">
+<meta property="og:image" content="http://yoursite.com/2018/08/26/巅峰极客第二场-writeup/2.png">
+<meta property="og:image" content="http://yoursite.com/2018/08/26/巅峰极客第二场-writeup/3.png">
+<meta property="og:image" content="http://yoursite.com/2018/08/26/巅峰极客第二场-writeup/4.png">
+<meta property="og:image" content="http://yoursite.com/2018/08/26/巅峰极客第二场-writeup/5.png">
+<meta property="og:image" content="http://yoursite.com/2018/08/26/巅峰极客第二场-writeup/6.png">
+<meta property="og:image" content="http://yoursite.com/2018/08/26/巅峰极客第二场-writeup/7.png">
+<meta property="og:image" content="http://yoursite.com/2018/08/26/巅峰极客第二场-writeup/8.png">
+<meta property="og:image" content="http://yoursite.com/2018/08/26/巅峰极客第二场-writeup/9.png">
+<meta property="og:image" content="http://yoursite.com/2018/08/26/巅峰极客第二场-writeup/10.png">
+<meta property="og:image" content="http://yoursite.com/2018/08/26/巅峰极客第二场-writeup/11..png">
+<meta property="og:image" content="http://yoursite.com/2018/08/26/巅峰极客第二场-writeup/12.png">
+<meta property="og:image" content="http://yoursite.com/2018/08/26/巅峰极客第二场-writeup/13.png">
+<meta property="og:image" content="http://yoursite.com/2018/08/26/巅峰极客第二场-writeup/14.png">
+<meta property="og:image" content="http://yoursite.com/2018/08/26/巅峰极客第二场-writeup/15.png">
+<meta property="og:image" content="http://yoursite.com/2018/08/26/巅峰极客第二场-writeup/16.png">
+<meta property="og:image" content="http://yoursite.com/2018/08/26/巅峰极客第二场-writeup/17.png">
+<meta property="og:image" content="http://yoursite.com/2018/08/26/巅峰极客第二场-writeup/18.png">
+<meta property="og:image" content="http://yoursite.com/2018/08/26/巅峰极客第二场-writeup/19.png">
+<meta property="og:image" content="http://yoursite.com/2018/08/26/巅峰极客第二场-writeup/20..png">
+<meta property="og:image" content="http://yoursite.com/2018/08/26/巅峰极客第二场-writeup/21.png">
+<meta property="og:image" content="http://yoursite.com/2018/08/26/巅峰极客第二场-writeup/22.png">
+<meta property="og:image" content="http://yoursite.com/2018/08/26/巅峰极客第二场-writeup/23.png">
+<meta property="og:image" content="http://yoursite.com/2018/08/26/巅峰极客第二场-writeup/24.png">
+<meta property="og:image" content="http://yoursite.com/2018/08/26/巅峰极客第二场-writeup/25.png">
+<meta property="og:image" content="http://yoursite.com/2018/08/26/巅峰极客第二场-writeup/26.png">
+<meta property="og:updated_time" content="2018-08-28T16:09:53.272Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="巅峰极客第二场-writeup">
+<meta name="twitter:description" content="CTFPWN 简单的栈溢出Ida打开找到关键函数查看保护溢出点为32Exp如下 还有一个坑就是getshell之后还要玩游戏。。  不停运行./getflag就出flag RE简单的逆向运行 Ida打开查找字符串找到对应函数F5失败0x4012b2的sp有问题Alt+k先改0x40127b的sp 再改0x4012b2的spF5成功后，很明显是关键函数这里把输入的高4位和低4位逐个跟flag比较，成">
+<meta name="twitter:image" content="http://yoursite.com/2018/08/26/巅峰极客第二场-writeup/1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/08/26/巅峰极客第二场-writeup/"/>
+
+
+
+
+
+  <title>巅峰极客第二场-writeup | Mugen</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Mugen</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">lego's blog</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-flag"></i> <br />
+            
+            朋友
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于我
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/26/巅峰极客第二场-writeup/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lego">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mugen">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">巅峰极客第二场-writeup</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-26T23:46:49+08:00">
+                2018-08-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CTF/" itemprop="url" rel="index">
+                    <span itemprop="name">CTF</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i> 阅读次数
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="CTF"><a href="#CTF" class="headerlink" title="CTF"></a>CTF</h3><h4 id="PWN"><a href="#PWN" class="headerlink" title="PWN"></a>PWN</h4><p><img src="/2018/08/26/巅峰极客第二场-writeup/1.png" alt=""></p>
+<p>简单的栈溢出<br>Ida打开找到关键函数<br><img src="/2018/08/26/巅峰极客第二场-writeup/2.png" alt=""><br>查看保护<br><img src="/2018/08/26/巅峰极客第二场-writeup/3.png" alt=""><br><img src="/2018/08/26/巅峰极客第二场-writeup/4.png" alt=""><br>溢出点为32<br>Exp如下<br><img src="/2018/08/26/巅峰极客第二场-writeup/5.png" alt=""></p>
+<p>还有一个坑就是getshell之后还要玩游戏。。</p>
+<p><img src="/2018/08/26/巅峰极客第二场-writeup/6.png" alt=""></p>
+<p>不停运行./getflag就出flag</p>
+<h4 id="RE"><a href="#RE" class="headerlink" title="RE"></a>RE</h4><p><img src="/2018/08/26/巅峰极客第二场-writeup/7.png" alt=""><br>简单的逆向<br>运行</p>
+<p><img src="/2018/08/26/巅峰极客第二场-writeup/8.png" alt=""><br>Ida打开查找字符串<br><img src="/2018/08/26/巅峰极客第二场-writeup/9.png" alt=""><br>找到对应函数F5失败<br><img src="/2018/08/26/巅峰极客第二场-writeup/10.png" alt=""><br>0x4012b2的sp有问题<br>Alt+k先改0x40127b的sp</p>
+<p><img src="/2018/08/26/巅峰极客第二场-writeup/11..png" alt=""><br>再改0x4012b2的sp<br><img src="/2018/08/26/巅峰极客第二场-writeup/12.png" alt=""><br>F5成功后，很明显是关键函数<br><img src="/2018/08/26/巅峰极客第二场-writeup/13.png" alt=""><br>这里把输入的高4位和低4位逐个跟flag比较，成功就success，flag长度明显是42<br><img src="/2018/08/26/巅峰极客第二场-writeup/14.png" alt=""><br>静态分析太麻烦于是拖进ollydbg动态跟<br>查找字符串下断点</p>
+<p><img src="/2018/08/26/巅峰极客第二场-writeup/15.png" alt=""><br>输入42位<br><img src="/2018/08/26/巅峰极客第二场-writeup/16.png" alt=""><br>这里就是关键函数的比较输入的是否等于42<br><img src="/2018/08/26/巅峰极客第二场-writeup/17.png" alt=""><br>这里是高4位和低4位的比较<br><img src="/2018/08/26/巅峰极客第二场-writeup/18.png" alt=""><br>把跳转函数nop掉比较方便<br><img src="/2018/08/26/巅峰极客第二场-writeup/19.png" alt=""><br>这里上面的数据就是flag的数据，eax就是输入的，可知第一个的高4位是6<br><img src="/2018/08/26/巅峰极客第二场-writeup/20..png" alt=""><br>低4位也是6，则第一个数据为0x66<br>第二位高4位是6</p>
+<p><img src="/2018/08/26/巅峰极客第二场-writeup/21.png" alt=""><br>低4位是c<br><img src="/2018/08/26/巅峰极客第二场-writeup/22.png" alt=""><br>则第二位数据为0x6c</p>
+<p>如此类推，循环42次<br>Flag为<br>0x66,0x6c,0x61,0x67,0x7b,0x30,0x36,0x62,0x31,0x36,0x61,0x37,0x32,0x2d,0x35,0x31,0x63,0x63,0x2d,0x34,0x33,0x31,0x30,0x2d,<br>0x38,0x38,0x61,0x62,0x2d,0x37,0x30,0x61,0x62,0x36,0x38,0x32,0x39,0x30,0x65,0x32,0x32,0x7d<br>写个脚本</p>
+<p><img src="/2018/08/26/巅峰极客第二场-writeup/23.png" alt=""></p>
+<p><img src="/2018/08/26/巅峰极客第二场-writeup/24.png" alt=""><br>Flag为flag{06b16a72-51cc-4310-88ab-70ab68290e22}</p>
+<h4 id="CRYPTO"><a href="#CRYPTO" class="headerlink" title="CRYPTO"></a>CRYPTO</h4><p>用openssl解出n,e，一开始真没发现n一样，共膜攻击，yafu分解n等了半天。太年轻….<br>rsa -pubin -text -modulus -in warmup -in pubkey1.pem<br><img src="/2018/08/26/巅峰极客第二场-writeup/25.png" alt=""><br>rsa -pubin -text -modulus -in warmup -in pubkey2.pem<br><img src="/2018/08/26/巅峰极客第二场-writeup/26.png" alt=""></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> gmpy2</span><br><span class="line"><span class="keyword">import</span> string</span><br><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> long_to_bytes</span><br><span class="line"><span class="keyword">from</span> base64 <span class="keyword">import</span> *</span><br><span class="line">n = <span class="number">0x8989a398988456b3fef4a6ad86df3c99577f8978048de5436befc30d8d8c94958912aa526ff333b66857306ebb8de36c2c396a84efdc5d382502daa1a3f3b6e97502d2e31c849330f5b4c95257a149a97f5954eaf89341147adcdd4e950fff74e30bbe622876b42eeac86df4ad9715d05b5604aa8179424c7d9ac46bd6b5f322b2b5728ba148704a25a8efcc1e7c84ea7e5ce3e01703f04f94a431d9954bd7ae2c7dd6e879b35f8a2d4a5efbe737257bf99bd9ee66b15aff233fc77b558a487da5952fbe2b923da9c5eb46788c050336b7e36a5ed82d5c1b2aeb0e45bee405cbe72481db2568aa829eeac87d201a5a8ff5ee6f0be38192ab2839635f6c664217L</span></span><br><span class="line">e1 = <span class="number">2333</span></span><br><span class="line">e2 = <span class="number">23333</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'flag1.enc'</span>, <span class="string">'r'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    cipher1 = f.read()</span><br><span class="line">    cipher1 = b64decode(cipher1).encode(<span class="string">'hex'</span>)</span><br><span class="line">    cipher1 = string.atoi(cipher1, base=<span class="number">16</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'flag2.enc'</span>, <span class="string">'r'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    cipher2 = f.read()</span><br><span class="line">    cipher2 = b64decode(cipher2).encode(<span class="string">'hex'</span>)</span><br><span class="line">    cipher2 = string.atoi(cipher2, base=<span class="number">16</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># s &amp; t</span></span><br><span class="line"></span><br><span class="line">gcd, s, t = gmpy2.gcdext(e1, e2)</span><br><span class="line"><span class="keyword">if</span> s &lt; <span class="number">0</span>:</span><br><span class="line">    s = -s</span><br><span class="line">    cipher1 = gmpy2.invert(cipher1, n)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> t &lt; <span class="number">0</span>:</span><br><span class="line">    t = -t</span><br><span class="line">    cipher2 = gmpy2.invert(cipher2, n)</span><br><span class="line"></span><br><span class="line">plain = gmpy2.powmod(cipher1, s, n) * gmpy2.powmod(cipher2, t, n) % n</span><br><span class="line"><span class="keyword">print</span> long_to_bytes(plain)</span><br></pre></td></tr></table></figure>
+<p>flag{4b0b4c8a-82f3-4d80-902b-8e7a5706f8fe}</p>
+<h4 id="WEB"><a href="#WEB" class="headerlink" title="WEB"></a>WEB</h4><p>Sqli</p>
+<p>注册那里我burpsuite fuzz改admin密码</p>
+<p>登进去看到flag</p>
+<p>后来看师傅们的WP说admin加空格就好了</p>
+<h4 id="MISC"><a href="#MISC" class="headerlink" title="MISC"></a>MISC</h4><p>另存为 看到字体那有一半flag  关注公众号得到另一半 </p>
+<h3 id="综合渗透"><a href="#综合渗透" class="headerlink" title="综合渗透"></a>综合渗透</h3><h4 id="抛砖引玉"><a href="#抛砖引玉" class="headerlink" title="抛砖引玉"></a>抛砖引玉</h4><p><a href="http://www.zip" target="_blank" rel="noopener">www.zip</a>源码泄露</p>
+<p>找到root密码mypasswd</p>
+<h4 id="暗度陈仓"><a href="#暗度陈仓" class="headerlink" title="暗度陈仓"></a>暗度陈仓</h4><p>查看页面源码观察图片路径发现了后台路径/u-Are-Admin/，打开发现可以上传，这样就已经得到上传点的name了，测试后发现jpg,png,txt等格式可以上传，到时php后缀文件上传后会被改为fuck后缀，这里用大小写就可以绕过了，接着发现后台这里下载文件，抓包发现下载地址是/u-Are-Admin/download.php?id=参数，直接访问/u-Are-Admin/download.php后会下载一个文件，根据里面提示fuzz测试得到上传后的路径u-Are-Admin/u-upload-file，直接上传一个大马，大马里面net user得到管理员的全名，接着搜索admin.txt,得到文件里面的内容</p>
+<h4 id="瞒天过海"><a href="#瞒天过海" class="headerlink" title="瞒天过海"></a>瞒天过海</h4><p>cat.php?id=1  sql注入拿到密码</p>
+<p>cat.php这里泄露了绝对路径</p>
+<p>用sqlmap 写shell就好了</p>
+<p>Sqlmap.py –u “xxxx”  –os-shell</p>
+<p>然后连上去翻配置文件得到mysql密码</p>
+<p>在看C盘password.txt的内容</p>
+<h4 id="偷梁换注"><a href="#偷梁换注" class="headerlink" title="偷梁换注"></a>偷梁换注</h4><p>.git泄露</p>
+<p>有个sql文件得到密码</p>
+<p>Admin@pgsql</p>
+<p>后台有个传图片的</p>
+<p>传上去之后有上传的漏洞</p>
+<p>我先上传一个大马，在加个一句话</p>
+<p>菜刀连上去看/etc/passwd得到ichunqiu全名</p>
+<p>再cat /tmp/access.log得到前16位</p>
+<h4 id="反客为主"><a href="#反客为主" class="headerlink" title="反客为主"></a>反客为主</h4><p>看robots.txt</p>
+<p>访问info</p>
+<p>看到phpinfo</p>
+<p>改下filename=C:\phpStudy\Documents.txt</p>
+<p>得到Documents.txt内容</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/writeup/" rel="tag"># writeup</a>
+          
+            <a href="/tags/巅峰极客/" rel="tag"># 巅峰极客</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/08/20/线下赛玩法/" rel="next" title="线下赛玩法">
+                <i class="fa fa-chevron-left"></i> 线下赛玩法
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">lego</p>
+              <p class="site-description motion-element" itemprop="description">从小菜鸡往大菜鸡成长的路上...</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">24</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#CTF"><span class="nav-number">1.</span> <span class="nav-text">CTF</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#PWN"><span class="nav-number">1.1.</span> <span class="nav-text">PWN</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#RE"><span class="nav-number">1.2.</span> <span class="nav-text">RE</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CRYPTO"><span class="nav-number">1.3.</span> <span class="nav-text">CRYPTO</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#WEB"><span class="nav-number">1.4.</span> <span class="nav-text">WEB</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#MISC"><span class="nav-number">1.5.</span> <span class="nav-text">MISC</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#综合渗透"><span class="nav-number">2.</span> <span class="nav-text">综合渗透</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#抛砖引玉"><span class="nav-number">2.1.</span> <span class="nav-text">抛砖引玉</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#暗度陈仓"><span class="nav-number">2.2.</span> <span class="nav-text">暗度陈仓</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#瞒天过海"><span class="nav-number">2.3.</span> <span class="nav-text">瞒天过海</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#偷梁换注"><span class="nav-number">2.4.</span> <span class="nav-text">偷梁换注</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#反客为主"><span class="nav-number">2.5.</span> <span class="nav-text">反客为主</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">lego</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
