@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="SSRF,内网,漏洞挖掘," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="SSRF简介概念:SSRF(Server-Side Request Forgery)，服务器端请求伪造，利用漏洞伪造服务器端发起请求，从而突破客户端获取不到数据限制。 那么SSRF 可以做什么呢？ 1.内外网的端口和服务扫描 2.主机本地敏感数据的读取 3.内外网主机应用程序漏洞的利用 4.内外网Web站点漏洞的利用  如何挖掘SSRF漏洞可能存在的地方有  社交分享功能 转码服务 在线翻译 图片">
+<meta name="keywords" content="SSRF,内网,漏洞挖掘">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SSRF漏洞学习">
+<meta property="og:url" content="http://yoursite.com/2018/09/08/SSRF漏洞学习/index.html">
+<meta property="og:site_name" content="Mugen">
+<meta property="og:description" content="SSRF简介概念:SSRF(Server-Side Request Forgery)，服务器端请求伪造，利用漏洞伪造服务器端发起请求，从而突破客户端获取不到数据限制。 那么SSRF 可以做什么呢？ 1.内外网的端口和服务扫描 2.主机本地敏感数据的读取 3.内外网主机应用程序漏洞的利用 4.内外网Web站点漏洞的利用  如何挖掘SSRF漏洞可能存在的地方有  社交分享功能 转码服务 在线翻译 图片">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2018/09/08/SSRF漏洞学习/1.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/09/08/SSRF漏洞学习/2.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/09/08/SSRF漏洞学习/3.png">
+<meta property="og:image" content="http://yoursite.com/2018/09/08/SSRF漏洞学习/4.png">
+<meta property="og:image" content="http://yoursite.com/2018/09/08/SSRF漏洞学习/5.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/09/08/SSRF漏洞学习/6.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/09/08/SSRF漏洞学习/7.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/09/08/SSRF漏洞学习/8.png">
+<meta property="og:updated_time" content="2018-09-08T15:11:08.889Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SSRF漏洞学习">
+<meta name="twitter:description" content="SSRF简介概念:SSRF(Server-Side Request Forgery)，服务器端请求伪造，利用漏洞伪造服务器端发起请求，从而突破客户端获取不到数据限制。 那么SSRF 可以做什么呢？ 1.内外网的端口和服务扫描 2.主机本地敏感数据的读取 3.内外网主机应用程序漏洞的利用 4.内外网Web站点漏洞的利用  如何挖掘SSRF漏洞可能存在的地方有  社交分享功能 转码服务 在线翻译 图片">
+<meta name="twitter:image" content="http://yoursite.com/2018/09/08/SSRF漏洞学习/1.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/09/08/SSRF漏洞学习/"/>
+
+
+
+
+
+  <title>SSRF漏洞学习 | Mugen</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Mugen</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">lego's blog</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-flag"></i> <br />
+            
+            朋友
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于我
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/08/SSRF漏洞学习/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lego">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://raw.githubusercontent.com/legoc/legoc.github.io/master/about/index/baye.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mugen">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">SSRF漏洞学习</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-08T22:10:32+08:00">
+                2018-09-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/渗透测试/" itemprop="url" rel="index">
+                    <span itemprop="name">渗透测试</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i> 阅读次数
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="SSRF简介"><a href="#SSRF简介" class="headerlink" title="SSRF简介"></a>SSRF简介</h3><p>概念:SSRF(Server-Side Request Forgery)，服务器端请求伪造，利用漏洞伪造服务器端发起请求，从而突破客户端获取不到数据限制。</p>
+<p>那么SSRF 可以做什么呢？</p>
+<p>1.内外网的端口和服务扫描</p>
+<p>2.主机本地敏感数据的读取</p>
+<p>3.内外网主机应用程序漏洞的利用</p>
+<p>4.内外网Web站点漏洞的利用 </p>
+<h3 id="如何挖掘SSRF漏洞"><a href="#如何挖掘SSRF漏洞" class="headerlink" title="如何挖掘SSRF漏洞"></a>如何挖掘SSRF漏洞</h3><p>可能存在的地方有</p>
+<ul>
+<li>社交分享功能</li>
+<li>转码服务</li>
+<li>在线翻译</li>
+<li>图片加载和下载</li>
+<li>图片/文章收藏功能</li>
+<li>相关API或调用外部url的功能</li>
+</ul>
+<h3 id="SSRF验证"><a href="#SSRF验证" class="headerlink" title="SSRF验证"></a>SSRF验证</h3><p>排除法</p>
+<h3 id="SSRF绕过"><a href="#SSRF绕过" class="headerlink" title="SSRF绕过"></a>SSRF绕过</h3><h4 id="url的构成"><a href="#url的构成" class="headerlink" title="url的构成"></a>url的构成</h4><p><img src="/2018/09/08/SSRF漏洞学习/1.jpg" alt=""></p>
+<h4 id="各种形式的IP地址转换"><a href="#各种形式的IP地址转换" class="headerlink" title="各种形式的IP地址转换"></a>各种形式的IP地址转换</h4><p>原来还有这种操作…..</p>
+<p><img src="/2018/09/08/SSRF漏洞学习/2.jpg" alt=""></p>
+<h4 id="url跳转绕过"><a href="#url跳转绕过" class="headerlink" title="url跳转绕过"></a>url跳转绕过</h4><p><img src="/2018/09/08/SSRF漏洞学习/3.png" alt=""></p>
+<h4 id="短网址绕过"><a href="#短网址绕过" class="headerlink" title="短网址绕过"></a>短网址绕过</h4><ul>
+<li>http:/t.cn/htwtH</li>
+</ul>
+<h4 id="xip-io绕过"><a href="#xip-io绕过" class="headerlink" title="xip.io绕过"></a>xip.io绕过</h4><p><img src="/2018/09/08/SSRF漏洞学习/4.png" alt=""></p>
+<h4 id="WordPress-xmlrpc-php-Pingback缺陷与SSRF攻击"><a href="#WordPress-xmlrpc-php-Pingback缺陷与SSRF攻击" class="headerlink" title="WordPress xmlrpc.php Pingback缺陷与SSRF攻击"></a>WordPress xmlrpc.php Pingback缺陷与SSRF攻击</h4><p><img src="/2018/09/08/SSRF漏洞学习/5.jpg" alt=""></p>
+<p>这个原本是知道创宇研究的漏洞</p>
+<p>王松大佬给出的POC</p>
+<p>假如我们去这样访问一个超大的资源文件可造成DDOS攻击耗尽服务器资源</p>
+<h4 id="SSRF到底有多强大"><a href="#SSRF到底有多强大" class="headerlink" title="SSRF到底有多强大"></a>SSRF到底有多强大</h4><p>例如我们可以写个脚本来扫描内网存活主机</p>
+<p>然后在扫描对应的WEB指纹</p>
+<p><img src="/2018/09/08/SSRF漏洞学习/6.jpg" alt=""></p>
+<p>访问payload</p>
+<p>构造payload</p>
+<p><img src="/2018/09/08/SSRF漏洞学习/7.jpg" alt=""></p>
+<p>然后反弹shell</p>
+<p><img src="/2018/09/08/SSRF漏洞学习/8.png" alt=""></p>
+<p>实际中这里需要进行url编码 这里是为了方便展示payload</p>
+<h4 id="SSRF漏洞修复"><a href="#SSRF漏洞修复" class="headerlink" title="SSRF漏洞修复"></a>SSRF漏洞修复</h4><ul>
+<li>禁止跳转（请求的时候设置redirect=false）</li>
+<li>使用gethostbyname()判断是否为内网ip</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/SSRF/" rel="tag"># SSRF</a>
+          
+            <a href="/tags/内网/" rel="tag"># 内网</a>
+          
+            <a href="/tags/漏洞挖掘/" rel="tag"># 漏洞挖掘</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/09/07/Linux提权思路/" rel="next" title="Linux提权思路">
+                <i class="fa fa-chevron-left"></i> Linux提权思路
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="https://raw.githubusercontent.com/legoc/legoc.github.io/master/about/index/baye.png"
+                alt="lego" />
+            
+              <p class="site-author-name" itemprop="name">lego</p>
+              <p class="site-description motion-element" itemprop="description">从小菜鸡往大菜鸡成长的路上...</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">35</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#SSRF简介"><span class="nav-number">1.</span> <span class="nav-text">SSRF简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如何挖掘SSRF漏洞"><span class="nav-number">2.</span> <span class="nav-text">如何挖掘SSRF漏洞</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SSRF验证"><span class="nav-number">3.</span> <span class="nav-text">SSRF验证</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SSRF绕过"><span class="nav-number">4.</span> <span class="nav-text">SSRF绕过</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#url的构成"><span class="nav-number">4.1.</span> <span class="nav-text">url的构成</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#各种形式的IP地址转换"><span class="nav-number">4.2.</span> <span class="nav-text">各种形式的IP地址转换</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#url跳转绕过"><span class="nav-number">4.3.</span> <span class="nav-text">url跳转绕过</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#短网址绕过"><span class="nav-number">4.4.</span> <span class="nav-text">短网址绕过</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xip-io绕过"><span class="nav-number">4.5.</span> <span class="nav-text">xip.io绕过</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#WordPress-xmlrpc-php-Pingback缺陷与SSRF攻击"><span class="nav-number">4.6.</span> <span class="nav-text">WordPress xmlrpc.php Pingback缺陷与SSRF攻击</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SSRF到底有多强大"><span class="nav-number">4.7.</span> <span class="nav-text">SSRF到底有多强大</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SSRF漏洞修复"><span class="nav-number">4.8.</span> <span class="nav-text">SSRF漏洞修复</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">lego</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
