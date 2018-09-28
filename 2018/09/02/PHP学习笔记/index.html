@@ -462,6 +462,9 @@
           
 
   
+ <div id="gitalk-container"></div>
+ 
+  
 
 
 
@@ -768,6 +771,21 @@
 
 
 
+
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+  <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+   <script type="text/javascript">
+        var gitalk = new Gitalk({
+          clientID: '1220b3fc3519768decb8',
+          clientSecret: 'ae7d25ed45df0d884bc63e3a2269d4162172a05b',
+          repo: 'legoc.github.io',
+          owner: 'legoc',
+          admin: ['legoc'],
+          id: location.pathname,
+          distractionFreeMode: 'true'
+        })
+        gitalk.render('gitalk-container')           
+       </script>
 
   
 
