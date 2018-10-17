@@ -95,7 +95,7 @@
 <meta property="og:image" content="http://yoursite.com/2018/09/08/SSRF漏洞学习/6.jpg">
 <meta property="og:image" content="http://yoursite.com/2018/09/08/SSRF漏洞学习/7.jpg">
 <meta property="og:image" content="http://yoursite.com/2018/09/08/SSRF漏洞学习/8.png">
-<meta property="og:updated_time" content="2018-09-08T15:11:08.889Z">
+<meta property="og:updated_time" content="2018-10-06T03:00:14.895Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SSRF漏洞学习">
 <meta name="twitter:description" content="SSRF简介概念:SSRF(Server-Side Request Forgery)，服务器端请求伪造，利用漏洞伪造服务器端发起请求，从而突破客户端获取不到数据限制。 那么SSRF 可以做什么呢？ 1.内外网的端口和服务扫描 2.主机本地敏感数据的读取 3.内外网主机应用程序漏洞的利用 4.内外网Web站点漏洞的利用  如何挖掘SSRF漏洞可能存在的地方有  社交分享功能 转码服务 在线翻译 图片">
@@ -417,6 +417,7 @@
 <li>禁止跳转（请求的时候设置redirect=false）</li>
 <li>使用gethostbyname()判断是否为内网ip</li>
 </ul>
+<h3 id="discuz-ssrf"><a href="#discuz-ssrf" class="headerlink" title="discuz ssrf"></a>discuz ssrf</h3><p>#### </p>
 
       
     </div>
@@ -544,7 +545,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-count">22</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -566,7 +567,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">39</span>
+                  <span class="site-state-item-count">41</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -599,7 +600,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#SSRF简介"><span class="nav-number">1.</span> <span class="nav-text">SSRF简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如何挖掘SSRF漏洞"><span class="nav-number">2.</span> <span class="nav-text">如何挖掘SSRF漏洞</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SSRF验证"><span class="nav-number">3.</span> <span class="nav-text">SSRF验证</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SSRF绕过"><span class="nav-number">4.</span> <span class="nav-text">SSRF绕过</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#url的构成"><span class="nav-number">4.1.</span> <span class="nav-text">url的构成</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#各种形式的IP地址转换"><span class="nav-number">4.2.</span> <span class="nav-text">各种形式的IP地址转换</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#url跳转绕过"><span class="nav-number">4.3.</span> <span class="nav-text">url跳转绕过</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#短网址绕过"><span class="nav-number">4.4.</span> <span class="nav-text">短网址绕过</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xip-io绕过"><span class="nav-number">4.5.</span> <span class="nav-text">xip.io绕过</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#WordPress-xmlrpc-php-Pingback缺陷与SSRF攻击"><span class="nav-number">4.6.</span> <span class="nav-text">WordPress xmlrpc.php Pingback缺陷与SSRF攻击</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SSRF到底有多强大"><span class="nav-number">4.7.</span> <span class="nav-text">SSRF到底有多强大</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SSRF漏洞修复"><span class="nav-number">4.8.</span> <span class="nav-text">SSRF漏洞修复</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#SSRF简介"><span class="nav-number">1.</span> <span class="nav-text">SSRF简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如何挖掘SSRF漏洞"><span class="nav-number">2.</span> <span class="nav-text">如何挖掘SSRF漏洞</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SSRF验证"><span class="nav-number">3.</span> <span class="nav-text">SSRF验证</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SSRF绕过"><span class="nav-number">4.</span> <span class="nav-text">SSRF绕过</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#url的构成"><span class="nav-number">4.1.</span> <span class="nav-text">url的构成</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#各种形式的IP地址转换"><span class="nav-number">4.2.</span> <span class="nav-text">各种形式的IP地址转换</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#url跳转绕过"><span class="nav-number">4.3.</span> <span class="nav-text">url跳转绕过</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#短网址绕过"><span class="nav-number">4.4.</span> <span class="nav-text">短网址绕过</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xip-io绕过"><span class="nav-number">4.5.</span> <span class="nav-text">xip.io绕过</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#WordPress-xmlrpc-php-Pingback缺陷与SSRF攻击"><span class="nav-number">4.6.</span> <span class="nav-text">WordPress xmlrpc.php Pingback缺陷与SSRF攻击</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SSRF到底有多强大"><span class="nav-number">4.7.</span> <span class="nav-text">SSRF到底有多强大</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SSRF漏洞修复"><span class="nav-number">4.8.</span> <span class="nav-text">SSRF漏洞修复</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#discuz-ssrf"><span class="nav-number">5.</span> <span class="nav-text">discuz ssrf</span></a></li></ol></div>
             
 
           </div>
