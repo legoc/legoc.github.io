@@ -1638,6 +1638,13 @@ pre .javascript .function {
 .fancybox-close:hover {
   border: none;
 }
+.post-copyright {
+  margin: 2em 0 0;
+  padding: 0.5em 1em;
+  border-left: 3px solid #ff1700;
+  background-color: #f9f9f9;
+  list-style: none;
+}
 .rtl.post-body p,
 .rtl.post-body a,
 .rtl.post-body h1,
@@ -1819,7 +1826,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #ff0d30;
+  background: #feff4a;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -3026,5 +3033,17 @@ header.post-header {
 @media (max-width: 767px) {
   .content-wrap {
     width: 70% !important;
+  }
+}
+@media screen and (min-width: 1200px) {
+  body {
+    background: rgba(255,255,255,0.9);
+    background-image: url("/images/b1.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: 50% 50%;
+  }
+  #footer a {
+    color: #eee;
   }
 }
