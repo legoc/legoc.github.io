@@ -907,22 +907,13 @@
           repo: 'legoc.github.io',
           owner: 'legoc',
           admin: ['legoc'],
-          id: location.pathname,
+          id: decodeURI(window.location.pathname),
           distractionFreeMode: 'true'
         })
         gitalk.render('gitalk-container')           
        </script>
 	   
-<script src="/js/md5.min.js"></script>
-
-var gitalk = new Gitalk({
-  clientID: 'xxxxxxxxxxx',
-  clientSecret: 'xxxxxxxxxxxxxxxxxxx',
-  repo: 'xxxx.github.io',
-  owner: 'xxxx',
-  admin: ['xxxx'],
-  id: md5(location.href)
-})	   
+	   
 	   
 
 
