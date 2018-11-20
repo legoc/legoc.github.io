@@ -88,7 +88,13 @@
 <meta property="og:description" content="前言之前XMAN结营赛的时候，又是靠偷payload活过来的，补洞又不会补，PHP不熟，代码审计还是要认认真真学下。加油鸭！ 思维导图 正文不知道咋入门问了下差池其羽师傅，他安利了个视频给我。Virink. https://www.ichunqiu.com/course/54473 环境准备 PHPstudy  Sublime Text 2  Firefox  …   Sublime Text2插">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://legoc.github.io/2018/10/09/代码审计入门笔记/1.png">
-<meta property="og:updated_time" content="2018-11-14T03:50:32.939Z">
+<meta property="og:image" content="https://legoc.github.io/2018/10/09/代码审计入门笔记/2.jpg">
+<meta property="og:image" content="https://legoc.github.io/2018/10/09/代码审计入门笔记/3.jpg">
+<meta property="og:image" content="https://legoc.github.io/2018/10/09/代码审计入门笔记/4.png">
+<meta property="og:image" content="https://legoc.github.io/2018/10/09/代码审计入门笔记/5.jpg">
+<meta property="og:image" content="https://legoc.github.io/2018/10/09/代码审计入门笔记/6.png">
+<meta property="og:image" content="https://legoc.github.io/2018/10/09/代码审计入门笔记/7.jpg">
+<meta property="og:updated_time" content="2018-11-20T00:53:50.075Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="代码审计入门笔记">
 <meta name="twitter:description" content="前言之前XMAN结营赛的时候，又是靠偷payload活过来的，补洞又不会补，PHP不熟，代码审计还是要认认真真学下。加油鸭！ 思维导图 正文不知道咋入门问了下差池其羽师傅，他安利了个视频给我。Virink. https://www.ichunqiu.com/course/54473 环境准备 PHPstudy  Sublime Text 2  Firefox  …   Sublime Text2插">
@@ -416,11 +422,81 @@
 <p>allow_url_fopen=on             是否远程打开文件 </p>
 <p>allow_url_include = off     是否包含远程文件</p>
 <h3 id="危险函数及特殊函数"><a href="#危险函数及特殊函数" class="headerlink" title="危险函数及特殊函数"></a>危险函数及特殊函数</h3><h4 id="PHP代码执行函数"><a href="#PHP代码执行函数" class="headerlink" title="PHP代码执行函数"></a>PHP代码执行函数</h4><ul>
-<li>eval</li>
-<li>assert                                一句话<code>&lt;?php $_GET[a]($_GET[b]); ?&gt;</code>   <code>http:/xxx/test.php?a=assert&amp;b=system(&#39;ls&#39;)</code></li>
-<li>preg_replace</li>
+<li><p>eval</p>
+</li>
+<li><p>assert                                一句话<code>&lt;?php $_GET[a]($_GET[b]); ?&gt;</code>   <code>http:/xxx/test.php?a=assert&amp;b=system(&#39;ls&#39;)</code></p>
+</li>
+<li><p>preg_replace</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">$a=&apos;system(&quot;dir&quot;); &apos;;</span><br><span class="line">preg_replace(&quot;/test/e&quot;,$a, &quot;jutst test&quot;)</span><br><span class="line">?&gt;</span><br><span class="line">这样就可以执行dir命令了</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>自定义函数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">$sfunc = &apos;sys&apos;.&apos;tem&apos;;</span><br><span class="line">$sfunc(&apos;whoami&apos;);</span><br><span class="line">?&gt;</span><br><span class="line"></span><br><span class="line">&lt;?php</span><br><span class="line"></span><br><span class="line">function test($var)&#123;</span><br><span class="line">	echo &quot;ssss&quot;;</span><br><span class="line">&#125;</span><br><span class="line">call_user_func(&quot;system&quot;,&quot;whoami&quot;);</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+<p><img src="/2018/10/09/代码审计入门笔记/2.jpg" alt=""></p>
+</li>
 </ul>
-<h4 id="包含函数"><a href="#包含函数" class="headerlink" title="包含函数"></a>包含函数</h4><h4 id="命令执行函数"><a href="#命令执行函数" class="headerlink" title="命令执行函数"></a>命令执行函数</h4><h4 id="文件操作函数"><a href="#文件操作函数" class="headerlink" title="文件操作函数"></a>文件操作函数</h4><h4 id="特殊函数"><a href="#特殊函数" class="headerlink" title="特殊函数"></a>特殊函数</h4>
+<h4 id="包含函数"><a href="#包含函数" class="headerlink" title="包含函数"></a>包含函数</h4><ul>
+<li><p>require</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">include $file;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li><p>include</p>
+</li>
+<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">include $file;</span><br><span class="line">include ($GET[&apos;file&apos;]);</span><br><span class="line">?file=php://filter/convert.base64-encode/resource=index.php</span><br><span class="line">?file=php://filter/read=convert.base64-encode/resource=hctf.php</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li><p>require_once</p>
+</li>
+<li><p>include_once</p>
+</li>
+</ul>
+<h4 id="命令执行函数"><a href="#命令执行函数" class="headerlink" title="命令执行函数"></a>命令执行函数</h4><ul>
+<li><p>exec()</p>
+</li>
+<li><p>passthru()</p>
+</li>
+<li><p>proc_open()</p>
+</li>
+<li><p>shell_exec()</p>
+</li>
+<li><p>system()</p>
+</li>
+<li><p>popen()</p>
+</li>
+</ul>
+<p><img src="/2018/10/09/代码审计入门笔记/3.jpg" alt=""></p>
+<h4 id="文件操作函数"><a href="#文件操作函数" class="headerlink" title="文件操作函数"></a>文件操作函数</h4><ul>
+<li>copy</li>
+<li>file_get_contents</li>
+<li>file_put_contents</li>
+<li>file</li>
+<li>fopen</li>
+<li>move_uploaded_file</li>
+<li>readfile</li>
+<li>rename</li>
+<li>rmdir</li>
+<li>unlink &amp; delete</li>
+</ul>
+<p><img src="/2018/10/09/代码审计入门笔记/4.png" alt=""></p>
+<h4 id="特殊函数"><a href="#特殊函数" class="headerlink" title="特殊函数"></a>特殊函数</h4><ul>
+<li>phpinfo()</li>
+<li>symlink()</li>
+<li>readlink</li>
+<li>getenv</li>
+<li>putenv</li>
+<li>dl</li>
+<li>ini_get</li>
+<li>ini_set</li>
+<li>ini_alter</li>
+<li>ini_restore</li>
+<li>is_numeric</li>
+<li>in_array</li>
+</ul>
+<p><img src="/2018/10/09/代码审计入门笔记/5.jpg" alt=""></p>
+<p><img src="/2018/10/09/代码审计入门笔记/6.png" alt=""></p>
+<p><img src="/2018/10/09/代码审计入门笔记/7.jpg" alt=""></p>
+
       
     </div>
     
