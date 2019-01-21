@@ -94,7 +94,7 @@
 <meta property="og:image" content="https://legoc.github.io/2018/10/09/代码审计入门笔记/5.jpg">
 <meta property="og:image" content="https://legoc.github.io/2018/10/09/代码审计入门笔记/6.png">
 <meta property="og:image" content="https://legoc.github.io/2018/10/09/代码审计入门笔记/7.jpg">
-<meta property="og:updated_time" content="2018-11-20T00:53:50.075Z">
+<meta property="og:updated_time" content="2018-11-28T11:38:43.773Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="代码审计入门笔记">
 <meta name="twitter:description" content="前言之前XMAN结营赛的时候，又是靠偷payload活过来的，补洞又不会补，PHP不熟，代码审计还是要认认真真学下。加油鸭！ 思维导图 正文不知道咋入门问了下差池其羽师傅，他安利了个视频给我。Virink. https://www.ichunqiu.com/course/54473 环境准备 PHPstudy  Sublime Text 2  Firefox  …   Sublime Text2插">
@@ -496,7 +496,7 @@
 <p><img src="/2018/10/09/代码审计入门笔记/5.jpg" alt=""></p>
 <p><img src="/2018/10/09/代码审计入门笔记/6.png" alt=""></p>
 <p><img src="/2018/10/09/代码审计入门笔记/7.jpg" alt=""></p>
-
+<h2 id="XDebug"><a href="#XDebug" class="headerlink" title="XDebug"></a>XDebug</h2>
       
     </div>
     
@@ -644,7 +644,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">26</span>
+                  <span class="site-state-item-count">27</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -666,7 +666,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">46</span>
+                  <span class="site-state-item-count">47</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -699,7 +699,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#思维导图"><span class="nav-number">2.</span> <span class="nav-text">思维导图</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#正文"><span class="nav-number">3.</span> <span class="nav-text">正文</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#环境准备"><span class="nav-number">3.1.</span> <span class="nav-text">环境准备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#审计方法"><span class="nav-number">3.2.</span> <span class="nav-text">审计方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#PHP安全配置"><span class="nav-number">3.2.1.</span> <span class="nav-text">PHP安全配置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#php-ini"><span class="nav-number">3.2.1.1.</span> <span class="nav-text">php.ini</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#危险函数及特殊函数"><span class="nav-number">3.2.2.</span> <span class="nav-text">危险函数及特殊函数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#PHP代码执行函数"><span class="nav-number">3.2.2.1.</span> <span class="nav-text">PHP代码执行函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#包含函数"><span class="nav-number">3.2.2.2.</span> <span class="nav-text">包含函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#命令执行函数"><span class="nav-number">3.2.2.3.</span> <span class="nav-text">命令执行函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#文件操作函数"><span class="nav-number">3.2.2.4.</span> <span class="nav-text">文件操作函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#特殊函数"><span class="nav-number">3.2.2.5.</span> <span class="nav-text">特殊函数</span></a></li></ol></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#思维导图"><span class="nav-number">2.</span> <span class="nav-text">思维导图</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#正文"><span class="nav-number">3.</span> <span class="nav-text">正文</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#环境准备"><span class="nav-number">3.1.</span> <span class="nav-text">环境准备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#审计方法"><span class="nav-number">3.2.</span> <span class="nav-text">审计方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#PHP安全配置"><span class="nav-number">3.2.1.</span> <span class="nav-text">PHP安全配置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#php-ini"><span class="nav-number">3.2.1.1.</span> <span class="nav-text">php.ini</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#危险函数及特殊函数"><span class="nav-number">3.2.2.</span> <span class="nav-text">危险函数及特殊函数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#PHP代码执行函数"><span class="nav-number">3.2.2.1.</span> <span class="nav-text">PHP代码执行函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#包含函数"><span class="nav-number">3.2.2.2.</span> <span class="nav-text">包含函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#命令执行函数"><span class="nav-number">3.2.2.3.</span> <span class="nav-text">命令执行函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#文件操作函数"><span class="nav-number">3.2.2.4.</span> <span class="nav-text">文件操作函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#特殊函数"><span class="nav-number">3.2.2.5.</span> <span class="nav-text">特殊函数</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#XDebug"><span class="nav-number">3.3.</span> <span class="nav-text">XDebug</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -726,7 +726,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

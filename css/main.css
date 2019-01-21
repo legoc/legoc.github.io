@@ -1826,7 +1826,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #963dd6;
+  background: #61ffff;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -2603,7 +2603,7 @@ pre .javascript .function {
 .header {
   position: relative;
   margin: 0 auto;
-  width: 80%;
+  width: 960px;
 }
 @media (min-width: 768px) and (max-width: 991px) {
   .header {
@@ -2663,7 +2663,7 @@ pre .javascript .function {
   }
 }
 .container .main-inner {
-  width: 80%;
+  width: 960px;
 }
 @media (min-width: 768px) and (max-width: 991px) {
   .container .main-inner {
@@ -2679,7 +2679,7 @@ pre .javascript .function {
   float: right;
   box-sizing: border-box;
   padding: 40px;
-  width: calc(100% - 260px);
+  width: 700px;
   background: #fff;
   min-height: 700px;
   box-shadow: initial;
@@ -2728,13 +2728,15 @@ pre .javascript .function {
 @media (min-width: 768px) and (max-width: 991px) {
   .footer-inner {
     width: auto;
-    padding-left: 0;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
   }
 }
 @media (max-width: 767px) {
   .footer-inner {
     width: auto;
-    padding-left: 0;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
   }
 }
 .sidebar-position-right .header-inner {
@@ -2991,48 +2993,6 @@ pre .javascript .function {
 @media (max-width: 767px) {
   .post-body {
     text-align: justify;
-  }
-}
-header {
-  width: 75% !important;
-}
-header.post-header {
-  width: auto !important;
-}
-.container .main-inner {
-  width: 75%;
-}
-.content-wrap {
-  width: calc(100% - 260px);
-}
-@media (min-width: 768px) and (max-width: 991px) {
-  .header {
-    width: auto !important;
-  }
-}
-@media (max-width: 767px) {
-  .header {
-    width: auto !important;
-  }
-}
-@media (min-width: 768px) and (max-width: 991px) {
-  .container .main-inner {
-    width: auto !important;
-  }
-}
-@media (max-width: 767px) {
-  .container .main-inner {
-    width: auto !important;
-  }
-}
-@media (min-width: 768px) and (max-width: 991px) {
-  .content-wrap {
-    width: 70% !important;
-  }
-}
-@media (max-width: 767px) {
-  .content-wrap {
-    width: 70% !important;
   }
 }
 @media screen and (min-width: 1200px) {

