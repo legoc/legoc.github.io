@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Mugen">
 <meta property="og:description" content="前言之前挖洞还是差了点，本来是想混个营长的，死活挖不出最后一个中危。难受是肯定的，可是也暴露了我的一些明显的不足，太依靠运气，应该静下心来好好学习一下了。这个文章长期更新吧，算给自己做做长期的笔记。 安利一个镜像 https://shuimugan.com ps:最后还是混到了营长 没想到审了这么久一个洞感谢，Art3mis师傅千里送payload。 正文11-07SQL注入学习腾讯某分站SQL注">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-01-24T03:41:10.169Z">
+<meta property="og:updated_time" content="2019-02-27T13:43:33.411Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="读乌云漏洞库">
 <meta name="twitter:description" content="前言之前挖洞还是差了点，本来是想混个营长的，死活挖不出最后一个中危。难受是肯定的，可是也暴露了我的一些明显的不足，太依靠运气，应该静下心来好好学习一下了。这个文章长期更新吧，算给自己做做长期的笔记。 安利一个镜像 https://shuimugan.com ps:最后还是混到了营长 没想到审了这么久一个洞感谢，Art3mis师傅千里送payload。 正文11-07SQL注入学习腾讯某分站SQL注">
@@ -402,7 +402,7 @@
 <h3 id="url跳转"><a href="#url跳转" class="headerlink" title="url跳转"></a>url跳转</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">https://shuimugan.com/bug/view?bug_no=170508     js控制二维码跳转地址 以及绕过</span><br><span class="line">poc http://vac.qq.com/common/pc/pc.html?title=乌云来啦&amp;acturl=http://banfei.zhongan.com:@wooyun.org/</span><br></pre></td></tr></table></figure>
 <p>QQ一个强制聊天漏洞</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://shuimugan.com/bug/view?bug_no=167168  	 mqqwpa:// 协议没有加密，可以通过 mqqwpa://im/chat?chat_type=wpa&amp;uin=QQ号码&amp;version=1&amp;src_type=web&amp;web_src=&amp;name=0</span><br></pre></td></tr></table></figure>
-<h3 id="扫描器总结"><a href="#扫描器总结" class="headerlink" title="扫描器总结"></a>扫描器总结</h3><h4 id="nmap"><a href="#nmap" class="headerlink" title="nmap"></a>nmap</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap -v -sn -PE -n --min-hostgroup 1024 --min-parallelism 1024 -oX nmap_output.xml www.lijiejie.com/16</span><br></pre></td></tr></table></figure>
+<h3 id="扫描器总结"><a href="#扫描器总结" class="headerlink" title="扫描器总结"></a>扫描器总结</h3><h4 id="nmap"><a href="#nmap" class="headerlink" title="nmap"></a>nmap</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">nmap -v -sn -PE -n --min-hostgroup 1024 --min-parallelism 1024 -oX nmap_output.xml www.lijiejie.com/16</span><br><span class="line">nmap -sP --min-hostgroup 1024 --min-parallelism 1024 -iL ip.txt -oG ip_output1113.txt</span><br></pre></td></tr></table></figure>
 <p>-sn    不扫描端口，只ping主机</p>
 <p>-PE   通过ICMP echo判定主机是否存活</p>
 <p>-n     不反向解析IP地址到域名</p>
@@ -412,7 +412,8 @@
 <p>一旦扫描结束，解析XML文档即可得到哪些IP地址是存活的。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">nmap -sS -p 1-65535 -v 14.116.140.49</span><br><span class="line">参数：</span><br><span class="line">-sS    TCP SYN扫描    nmap -sS 192.168.1.254   </span><br><span class="line">-P     指定端口扫描   nmap -sS -P 1-65535 192.168.1.254</span><br><span class="line">-V     详细信息       nmap -V -sS 192.168.1.254</span><br></pre></td></tr></table></figure>
 <h4 id="masscan"><a href="#masscan" class="headerlink" title="masscan"></a>masscan</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">masscan --ports 1-65535 14.116.143.118 --rate 1000 --wait 1</span><br></pre></td></tr></table></figure>
-<h4 id="hydra爆破"><a href="#hydra爆破" class="headerlink" title="hydra爆破"></a>hydra爆破</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hydra -L uname.txt -P pwd.txt 192.168.1.3 telnet</span><br></pre></td></tr></table></figure>
+<h4 id="hydra爆破"><a href="#hydra爆破" class="headerlink" title="hydra爆破"></a>hydra爆破</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">-R   根据上一次进度继续破解</span><br><span class="line">-S   使用SSL协议连接</span><br><span class="line">-s   指定端口</span><br><span class="line">-l   指定用户名</span><br><span class="line">-L   指定用户名字典(文件)</span><br><span class="line">-p   指定密码破解</span><br><span class="line">-P   指定密码字典(文件)</span><br><span class="line">-e   空密码探测和指定用户密码探测(ns)</span><br><span class="line">-M   &lt;FILE&gt;指定目标列表文件一行一条</span><br><span class="line">-f   在使用-M参数以后，找到第一对登录名或者密码的时候中止破解。</span><br><span class="line">-C   用户名可以用:分割(username:password)可以代替-l username -p password</span><br><span class="line">-o   &lt;FILE&gt;输出文件</span><br><span class="line">-t   指定多线程数量，默认为16个线程</span><br><span class="line">-w   TIME 设置最大超时的时间，单位秒，默认是30s</span><br><span class="line">-vV  显示详细过程</span><br><span class="line">server     目标IP</span><br><span class="line">service    指定服务名(telnet ftp pop3 mssql mysql ssh ssh2......)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hydra -L uname.txt -P pwd.txt 192.168.1.3 telnet</span><br><span class="line">hydra -l root -P oracle_logins.txt -t 5 -vV -o oracle_passwords.txt -s 30002 -e ns 121.41.173.190 mysql</span><br></pre></td></tr></table></figure>
 <h4 id="patator"><a href="#patator" class="headerlink" title="patator"></a>patator</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">host=FILE0 user=FILE1 password=FILE2 0=hosts.txt 1=logins.txt 2=passwords.txt</span><br></pre></td></tr></table></figure>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python patator.py telnet_login host=10.10.12.77 user=FILE=0 0=3389u.txt password=FILE1 1=3389d.txt</span><br></pre></td></tr></table></figure>
 <h4 id="dirs3arch目录爆破"><a href="#dirs3arch目录爆破" class="headerlink" title="dirs3arch目录爆破"></a>dirs3arch目录爆破</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 dirs3arch.py -u https://gjapplog.uc.cn/ -e php</span><br></pre></td></tr></table></figure>
@@ -564,7 +565,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">29</span>
+                  <span class="site-state-item-count">31</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -586,7 +587,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">50</span>
+                  <span class="site-state-item-count">52</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
