@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Mugen">
 <meta property="og:description" content="xss靶场地址：http://test.xss.tv/ 参考wp:https://xz.aliyun.com/t/1206 小记：  &amp;lt;input&amp;gt;标签里面可触发alert的事件oninput 和 onchange  &amp;lt;a&amp;gt;href的javascript 1&amp;lt;a href=&amp;quot;javascript:alert(/1/)&amp;quot;&amp;gt;axxx&amp;lt;/a&amp;">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-03-05T02:06:06.906Z">
+<meta property="og:updated_time" content="2019-03-08T04:52:32.186Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="XSS学习小记">
 <meta name="twitter:description" content="xss靶场地址：http://test.xss.tv/ 参考wp:https://xz.aliyun.com/t/1206 小记：  &amp;lt;input&amp;gt;标签里面可触发alert的事件oninput 和 onchange  &amp;lt;a&amp;gt;href的javascript 1&amp;lt;a href=&amp;quot;javascript:alert(/1/)&amp;quot;&amp;gt;axxx&amp;lt;/a&amp;">
@@ -429,6 +429,9 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fun = varnames[2] || &apos;&apos;;       这里fun等于alert(/xss/)</span><br></pre></td></tr></table></figure>
 <p>eval函数执行  parent.alert(/xss/) 触发xss</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">	if(fun) eval(&apos;parent.&apos;+fun+&apos;(&quot;&apos;+setv+&apos;&quot;)&apos;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>somepayload</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot;);alert(1);//</span><br></pre></td></tr></table></figure>
+<h2 id="一些乌云上的XSS案例"><a href="#一些乌云上的XSS案例" class="headerlink" title="一些乌云上的XSS案例"></a>一些乌云上的XSS案例</h2><p>搜狐邮箱储存型XSS <a href="https://shuimugan.com/bug/view?bug_no=167250" target="_blank" rel="noopener">https://shuimugan.com/bug/view?bug_no=167250</a></p>
 
       
     </div>
@@ -577,7 +580,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">31</span>
+                  <span class="site-state-item-count">34</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -599,7 +602,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">52</span>
+                  <span class="site-state-item-count">54</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -632,7 +635,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#xss靶场"><span class="nav-number">1.</span> <span class="nav-text">xss靶场</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#dom-xss"><span class="nav-number">2.</span> <span class="nav-text">dom-xss</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一个简单的demo"><span class="nav-number">2.0.1.</span> <span class="nav-text">一个简单的demo</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#几种常见的dom型xss"><span class="nav-number">2.0.2.</span> <span class="nav-text">几种常见的dom型xss</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#使用document-write直接输出导致浏览器解析恶意代码"><span class="nav-number">2.0.2.1.</span> <span class="nav-text">使用document.write直接输出导致浏览器解析恶意代码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用innerHTML直接输出导致浏览器解析恶意代码"><span class="nav-number">2.0.2.2.</span> <span class="nav-text">使用innerHTML直接输出导致浏览器解析恶意代码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用location-location-href-location-replace-iframe-src造成的XSS"><span class="nav-number">2.0.2.3.</span> <span class="nav-text">使用location/location.href/location.replace/iframe.src造成的XSS</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用setTimeout-setInterval造成的XSS"><span class="nav-number">2.0.2.4.</span> <span class="nav-text">使用setTimeout/setInterval造成的XSS</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#dom-xss实例"><span class="nav-number">2.0.3.</span> <span class="nav-text">dom-xss实例</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#xss靶场"><span class="nav-number">1.</span> <span class="nav-text">xss靶场</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#dom-xss"><span class="nav-number">2.</span> <span class="nav-text">dom-xss</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一个简单的demo"><span class="nav-number">2.0.1.</span> <span class="nav-text">一个简单的demo</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#几种常见的dom型xss"><span class="nav-number">2.0.2.</span> <span class="nav-text">几种常见的dom型xss</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#使用document-write直接输出导致浏览器解析恶意代码"><span class="nav-number">2.0.2.1.</span> <span class="nav-text">使用document.write直接输出导致浏览器解析恶意代码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用innerHTML直接输出导致浏览器解析恶意代码"><span class="nav-number">2.0.2.2.</span> <span class="nav-text">使用innerHTML直接输出导致浏览器解析恶意代码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用location-location-href-location-replace-iframe-src造成的XSS"><span class="nav-number">2.0.2.3.</span> <span class="nav-text">使用location/location.href/location.replace/iframe.src造成的XSS</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用setTimeout-setInterval造成的XSS"><span class="nav-number">2.0.2.4.</span> <span class="nav-text">使用setTimeout/setInterval造成的XSS</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#dom-xss实例"><span class="nav-number">2.0.3.</span> <span class="nav-text">dom-xss实例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一些乌云上的XSS案例"><span class="nav-number">2.1.</span> <span class="nav-text">一些乌云上的XSS案例</span></a></li></ol></li></ol></div>
             
 
           </div>
