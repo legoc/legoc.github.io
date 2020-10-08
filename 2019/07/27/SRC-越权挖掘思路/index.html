@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="渗透测试,SRC挖掘,整理笔记," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Mugen" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="前言闲着也是闲着，自己整理越权的思路来，顺便写点笔记，这个怕是要鸽，慢慢更，这方面的东西了解的太少。 正文越权分类根据对数据库的操作进行分类，可以分为以下几类：越权查询、越权删除、越权修改、越权添加等。 根据维度进行分类，可分为：平行越权、垂直越权、交叉越权。 平行越权：权限类型不变，权限ID改变；如：同是普通用户，其中一个用户可查看其它用户信息。常见的就是通过修改某一个ID参数来查看其他用户的信">
+<meta name="keywords" content="渗透测试,SRC挖掘,整理笔记">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SRC-越权挖掘思路">
+<meta property="og:url" content="https://legoc.github.io/2019/07/27/SRC-越权挖掘思路/index.html">
+<meta property="og:site_name" content="Mugen">
+<meta property="og:description" content="前言闲着也是闲着，自己整理越权的思路来，顺便写点笔记，这个怕是要鸽，慢慢更，这方面的东西了解的太少。 正文越权分类根据对数据库的操作进行分类，可以分为以下几类：越权查询、越权删除、越权修改、越权添加等。 根据维度进行分类，可分为：平行越权、垂直越权、交叉越权。 平行越权：权限类型不变，权限ID改变；如：同是普通用户，其中一个用户可查看其它用户信息。常见的就是通过修改某一个ID参数来查看其他用户的信">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-07-07T00:08:53.788Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SRC-越权挖掘思路">
+<meta name="twitter:description" content="前言闲着也是闲着，自己整理越权的思路来，顺便写点笔记，这个怕是要鸽，慢慢更，这方面的东西了解的太少。 正文越权分类根据对数据库的操作进行分类，可以分为以下几类：越权查询、越权删除、越权修改、越权添加等。 根据维度进行分类，可分为：平行越权、垂直越权、交叉越权。 平行越权：权限类型不变，权限ID改变；如：同是普通用户，其中一个用户可查看其它用户信息。常见的就是通过修改某一个ID参数来查看其他用户的信">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://legoc.github.io/2019/07/27/SRC-越权挖掘思路/"/>
+
+
+
+
+
+  <title>SRC-越权挖掘思路 | Mugen</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Mugen</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">lego's blog</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-flag"></i> <br />
+            
+            朋友
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于我
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://legoc.github.io/2019/07/27/SRC-越权挖掘思路/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lego">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://raw.githubusercontent.com/legoc/legoc.github.io/master/about/index/baye.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mugen">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">SRC-越权挖掘思路</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-27T10:20:36+08:00">
+                2019-07-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i> 阅读次数
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>闲着也是闲着，自己整理越权的思路来，顺便写点笔记，这个怕是要鸽，慢慢更，这方面的东西了解的太少。</p>
+<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><h2 id="越权分类"><a href="#越权分类" class="headerlink" title="越权分类"></a>越权分类</h2><p>根据对数据库的操作进行分类，可以分为以下几类：越权查询、越权删除、越权修改、越权添加等。</p>
+<p>根据维度进行分类，可分为：平行越权、垂直越权、交叉越权。</p>
+<p>平行越权：权限类型不变，权限ID改变；如：同是普通用户，其中一个用户可查看其它用户信息。常见的就是通过修改某一个ID参数来查看其他用户的信息，比如你查看自己的信息时，发现URL连接中，或者http请求头中有一个userID的参数，然后你修改这个参数就可以查看那个人信息了！</p>
+<p>垂直越权：权限ID不变，权限类型改变；如普通用户可使用管理员权限进行操作。如你登录时，发现cookie中有一个roleID的角色参数，那么可以通过修改该ID为1或者0，根据具体情况来定，就可以使用管理员权限了！</p>
+<p>交叉越权：权限类型改变，权限ID也改变。</p>
+<h2 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h2><ul>
+<li>改识别用户参数</li>
+<li>改cookie</li>
+<li>越权访问</li>
+<li>登陆后，修改密码 未校验id与用户 修改id 即可该其他人密码</li>
+<li>修改个人数据时 页面源代码有用户标识符id 抓包修改或添加id</li>
+<li>直接访问后台链接禁用js则不会跳转登录界面，直接登陆</li>
+<li>登陆分为账号和游客登陆，游客功能有限，app端只前端检测，模拟发包即可</li>
+<li>越权订单查看打印下载、越权操作他人收货地址、增删改查等。</li>
+</ul>
+<h2 id="tips"><a href="#tips" class="headerlink" title="tips"></a>tips</h2><p>burp里面看history关注json包</p>
+<h3 id="接口寻找"><a href="#接口寻找" class="headerlink" title="接口寻找"></a>接口寻找</h3><h4 id="常规扫描"><a href="#常规扫描" class="headerlink" title="常规扫描"></a>常规扫描</h4><p>dirsearch</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 dirsearch.py -u https://example.com/ -e *</span><br></pre></td></tr></table></figure>
+<p>建议在vps上建立一个这样的sh文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 dirsearch.py -u $1 -e * --random-user-agents --header &quot;X-Forwarded-For: 127.0.0.1&quot;</span><br></pre></td></tr></table></figure>
+<p>然后直接运行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sh run.sh https://example.com/</span><br></pre></td></tr></table></figure>
+<h4 id="wfuzz"><a href="#wfuzz" class="headerlink" title="wfuzz"></a>wfuzz</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">wfuzz -w /home/ubuntu/lego/dict/parm.txt --hc 404 &apos;http://113.105.184.114:8899/api/FUZZ&apos;</span><br><span class="line">wfuzz -w /home/ubuntu/lego/dict/parm.txt --hh 30 &apos;http://api.sc.weibo.com/?FUZZ&apos;</span><br><span class="line">wfuzz -w /home/ubuntu/lego/dict/parm.txt --hc 404 &apos;http://go.chaohua.weibo.com/?FUZZ&apos;</span><br><span class="line">wfuzz -w /home/ubuntu/lego/dict/parm.txt --hc 404 &apos;http://dataflow.biliapi.com/s/FUZZ&apos;</span><br><span class="line">wfuzz -w url --hc 404 &apos;https://FUZZ//error.log&apos;</span><br></pre></td></tr></table></figure>
+<p>正则匹配接口</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">([A-Za-z0-9_].*)/</span><br><span class="line">([A-Za-z0-9_].*)/([A-Za-z0-9_].*)/</span><br><span class="line">([A-Za-z0-9_]+)/([A-Za-z0-9_]+)/</span><br></pre></td></tr></table></figure>
+<h4 id="LinkFinder"><a href="#LinkFinder" class="headerlink" title="LinkFinder"></a>LinkFinder</h4><p>从js寻找接口</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 linkfinder.py -i https://example.com/1.js -o results.html</span><br></pre></td></tr></table></figure>
+<p>分析整个域，找接口的话还是推荐直接单个js</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python linkfinder.py -i https://example.com -d</span><br></pre></td></tr></table></figure>
+<p>python快速搭起http服务，以便优雅的查看html报告</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python -m SimpleHTTPServer 6666</span><br></pre></td></tr></table></figure>
+<h3 id="jsspider"><a href="#jsspider" class="headerlink" title="jsspider"></a><strong>jsspider</strong></h3><p>提取js并且寻找对应的接口</p>
+<p>-d深度 一般默认为1就好</p>
+<p> -c 携带cookie爬接口</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 main.py -u http://target.com -d 1 -c cookie</span><br></pre></td></tr></table></figure>
+<h4 id="常用接口框架"><a href="#常用接口框架" class="headerlink" title="常用接口框架"></a>常用接口框架</h4><h5 id="swagger-ui-html"><a href="#swagger-ui-html" class="headerlink" title="swagger-ui.html"></a>swagger-ui.html</h5><p>一个无依赖的HTML、JS和CSS集合，可以为Swagger兼容API动态生成优雅文档。</p>
+<h5 id="service-asmx"><a href="#service-asmx" class="headerlink" title="service.asmx"></a>service.asmx</h5><p>WSDL 文件是一个 XML 文档，用于说明一组 SOAP 消息以及如何交换这些消息。大多数情况下由软件自动生成和使用。服务端的使用说明书</p>
+<h4 id="自己挖到过的案例"><a href="#自己挖到过的案例" class="headerlink" title="自己挖到过的案例"></a>自己挖到过的案例</h4><h5 id="查看评论越权"><a href="#查看评论越权" class="headerlink" title="查看评论越权"></a>查看评论越权</h5><p>此处场景为查看自己的评论</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://XXXX.com/XXXX/X.php?do=sp_my&amp;fetch=comments&amp;XXUid=1121</span><br></pre></td></tr></table></figure>
+<p>该Uid为某用户所有评论的接口</p>
+<p>可越权至查看所有人的评论 主要危害为爬虫个人兴趣定位隐私分析 危害不大</p>
+<h6 id="支付越权"><a href="#支付越权" class="headerlink" title="支付越权"></a>支付越权</h6><p>此处场景为支付一个订单</p>
+<p>支付处抓包 mids为用户ID可以修改为任意</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">GET /XXXXXXX/?mids=400012&amp;_=1573267446039 HTTP/1.1</span><br><span class="line">host: XXXXXXX</span><br><span class="line">Connection: close</span><br><span class="line">cookie: SESSION=XXXXXX</span><br><span class="line">x-requested-with: com.tencent.mm</span><br></pre></td></tr></table></figure>
+<p>然后会返回一个订单 根据得到的订单号 根据订单号 查看订单接口</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">GET /bg/getOrderInfoDetails?orderNo=XXXXXX&amp;_=1573266945830 HTTP/1.1</span><br><span class="line">host: XXX</span><br><span class="line">Connection: close</span><br><span class="line">accept: application/json, text/javascript, */*; q=0.01</span><br><span class="line">cookie: SESSION=XXXXXX</span><br></pre></td></tr></table></figure>
+<p>则返回了这个用户的某些敏感信息 造成越权</p>
+<h5 id="生成越权"><a href="#生成越权" class="headerlink" title="生成越权"></a>生成越权</h5><p>此处场景为生成自己的档案信息</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">GET /XXXXX/preview?memberId=401112&amp;showMemberAdditionNames=&amp;showMemberRewardIds=&amp;isShowAllFee=false&amp;_=1573270602774 HTTP/1.1</span><br><span class="line">Connection: close</span><br><span class="line">accept: application/json, text/javascript, */*; q=0.01</span><br><span class="line">cookie: SESSION=XXXXXX</span><br></pre></td></tr></table></figure>
+<p>memberId越权可修改为其他人的</p>
+<p>然后返回一些敏感信息</p>
+<h5 id="接口越权"><a href="#接口越权" class="headerlink" title="接口越权"></a>接口越权</h5><p>此处场景为查看个人信息</p>
+<p>在日志里发现一个接口</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://XXXX.com/xxx/rs/users/getUserInfo</span><br></pre></td></tr></table></figure>
+<p>将会返回我的个人信息删除getuserinfo</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://XXXX.com/xxx/rs/users/</span><br></pre></td></tr></table></figure>
+<p>返回部分人的信息 造成越权</p>
+<p>后发现可以设置翻页大小</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://XXXXXX.com/xxx/rs/users?pageNo=1&amp;pageSize=100</span><br></pre></td></tr></table></figure>
+<p>将size改为10000则返回10000个用户的信息</p>
+<p>可越权所有账户</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    lego
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://legoc.github.io/2019/07/27/SRC-越权挖掘思路/" title="SRC-越权挖掘思路">https://legoc.github.io/2019/07/27/SRC-越权挖掘思路/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/渗透测试/" rel="tag"># 渗透测试</a>
+          
+            <a href="/tags/SRC挖掘/" rel="tag"># SRC挖掘</a>
+          
+            <a href="/tags/整理笔记/" rel="tag"># 整理笔记</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/07/20/SRC-信息收集/" rel="next" title="SRC-信息收集">
+                <i class="fa fa-chevron-left"></i> SRC-信息收集
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/08/14/初试xray/" rel="prev" title="初试xray">
+                初试xray <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+ <div id="gitalk-container"></div>
+ 
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="https://raw.githubusercontent.com/legoc/legoc.github.io/master/about/index/baye.png"
+                alt="lego" />
+            
+              <p class="site-author-name" itemprop="name">lego</p>
+              <p class="site-description motion-element" itemprop="description">从小菜鸡往大菜鸡成长的路上...</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">43</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">63</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#正文"><span class="nav-number">2.</span> <span class="nav-text">正文</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#越权分类"><span class="nav-number">3.</span> <span class="nav-text">越权分类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#场景"><span class="nav-number">4.</span> <span class="nav-text">场景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tips"><span class="nav-number">5.</span> <span class="nav-text">tips</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#接口寻找"><span class="nav-number">5.1.</span> <span class="nav-text">接口寻找</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#常规扫描"><span class="nav-number">5.1.1.</span> <span class="nav-text">常规扫描</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#wfuzz"><span class="nav-number">5.1.2.</span> <span class="nav-text">wfuzz</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#LinkFinder"><span class="nav-number">5.1.3.</span> <span class="nav-text">LinkFinder</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#jsspider"><span class="nav-number">5.2.</span> <span class="nav-text">jsspider</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#常用接口框架"><span class="nav-number">5.2.1.</span> <span class="nav-text">常用接口框架</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#swagger-ui-html"><span class="nav-number">5.2.1.1.</span> <span class="nav-text">swagger-ui.html</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#service-asmx"><span class="nav-number">5.2.1.2.</span> <span class="nav-text">service.asmx</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#自己挖到过的案例"><span class="nav-number">5.2.2.</span> <span class="nav-text">自己挖到过的案例</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#查看评论越权"><span class="nav-number">5.2.2.1.</span> <span class="nav-text">查看评论越权</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#支付越权"><span class="nav-number">5.2.2.1.1.</span> <span class="nav-text">支付越权</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#生成越权"><span class="nav-number">5.2.2.2.</span> <span class="nav-text">生成越权</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#接口越权"><span class="nav-number">5.2.2.3.</span> <span class="nav-text">接口越权</span></a></li></ol></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">lego</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+  <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+   <script type="text/javascript">
+        var gitalk = new Gitalk({
+          clientID: '76aae4c57ee7f811d638',
+          clientSecret: 'd6d32a0bf34087bf9ee31a1a74fd5bd72cc23c92',
+          repo: 'legoc.github.io',
+          owner: 'legoc',
+          admin: ['legoc'],
+          id: decodeURI(window.location.pathname),
+          distractionFreeMode: 'true'
+        })
+        gitalk.render('gitalk-container')           
+       </script>
+	   
+	   
+	   
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

